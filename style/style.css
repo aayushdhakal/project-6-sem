@@ -107,7 +107,40 @@ header  .slideshow-container img{
    font-size: 1.3rem;
    font-style: italic;
 }
+
 /* Section */
+
 section{
-   height: 200vh;
+   /* height: 200vh; */
+   margin: 30px auto 0px auto;
+   width: 1000px;
+   padding-top: 60px;
+}
+
+section hr{
+   width: 800px;
+   height: 5px;
+   background-color: black;
+   margin: 10px auto;
+}
+
+section .header-recomendation{
+   position: relative;
+   padding-top: 40px;
+}
+
+section .header-recomendation img{
+   display: block;
+   width: 500px;
+   height: 400px;
+   border-radius: 3px;
+}
+
+section .header-recomendation img:nth-child(2){
+
+   border-bottom-left-radius:20%;
+}
+section .header-recomendation img:nth-child(1){
+   margin: 0 0 0 50%;
+   border-top-right-radius:20%;
 }
