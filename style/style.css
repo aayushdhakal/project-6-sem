@@ -35,6 +35,10 @@ hr {
    color: rgba(133, 132, 132, 0.74);
 }
 
+h2{
+   margin-left: 50px;
+}
+
 /* Header */
 
 /* Navigation Bar */
@@ -236,20 +240,18 @@ nav ul li a:hover {
    cursor: auto;
 }
 
-/*Body Recomendation*/
+/*Body Recommendation*/
 
-.recomendation h2 {
-   margin-left: 50px;
-}
-
-.recomendation__list {
-   justify-content: center;
+.recommendation__list {
+   
    display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
    margin: 10px auto;
    width: 100%;
 }
 
-.recomendation__list__item {
+.recommendation__list__item {
    background: #fff;
    display: flex;
    flex-direction: column;
@@ -257,15 +259,15 @@ nav ul li a:hover {
    width: 250px;
 }
 
-.recomendation__list__item_images {
+.recommendation__list__item_images {
    display: block;
    height: 50%;
    max-width: 100%;
    position: relative;
 }
 
-.recomendation__list__item_images_previous, 
-.recomendation__list__item_images_next {
+.recommendation__list__item_images_previous, 
+.recommendation__list__item_images_next {
    border-radius: 50%;
    color: #fff;
    cursor: pointer;
@@ -281,32 +283,32 @@ nav ul li a:hover {
    width: 2rem;
 }
 
-.recomendation__list__item_images_next {
+.recommendation__list__item_images_next {
    right: 0;
 }
 
-.recomendation__list__item_images_previous:hover, 
-.recomendation__list__item_images_next:hover{
+.recommendation__list__item_images_previous:hover, 
+.recommendation__list__item_images_next:hover{
    color: #000;
    font-weight: 900;
 }
 
-.recomendation__list__item_images img {
+.recommendation__list__item_images img {
    display: block;
-   max-height: 100%;
+   height: 100%;
    width: 100%;
 }
 
-.recomendation__list__item_info {
+.recommendation__list__item_info {
    padding: 16px 20px 20px 16px;
 }
 
-.recomendation__list__item_info h4 {
+.recommendation__list__item_info h4 {
    margin-top: 5px;
    font-size: 1.5rem;
 }
 
-.recomendation__list__item_info p {
+.recommendation__list__item_info p {
    margin-top: 5px;
    font-size: 1rem;
    line-height: 1.4;

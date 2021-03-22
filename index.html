@@ -31,7 +31,9 @@
             <img src="./style/assests/img-slider/91475-Kopan-Monastery.jpg">
             <div class="img-info">
                <h3>Monasteries</h3>
-               <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio eum odit inventore rerum. Illum corporis molestias necessitatibus nam maiores voluptatem voluptatum totam natus ut minus. Amet nesciunt aliquid quod exercitationem!</p>
+               <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio eum odit inventore rerum. Illum
+                  corporis molestias necessitatibus nam maiores voluptatem voluptatum totam natus ut minus. Amet
+                  nesciunt aliquid quod exercitationem!</p>
             </div>
          </div>
 
@@ -39,9 +41,11 @@
             <img src="./style/assests/img-slider/bhaktapur-tour.jpg">
             <div class="img-info">
                <h3>Bhaktapur</h3>
-               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui omnis accusamus commodi. Excepturi quisquam placeat
-               provident laboriosam vero repellendus consectetur officia, necessitatibus quo, magnam voluptatibus id iusto, sunt
-               pariatur eius.</p>
+               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui omnis accusamus commodi. Excepturi
+                  quisquam placeat
+                  provident laboriosam vero repellendus consectetur officia, necessitatibus quo, magnam voluptatibus id
+                  iusto, sunt
+                  pariatur eius.</p>
             </div>
          </div>
 
@@ -49,7 +53,9 @@
             <img src="./style/assests/img-slider/safari chitwan.jpg">
             <div class="img-info">
                <h3>Chitwan</h3>
-               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui omnis accusamus commodi. Excepturi quisquam placeat provident laboriosam vero repellendus consectetur officia, necessitatibus quo, magnam voluptatibus id iusto, sunt pariatur eius.</p>
+               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui omnis accusamus commodi. Excepturi
+                  quisquam placeat provident laboriosam vero repellendus consectetur officia, necessitatibus quo, magnam
+                  voluptatibus id iusto, sunt pariatur eius.</p>
             </div>
          </div>
 
@@ -65,17 +71,48 @@
 
    </header>
    <hr>
-   <div class="recomendation">
-      <h2>Recomedations</h2>
-      <ul class="recomendation__list">
-         <li class="recomendation__list__item">
-            <div class="recomendation__list__item_images">
-               <div class="recomendation__list__item_images_previous">&#8249;</div>
-               <img src="./style/assests/img-slider/lumbini2.jpg" alt="#">
-               <img src="./style/assests/img-slider/lumbini2.jpg" alt="#" style="display: none;">
-               <div class="recomendation__list__item_images_next">&#8250;</div>
+   <div class="recommendation">
+      <h2>Recommendations</h2>
+      <ul class="recommendation__list">
+
+         <li class="recommendation__list__item">
+            <div class="recommendation__list__item_images">
+               <img src="./style/assests/img-slider/bhaktapur-tour.jpg" alt="#">
             </div>
-            <div class="recomendation__list__item_info">
+            <div class="recommendation__list__item_info">
+               <span class="tag">Lorem</span>
+               <h4>Lorem, ipsum</h4>
+               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio veniam optio nemo alias saepe sequi hic! Dignissimos autem error temporibus, eaque delectus est, sunt.</p>
+            </div>
+         </li>
+
+         <li class="recommendation__list__item" tabindex="0">
+            <div class="recommendation__list__item_images">
+               <img src="./style/assests/picture.jpg" alt="#">
+            </div>
+            <div class="recommendation__list__item_info">
+               <span class="tag">Lorem</span>
+               <h4>Lorem, ipsum</h4>
+               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio veniam optio nemo alias saepe sequi hic! Dignissimos autem error temporibus, eaque delectus est, sunt.</p>
+            </div>
+         </li>
+
+         <li class="recommendation__list__item" tabindex="0">
+            <div class="recommendation__list__item_images">
+               <img src="./style/assests/img-slider/raimond-klavins-59Al83Zjtf8-unsplash.jpg" alt="#">
+            </div>
+            <div class="recommendation__list__item_info">
+               <span class="tag">Lorem</span>
+               <h4>Lorem, ipsum</h4>
+               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio veniam optio nemo alias saepe sequi hic! Dignissimos autem error temporibus, eaque delectus est, sunt.</p>
+            </div>
+         </li>
+
+         <li class="recommendation__list__item" tabindex="0">
+            <div class="recommendation__list__item_images">
+               <img src="./style/assests/img-slider/big.jpg" alt="#">
+            </div>
+            <div class="recommendation__list__item_info">
                <span class="tag">Lorem</span>
                <h4>Lorem, ipsum</h4>
                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio veniam optio nemo alias saepe sequi hic! Dignissimos autem error temporibus, eaque delectus est, sunt.</p>
@@ -84,34 +121,12 @@
 
       </ul>
    </div>
+   <hr>
+   <div class="explore">
+      <h2>Explore</h2>
+   </div>
 
-   <script>
-      var slideIndex = 1;
-      showSlides(slideIndex);
-
-      function plusSlides(n) {
-         showSlides(slideIndex += n);
-      }
-
-      function currentSlide(n) {
-         showSlides(slideIndex = n);
-      }
-      function showSlides(n) {
-         var i;
-         var slides = document.getElementsByClassName("slides");
-         var dots = document.getElementsByClassName("dot");
-         if (n > slides.length) { slideIndex = 1 }
-         if (n < 1) { slideIndex = slides.length }
-         for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-         }
-         for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-         }
-         slides[slideIndex - 1].style.display = "block";
-         dots[slideIndex - 1].className += " active";
-      }
-   </script>
+   <script src="./scripts/src.js"></script>
 </body>
 
 </html>
