@@ -38,6 +38,6 @@ setInterval(() => {
    }
    currentSlide(slideIndex);
    slideIndex++;
-}, 4000)
+}, 3000)
 
 //Assgining the blog nameing
