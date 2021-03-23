@@ -39,13 +39,13 @@ h2 {
    margin-left: 50px;
 }
 
-p{
+p {
    line-height: 1.4;
 }
 
-.recommendation > h2,
-.explore > h2,
-.activity > h2 {
+.recommendation>h2,
+.explore>h2,
+.activity>h2 {
    padding-bottom: 30px;
 }
 
@@ -268,6 +268,17 @@ nav ul li a:hover {
    flex-direction: column;
    overflow: hidden;
    width: 250px;
+   transition: all ease-in 0.2s;
+}
+
+.recommendation__list__item:hover {
+   transform: scale(1.01);
+   box-shadow: 0 0 10px 1px #000;
+}
+
+.recommendation__list__item_more {
+   text-decoration: underline;
+   color: rgba(105, 99, 99, 0.425);
 }
 
 .recommendation__list__item_images {
@@ -326,8 +337,8 @@ nav ul li a:hover {
    text-align: left;
 }
 
-.explore_blog_more{
-   color: var(--blue);
+.explore_blog_more {
+   color: #999;
    text-decoration: underline;
 }
 
@@ -359,7 +370,7 @@ nav ul li a:hover {
    overflow: hidden;
 }
 
-.explore_content_blog_image{
+.explore_content_blog_image {
    width: 100%;
    height: 100%;
 }
@@ -374,10 +385,10 @@ nav ul li a:hover {
 .explore_content_blog_info {
    color: #fff;
    transform: translateY(166px);
-   background-color: rgba(0, 0, 0, .6);
+   background-color: rgba(0, 0, 0, .7);
    left: 0;
    padding: 5px 0 0 25px;
-   transition: all ease-in 0.3s;
+   transition: all ease 0.4s;
    top: 0;
    position: absolute;
    right: 0;
@@ -398,6 +409,10 @@ nav ul li a:hover {
 .explore_content_blog--big .explore_content_blog_info {
    bottom: 0px;
    transform: translateY(366px);
+}
+
+.explore_content_blog--big .explore_content_blog_info p {
+   max-width: 350px;
 }
 
 .explore_content_blog:nth-child(1) {
@@ -512,8 +527,12 @@ nav ul li a:hover {
    transform: translateY(366px);
 }
 
-.activity_blog_more{
-   color: var(--blue);
+.activity_content_blog--big .activity_content_blog_info p {
+   max-width: 350px;
+}
+
+.activity_blog_more {
+   color: #999;
    text-decoration: underline;
 }
 
@@ -559,4 +578,38 @@ nav ul li a:hover {
 
 .activity_content_blog:nth-child(11) {
    grid-area: 4 / 1 / 5 / 2;
+}
+
+
+
+/* footer */
+footer {
+   margin-top: 30px;
+   background-color: rgb(53, 53, 53);
+}
+
+.subscribe-feature {
+   background-color: rgb(37, 37, 37);
+   padding: 20px;
+}
+
+.subscribe-feature a {
+   color: #fff;
+}
+
+.footer-content {
+   display: flex;
+   justify-content: space-around;
+   padding: 40px;
+}
+
+/* need to be changed */
+footer li,h3 {
+   list-style: none;
+   color: white;
+}
+
+/* need to be changed */
+a{
+   color: white;
 }
