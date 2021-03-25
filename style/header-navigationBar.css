@@ -1,0 +1,49 @@
+/* Navigation Bar */
+
+header {
+   width: 100%;
+}
+
+header nav {
+   overflow: hidden;
+   display: flex;
+   padding: 10px 20px;
+   justify-content: space-between;
+   background-color: var(--blue);
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   z-index: 10;
+}
+
+nav h1 {
+   font-size: 2rem;
+   padding-left: 25px;
+   cursor: pointer;
+   color: white;
+}
+
+nav h1:hover {
+   color: white;
+}
+
+nav ul {
+   list-style: none;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+}
+
+nav ul li a {
+   padding: 19px;
+   color: white;
+   transition: all 0.3s ease-out;
+   font-size: 16px;
+   font-weight: 600;
+}
+
+nav ul li a:hover {
+   padding-bottom: 25px;
+   background-color: #26649e;
+}
