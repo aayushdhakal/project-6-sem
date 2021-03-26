@@ -7,8 +7,8 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="icon" href="./style/assests/travel.png">
    <link rel="stylesheet" href="./style/style.css">
-   <link rel="stylesheet" href="./style/loginPage.css">
-   <title>Passion Seekers | Login</title>
+   <link rel="stylesheet" href="./style/signupPage.css">
+   <title>Passion Seekers | Signup</title>
 </head>
 
 <body>
@@ -48,24 +48,44 @@
          </ul>
       </div>
       <div class="container__right">
-         <div class="container__right__form_login">
-            <h2>Login</h2>
-            <form action="#" name="login_form" class="container__right__form_login__form">
+         <div class="container__right__form_signup">
+            <h2>Signup</h2>
+            <form action="#" name="signup_form" class="container__right__form_signup__form">
+
+               <div class="container__right__form__element">
+                  <Label for="name">Name</Label>
+                  <input type="text" placeholder="Enter name here" id="name">
+               </div>
+
+               <div class="container__right__form__element">
+                  <Label for="email">Email</Label>
+                  <input type="text" placeholder="Enter email here" id="email">
+               </div>
+
+               <div class="container__right__form__element">
+                  <Label for="phone">Phone Number</Label>
+                  <input type="text" placeholder="Enter phone here" id="phone">
+               </div>
+
                <div class="container__right__form__element">
                   <Label for="username">Username</Label>
-                  <input type="text" placeholder="Enter Username here" id="username">
+                  <input type="text" placeholder="Enter username here" id="username">
                </div>
+
                <div class="container__right__form__element">
                   <Label for="password">Password</Label>
                   <input type="text" placeholder="Enter password here" id="password">
                </div>
-               <div class="container__right__form__element container__right__form__element--checkbox">
+
+               <!-- <div class="container__right__form__element container__right__form__element--checkbox">
                   <Label for="remember">Remember Me</Label>
                   <input type="checkbox" id="remember">
+               </div> -->
+
+               <div class="container__right__form__element container__right__form__element--signup__btn">
+                  <input type="submit" value="Signup">
                </div>
-               <div class="container__right__form__element container__right__form__element--login__btn">
-                  <input type="submit" value="Login">
-               </div>
+
             </form>
             <hr>
          </div>

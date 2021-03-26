@@ -116,18 +116,19 @@ body{
 
 .container__right{
    padding-top: 80px;
+   position: absolute;
 }
 
-.container__right__form_login__form hr{
+.container__right__form_signup__form hr{
    margin: 0;
 }
 
-.container__right__form_login > h2{
+.container__right__form_signup > h2{
    font-size: 4rem;
    margin: 0;
 }
 
-.container__right__form_login__form{
+.container__right__form_signup__form{
    margin-left:30px ;
    padding:0px 40px;
 }
@@ -160,13 +161,13 @@ body{
    border-radius:0;
 }
 
-.container__right__form__element--login__btn{
+.container__right__form__element--signup__btn{
    /* padding: 20px; */
    width: 100%;
    margin: 0 auto;
 }
 
-.container__right__form__element--login__btn input{
+.container__right__form__element--signup__btn input{
    background: rgb(53,157,204);
    border-radius: 4px;
    background: linear-gradient(100deg, rgba(53,157,204,1) 22%, rgba(73,169,219,0.8435749299719888) 48%, rgba(57,140,200,0.8603816526610644) 72%, rgba(80,147,193,0.835171568627451) 99%);
@@ -179,6 +180,6 @@ body{
    padding: 10px;
 }
 
-.container__right__form__element--login__btn input:hover{
+.container__right__form__element--signup__btn input:hover{
    transform: scale(1.04);
 }
