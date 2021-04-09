@@ -1,4 +1,8 @@
 /*Body Recommendation*/
+.recommendation--small{
+   width: 850px;
+   margin-bottom: 30px;
+}
 
 .recommendation__list {
    display: flex;
