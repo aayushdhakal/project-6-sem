@@ -1,0 +1,31 @@
+.admin__interaction{
+   position: fixed;
+   bottom: 0;
+   right: 0;
+   z-index: 2;
+}
+
+.admin__interaction__actions{
+   display: flex;
+   flex-direction: column;
+   margin-bottom:20px;
+}
+
+.admin__interaction__actions button{
+   cursor: pointer;
+   border: none;
+   background-color: var(--blue);
+   color: transparent;
+   margin-bottom: 6px;
+   outline: none;
+   padding: 15px;
+   transform: translateX(80%);
+   transition:all 0.3s ease-in-out;
+
+}
+
+.admin__interaction__actions button:hover{
+   background: rgb(13, 67, 110);
+   color: white;
+   transform: translateX(0);
+}
