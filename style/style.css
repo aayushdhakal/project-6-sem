@@ -49,3 +49,9 @@ p {
 .activity>h2 {
    padding-bottom: 30px;
 }
+
+.end__of__page{
+   background-color: var(--blue);
+   height: 6px;
+   width: 100%;
+}

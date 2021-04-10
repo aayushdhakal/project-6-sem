@@ -2,6 +2,11 @@
 .recommendation--small{
    width: 850px;
    margin-bottom: 30px;
+   margin-left: 30px;
+}
+
+.recommendation--lists{
+   margin-top: 80px;
 }
 
 .recommendation__list {
@@ -12,12 +17,21 @@
    width: 100%;
 }
 
+.recommendation__list--search__posts{
+   display: grid;
+   grid-template-columns: repeat(4,1fr);
+}
+
+.recommendation__list--search__posts > *{
+   margin: 10px auto;
+}
+
 .recommendation__list__item {
    background: #fff;
    display: flex;
    flex-direction: column;
    overflow: hidden;
-   width: 250px;
+   max-width: 250px;
    transition: all ease-in 0.2s;
 }
 

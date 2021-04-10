@@ -183,9 +183,3 @@ aside {
    display: inline;
    padding-left: 10px;
 }
-
-.end__line{
-   background-color: var(--blue);
-   height: 6px;
-   width: 100%;
-}
