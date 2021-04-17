@@ -26,6 +26,14 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
 </head>
 
 <body>
+   <script>
+      function confrimlogout() {
+         const confrimation = confirm('Are you sure you wanna logout?');
+         if(confrimation){
+            location.href = './logout.php';
+         }
+      }
+   </script>
    <header>
       <nav>
          <h1>Passion Seekers</h1>
@@ -49,9 +57,12 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
                echo "<li><a href='#'>" . $_SESSION['username'] . "</a></li>";
 
                echo "<li class='logout__btn'>
-                  <a href='./logout.php' class='logout__img'>
-                     <img src='./style/assests/logout.png' width='18px' height='18px'>
-                  </a>
+                  <button 
+                     href='./logout.php' 
+                     class='logout__img'
+                     onclick=\"confrimlogout()\"
+                  ><img src='./style/assests/logout.png' width='18px' height='18px'>
+                  </button>
                   <p>Logout<p>
                </li>";
             } else {
@@ -555,6 +566,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
          <button>Remove Post</button>
       </div>
    </section>
+
    <script src="./scripts/src.js"></script>
 </body>
 

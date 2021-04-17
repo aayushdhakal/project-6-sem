@@ -8,13 +8,23 @@ $db_name = 'db_passion_seekers';
 $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
 $connection_status = $connection->connect_errno == 0 ? "Connected":"Not Connected"; 
 
-
 //database connection error check
 if ($connection->connect_errno != 0) {
   die('Database Connection Error : ' . $connection->connect_error);
 }
 
 function mysqlLoginQuery($username,$password){
-  $query ="select * from tb_users where username='$username' and password='$password' and status=1";
+  $query ="SELECT * FROM tbl_users WHERE username='$username' AND password='$password' AND status=1";
   return $query;
 }
+
+function isAdmin($username){
+  $query = "SELECT * FROM tbl_admins WHERE username='$username' AND status=1";
+  return $query;
+}
+
+$query1 = "SELECT * FROM tbl_users WHERE username='user' AND password='upassword' AND status=1";
+print_r($connection->query($query1));
+
+
+

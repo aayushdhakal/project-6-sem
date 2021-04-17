@@ -61,4 +61,3 @@ function changeVisiblility(e) {
       inputFieldToBeShown.classList.remove('search__form__field--display');
    }
 }
-

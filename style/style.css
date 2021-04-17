@@ -15,7 +15,7 @@
 }
 
 body {
-   font-family: 'Roboto Condensed', sans-serif;
+   font-family: 'Roboto Condensed',sans-serif;
    font-size: 1rem;
    background-color:var(--background-color) ;
    /* overflow-x: hidden; */

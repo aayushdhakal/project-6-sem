@@ -44,9 +44,13 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
       if (isset($username) && isset($password)) {
          $sql = mysqlLoginQuery($username, $password);
          $result = $connection->query($sql);
+
+         $result1 = $connection->query(isAdmin($_SESSION['username']));
+         print_r($result1);
+
          $login = $result->num_rows == 1;
 
-         if($login){
+         if ($login) {
             $data = $result->fetch_assoc();
 
             session_start();
