@@ -29,10 +29,6 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
    require_once './connection.php';
    $loggin = "<script>console.log('sucess')</script>";
 
-   if(isset($_GET['admin']) && $_GET['admin']==true){
-      header('location:./loginPageAdmin.php');
-   }
-
    if (isset($_POST['login'])) {
 
       $err = [];
@@ -50,7 +46,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
       };
 
       if (isset($username) && isset($password)) {
-         $sql = mysqlLoginQuery($username, $password);
+         $sql = mysqlLoginQueryAdmin($username, $password);
          $result = $connection->query($sql);
          $login = $result->num_rows == 1 ? true : false;
 
@@ -61,12 +57,14 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
                setcookie('username', $username, time() + (60 * 60 * 24 * 7));
                setcookie('name', $data['name'], time() + (60 * 60 * 24 * 7));
                setcookie('id', $data['id'], time() + (60 * 60 * 24 * 7));
+               setcookie('admin',true, time() + (60 * 60 * 24 * 7));
             };
 
             session_start();
             $_SESSION['username'] = $username;
             $_SESSION['name'] = $data['name'];
             $_SESSION['id'] = $data['id'];
+            $_SESSION['admin'] = true;
 
             header("location:index.php");
             exit();
@@ -120,7 +118,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
       </div>
       <div class="container__right">
          <div class="container__right__form_login">
-            <h2>Login</h2>
+            <h2>Login for Admins</h2>
             <form action="#" class="container__right__form_login__form" method="POST">
 
                <div class="container__right__form__element">

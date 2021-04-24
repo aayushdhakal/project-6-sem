@@ -17,14 +17,28 @@ function mysqlLoginQuery($username,$password){
   $query ="SELECT * FROM tbl_users WHERE username='$username' AND password='$password' AND status=1";
   return $query;
 }
+function mysqlLoginQueryAdmin($username,$password){
+  $query ="SELECT * FROM tbl_admins WHERE username='$username' AND password='$password' AND status=1";
+  return $query;
+}
 
 function isAdmin($username){
   $query = "SELECT * FROM tbl_admins WHERE username='$username' AND status=1";
   return $query;
 }
 
-$query1 = "SELECT * FROM tbl_users WHERE username='user' AND password='upassword' AND status=1";
-print_r($connection->query($query1));
+function mysqlSignUp($name='',$username,$password,$email,$phoneNumber='',$address=''){
+  $query = "INSERT INTO `tbl_users`(`name`, `username`, `password`, `email`, `phone_number`, `address`) VALUES ('$name','$username','$password','$email','$phoneNumber','$address')";
+  return $query;
+}
+
+function mysqlSignUpAdmin($name='',$username,$password,$email,$phoneNumber='',$address=''){
+  $query = "INSERT INTO `tbl_admins`(`name`, `username`, `password`, `email`, `phone_number`, `address`) VALUES ('$name','$username','$password','$email','$phoneNumber','$address')";
+  return $query;
+}
+
+// $query1 = "SELECT * FROM tbl_users WHERE username='user' AND password='upassword' AND status=1";
+// print_r($connection->query($query1));
 
 
 

@@ -1,6 +1,6 @@
 <?php
+session_start();
 if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
-   session_start();
    $_SESSION['username'] = $_COOKIE['username'];
 };
 ?>
@@ -20,7 +20,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
    <link rel="stylesheet" href="./style/explore.css">
    <link rel="stylesheet" href="./style/activity.css">
    <link rel="stylesheet" href="./style/footer.css">
-   <link rel="stylesheet" href="./style/admin-actions.css">
+   <link rel="stylesheet" href="./style/admin-jobs.css">
    <link rel="icon" href="./style/assests/travel.png">
    <title>Passion Seekers | Home</title>
 </head>
@@ -29,51 +29,13 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
    <script>
       function confrimlogout() {
          const confrimation = confirm('Are you sure you wanna logout?');
-         if(confrimation){
+         if (confrimation) {
             location.href = './logout.php';
          }
       }
    </script>
    <header>
-      <nav>
-         <h1>Passion Seekers</h1>
-         <ul>
-            <li>
-               <div class="search__posts">
-                  <form action="./loginPage.html" name="search__post">
-                     <button type="button" class="search__form__btn">
-                        <img src="./style/assests/search.png" alt="search">
-                     </button>
-                     <input type="text" class="search__form__field">
-                  </form>
-               </div>
-            </li>
-            <li><a href="#">Explore</a></li>
-            <li><a href="#">Activities</a></li>
-            <li><a href="#">Trending places</a></li>
-            <?php
-
-            if (isset($_SESSION['username'])) {
-               echo "<li><a href='#'>" . $_SESSION['username'] . "</a></li>";
-
-               echo "<li class='logout__btn'>
-                  <button 
-                     href='./logout.php' 
-                     class='logout__img'
-                     onclick=\"confrimlogout()\"
-                  ><img src='./style/assests/logout.png' width='18px' height='18px'>
-                  </button>
-                  <p>Logout<p>
-               </li>";
-            } else {
-               echo "<li><a href='./signupPage.html'>Sign up</a></li>";
-               echo "<li>|</li>";
-               echo "<li><a href='./loginPage.php'>Login</a></li>";
-            }
-
-            ?>
-         </ul>
-      </nav>
+      <?php require_once './navigationBar.php'; ?>
 
       <div class="slideshow-container">
          <div class="shade-slides"></div>
@@ -557,16 +519,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
          <p>Copyright &#169; 2021 All Rights Reserved </p>
       </div>
    </footer>
-
-   <section class="admin__interaction">
-      <div class="admin__interaction__actions">
-         <button>Created Post</button>
-         <button>View Reviews</button>
-         <button>Block User</button>
-         <button>Remove Post</button>
-      </div>
-   </section>
-
+   <?php require_once './adminJobs.php' ?>
    <script src="./scripts/src.js"></script>
 </body>
 

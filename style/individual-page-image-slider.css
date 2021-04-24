@@ -153,7 +153,7 @@ aside {
    margin-top: 70px;
    overflow: hidden;
    width: 30vw;
-   height: 600px;
+   height: 100vh;
    z-index: 1;
 }
 
@@ -182,4 +182,16 @@ aside {
 .aside__recomendation__content p{
    display: inline;
    padding-left: 10px;
+}
+
+@media only screen and (min-width: 1500px) {
+   
+   section{
+      margin-left: 10rem;
+   }
+
+   /* .recommendation--small{
+      margin-left: 10rem;
+   } */
+
 }

@@ -1,0 +1,205 @@
+<?php
+require_once './loginAndSignupErrorMsg.php';
+require_once './connection.php';
+?>
+<?php
+if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
+   session_start();
+   $_SESSION['username'] = $_COOKIE['username'];
+   header('location:index.php');
+};
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="icon" href="./style/assests/travel.png">
+   <link rel="stylesheet" href="./style/style.css">
+   <link rel="stylesheet" href="./style/signupPage.css">
+   <title>Passion Seekers | Signup</title>
+</head>
+
+<body>
+
+   <?php
+
+   if(isset($_GET['admin']) && $_GET['admin']=='true'){
+      header('location:./signupPageAdmin.php');
+   }
+
+   if (isset($_POST['signup'])) {
+
+      if (isset($_POST['name'])) {
+         $name = trim($_POST['name']);
+      }
+
+      if (isset($_POST['email']) && !empty($_POST['email'])) {
+         $email = trim($_POST['email']);
+      } else {
+         $err_email = true;
+      }
+
+      if (isset($_POST['phone'])) {
+         $phone = trim($_POST['phone']);
+      }
+
+      if (isset($_POST['address'])) {
+         $address = trim($_POST['address']);
+      }
+
+      if (isset($_POST['username']) && !empty($_POST['username'])) {
+         $username = trim($_POST['username']);
+      } else {
+         $err_username = true;
+      }
+
+      if (isset($_POST['password']) && !empty($_POST['password'])  && strlen($_POST['password']) > 7 && isset($_POST['repassword']) && !empty($_POST['repassword']) && $_POST['repassword']==$_POST['password']) {
+         $password = md5($_POST['password']);
+      } else {
+         $err_password = true;
+      }
+
+
+      if ($err_email || $err_password || $err_username) {
+         $err_signup = true;
+      } else {
+         $err_signup = false;
+      }
+
+      //check if there is error if not then we procced to working with database
+      if (!$err_signup) {
+         if (isset($username) && isset($password) && isset($email)) {
+            $query = mysqlSignUp($name, $username, $password, $email, $phone, $address);
+            $result = $connection->query($query);
+
+            if (!$result) {
+               displayError(true, "Error on signing up.");
+            } else {
+               echo '<script>
+                  alert("Account created successfully. Redirecting to Login Page");
+                  window.location.href= "./loginPage.php";
+               </script>';
+               exit();
+            }
+         }
+      }
+   }
+   ?>
+   <div class="container">
+      <div class="container__left">
+         <div class="container__left__home__logo">
+            <a href="./index.php">
+               <img class="container__left__home__logo__img" src="./style/assests/logo home.png" alt="home-logo">
+            </a>
+         </div>
+         <div class="container__left__logo__info">
+            <a href="./index.html">
+               <h3>Passion</h3>
+               <h3>Seekers</h3>
+            </a>
+            <p>Making Dreams Comes True.</p>
+         </div>
+         <ul class="container__left__short__info">
+            <li class="container__left__short__info__list">
+               <div class="container__left__short__info__img">
+                  <img src="./style/assests/search.png" alt="#">
+               </div>
+               <p>Search for locations</p>
+            </li>
+            <li class="container__left__short__info__list">
+               <div class="container__left__short__info__img">
+                  <img src="./style/assests/save.png" alt="#">
+               </div>
+               <p>Save your favorite location</p>
+            </li>
+            <li class="container__left__short__info__list">
+               <div class="container__left__short__info__img">
+                  <img src="./style/assests/location.png" alt="#">
+               </div>
+               <p>Find various Activities around you</p>
+            </li>
+         </ul>
+      </div>
+      <div class="container__right">
+         <div class="container__right__form_signup">
+            <h2>Signup</h2>
+            <form action="#" method="POST" class="container__right__form_signup__form">
+
+               <div class="container__right__form__element">
+                  <Label for="name">Name</Label>
+                  <input type="text" placeholder="Enter name here" id="name" name="name" <?php echo 'value="' . $name . '"' ?>>
+               </div>
+
+               <div class="container__right__form__element">
+                  <Label for="email">Email</Label>
+                  <?php if (isset($err_email)) { ?>
+                     <input type="text" placeholder="Enter email here" id="email" name="email" class="validation__input validation__input--empty">
+                  <?php } else { ?>
+                     <input type="text" placeholder="Enter email here" id="email" name="email" class="validation__input" <?php echo 'value="' . $email . '"' ?>>
+                  <?php  } ?>
+                  <!-- <input type="text" placeholder="Enter email here" id="email" name="email"> -->
+               </div>
+
+               <div class="container__right__form__element">
+                  <Label for="phone">Phone Number</Label>
+                  <input type="text" placeholder="Enter phone here" id="phone" name="phone" <?php echo 'value="' . $phone . '"' ?>>
+               </div>
+
+               <div class="container__right__form__element">
+                  <Label for="address">Address</Label>
+                  <input type="text" placeholder="Enter address here" id="address" name="address" <?php echo 'value="' . $address . '"' ?>>
+               </div>
+
+               <div class="container__right__form__element">
+                  <Label for="username">Username</Label>
+                  <?php if (isset($err_username)) { ?>
+                     <input type="text" placeholder="Enter username here" id="username" name="username" class="validation__input validation__input--empty">
+                  <?php } else { ?>
+                     <input type="text" placeholder="Enter username here" id="username" name="username" class="validation__input" <?php echo 'value="' . $username . '"' ?>>
+                  <?php } ?>
+               </div>
+
+               <div class="container__right__form__element">
+                  <Label for="password">Password</Label>
+                  <?php if (isset($err_password)) { ?>
+                     <input type="text" placeholder="Enter password here" id="password" name="password" class="validation__input validation__input--empty">
+                  <?php } else { ?>
+                     <input type="text" placeholder="Enter password here" id="password" name="password" class="validation__input">
+                  <?php } ?>
+               </div>
+
+               <div class="container__right__form__element">
+                  <Label for="repassword">Re-enter password</Label>
+                  <?php if (isset($err_re_password)) { ?>
+                     <input type="text" placeholder="Enter Password here Again" id="repassword" name="repassword" class="validation__input validation__input--empty">
+                  <?php } else { ?>
+                     <input type="text" placeholder="Enter Password here Again" id="repassword" name="repassword" class="validation__input">
+                  <?php } ?>
+               </div>
+
+               <!-- <div class="container__right__form__element container__right__form__element--checkbox">
+                  <Label for="remember">Remember Me</Label>
+                  <input type="checkbox" id="remember">
+               </div> -->
+
+               <div class="container__right__form__element container__right__form__element--signup__btn">
+                  <input type="submit" value="Signup" name="signup">
+               </div>
+
+            </form>
+            <hr>
+         </div>
+         <?php
+         if ($err_signup) {
+            displayError($err_signup);
+         }
+         ?>
+      </div>
+   </div>
+   <script src="./scripts/validation.js"></script>
+</body>
+
+</html>

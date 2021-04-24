@@ -1,0 +1,45 @@
+.admin__interaction {
+   position: fixed;
+   bottom: 0;
+   right: 2px;
+   z-index: 2;
+}
+
+.admin__interaction__actions {
+   display: flex;
+   flex-direction: column;
+   margin-bottom: 20px;
+}
+
+.admin__interaction__actions a {
+   margin-bottom: 4px;
+}
+
+.admin__interaction__actions a button {
+   border: none;
+   background-color: var(--blue);
+   cursor: pointer;
+   color: transparent;
+   padding: 15px 10px;
+   transition: all 0.25s ease-in;
+   transform: translateX(88%);
+   width: 150px;
+   /* margin-bottom: 6px;
+   outline: none;
+   padding: 15px;*/
+}
+
+.admin__interaction__actions a button:hover {
+   color: white;
+   background-color: #173857c9;
+   transform: translateX(0);
+   /* background: rgb(13, 67, 110); */
+}
+
+/* .admin__interaction__actions button a {
+   color: transparent;
+}
+
+.admin__interaction__actions button a:hover{
+   color: white;
+} */
