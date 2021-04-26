@@ -1,26 +1,23 @@
-<?php function displayError($err_val, $msg = "! Please fill the form properly")
+<?php function displayError($err_val, $msg = "Please fill the form properly !", $time = 0)
 { ?>
+   <?php $uniqueClass = "class" . uniqid() ?>
    <?php if (isset($err_val)) { ?>
-      <div class="output__message" style="
+      <div class="<?php echo $uniqueClass ?>" style="
          background:rgb(139, 40, 40);
          border-radius: 20px;
-         bottom:2rem; 
          color: white;
          display: block;
          font-weight: 600;
-         position: fixed; 
+         margin-bottom:5px;
          padding:10px;
-         right:20px ; 
          transition: all ease 0.3s;
-         z-index:1;
          ">
          <p><?php echo $msg ?></p>
+         <script>
+            setTimeout(() => {
+               let mesg = document.querySelector('.<?php echo $uniqueClass ?>').style.opacity = 0;
+            }, 3000 + <?php echo $time * 1000 ?>)
+         </script>
       </div>
-      <script>
-         setTimeout(() => {
-            let mesg = document.querySelector('.output__message').style.opacity = 0;
-         }, 3000)
-      </script>
    <?php } ?>
-
 <?php } ?>

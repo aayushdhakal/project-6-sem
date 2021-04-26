@@ -27,9 +27,8 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
 
    <?php
    require_once './connection.php';
-   $loggin = "<script>console.log('sucess')</script>";
 
-   if(isset($_GET['admin']) && $_GET['admin']==true){
+   if (isset($_GET['admin']) && $_GET['admin'] == true) {
       header('location:./loginPageAdmin.php');
    }
 
@@ -72,13 +71,15 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
             exit();
          } else {
             $loginFailed = true;
-            $err_password = true;
-            $err_username = true;
+            $loginFailedUsers = true;
+            $loginFailedPassword = true;
          }
       }
 
-      if ($loginFailed || $err_password || $err_username) {
+      if ($err_password || $err_username) {
          $err_login = true;
+      } elseif ($loginFailed = true || $loginFailedUsers = true || $loginFailedPassword = true) {
+         $loginAuthenticationFalied = true;
       }
    }
    ?>
@@ -129,7 +130,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
                   <?php if (isset($err_username)) { ?>
                      <input type="text" placeholder="Enter Username here" id="username" name="username" class="validation__input validation__input--empty">
                   <?php } else { ?>
-                     <input type="text" placeholder="Enter Username here" id="username" name="username" class="validation__input">
+                     <input type="text" placeholder="Enter Username here" id="username" name="username" class="validation__input" <?php echo 'value="' . $username . '"' ?>>
                   <?php } ?>
 
                </div>
@@ -161,13 +162,21 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
             </form>
             <hr>
          </div>
-
-         <?php
-         require_once './loginAndSignupErrorMsg.php';
-         if ($err_login) {
-            displayError($err_login);
-         }
-         ?>
+         <div style=" bottom:2rem;
+                  display:flex;
+                  flex-direction:column;
+                  position:fixed;
+                  right:20px;
+         ">
+            <?php
+            require_once './loginAndSignupErrorMsg.php';
+            if ($err_login) {
+               displayError($err_login);
+            } elseif ($loginAuthenticationFalied) {
+               displayError(true, "Invalid Username or Password !");
+            }
+            ?>
+         </div>
 
       </div>
    </div>

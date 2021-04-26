@@ -26,6 +26,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
 </head>
 
 <body>
+
    <script>
       function confrimlogout() {
          const confrimation = confirm('Are you sure you wanna logout?');
@@ -34,6 +35,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
          }
       }
    </script>
+   
    <header>
       <?php require_once './navigationBar.php'; ?>
 

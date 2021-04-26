@@ -25,6 +25,11 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
 <body>
 
    <?php
+   $err_msgs = [];
+
+   if (isset($_GET['admin']) && $_GET['admin'] == 'false') {
+      header('location:./signupPage.php');
+   }
 
    if (isset($_POST['signup'])) {
 
@@ -52,12 +57,46 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
          $err_username = true;
       }
 
-      if (isset($_POST['password']) && !empty($_POST['password'])  && strlen($_POST['password']) > 7 && isset($_POST['repassword']) && !empty($_POST['repassword']) && $_POST['repassword']==$_POST['password']) {
+      if (isset($_POST['password']) && !empty($_POST['password'])  && strlen($_POST['password']) > 7 && isset($_POST['repassword']) && !empty($_POST['repassword']) && $_POST['repassword'] == $_POST['password']) {
          $password = md5($_POST['password']);
       } else {
          $err_password = true;
       }
 
+      //check wheather username exists or not
+      if (isset($username) && !$err_username) {
+         $queryUsers = mysqlCheckUsersUsername($username);
+         $queryAdmin = mysqlCheckAdminsUsername($username);
+
+         $resultUsers = $connection->query($queryUsers);
+         $resultAdmin = $connection->query($queryAdmin);
+
+         echo $resultUsers->num_rows;
+         echo $resultAdmin->num_rows;
+
+         if ($resultUsers->num_rows != 0 || $resultAdmin->num_rows != 0) {
+            $err_username = true;
+            echo $username . "Error";
+            array_push($err_msgs, "Username is taken");
+         }
+      }
+
+      //check wheather email exists or not
+      if (isset($email) && !$err_email) {
+         $queryUsers = mysqlCheckUsersEmail($email);
+         $queryAdmin = mysqlCheckAdminsEmail($email);
+
+         $resultUsers = $connection->query($queryUsers);
+         $resultAdmin = $connection->query($queryAdmin);
+
+         echo $resultUsers->num_rows;
+         echo $resultAdmin->num_rows;
+
+         if ($resultUsers->num_rows != 0 || $resultAdmin->num_rows != 0) {
+            $err_username = true;
+            array_push($err_msgs, "Email is taken.");
+         }
+      }
 
       if ($err_email || $err_password || $err_username) {
          $err_signup = true;
@@ -188,11 +227,24 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
             </form>
             <hr>
          </div>
-         <?php
-         if ($err_signup) {
-            displayError($err_signup);
-         }
-         ?>
+
+         <div style=" bottom:2rem;
+                  display:flex;
+                  flex-direction:column;
+                  position:fixed;
+                  right:20px;
+         ">
+            <?php
+            if (count($err_msgs) > 0) {
+               foreach ($err_msgs as $index => $message) {
+                  displayError(true, $message, $index + 1);
+               }
+            } else {
+               displayError($err_signup);
+            }
+            ?>
+         </div>
+
       </div>
    </div>
    <script src="./scripts/validation.js"></script>

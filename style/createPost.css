@@ -1,0 +1,13 @@
+.location_information{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   margin: 50px auto 0 auto;
+   width: 100vw;
+}
+
+.location_information_upload_form{
+   display: block;
+   width: 100%;
+   margin: 0 auto;
+}
