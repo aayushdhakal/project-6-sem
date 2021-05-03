@@ -1,13 +1,11 @@
 <?php
+session_start();
 require_once './loginAndSignupErrorMsg.php';
-require_once './connection.php';
-?>
-<?php
-if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
-   session_start();
-   $_SESSION['username'] = $_COOKIE['username'];
+require_once './__connection.php';
+require_once './__assignSession.php';
+if((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])){
    header('location:index.php');
-};
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +24,6 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
 <body>
 
    <?php
-   require_once './connection.php';
 
    if (isset($_GET['admin']) && $_GET['admin'] == true) {
       header('location:./loginPageAdmin.php');

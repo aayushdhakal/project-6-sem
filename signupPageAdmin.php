@@ -1,13 +1,11 @@
 <?php
+session_start();
 require_once './loginAndSignupErrorMsg.php';
-require_once './connection.php';
-?>
-<?php
+require_once './__connection.php';
+require_once './__assignSession.php';
 if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
-   session_start();
-   $_SESSION['username'] = $_COOKIE['username'];
    header('location:index.php');
-};
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

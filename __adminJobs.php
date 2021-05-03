@@ -3,7 +3,7 @@
    ?>
       <section class="admin__interaction">
          <div class="admin__interaction__actions">
-            <a href="#"><button>Created Post</button></a>
+            <a href="./createPost.php"><button>Created Post</button></a>
             <a href="#"><button>Edit Post</button></a>
             <a href="#"><button>Remove Post</button></a>
             <a href="#"><button>View Reviews</button></a>

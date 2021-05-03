@@ -1,8 +1,6 @@
 <?php
-session_start();
-if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
-   $_SESSION['username'] = $_COOKIE['username'];
-};
+   session_start();
+   require_once './__assignSession.php';
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +35,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
    </script>
    
    <header>
-      <?php require_once './navigationBar.php'; ?>
+      <?php require_once './__navigationBar.php'; ?>
 
       <div class="slideshow-container">
          <div class="shade-slides"></div>
@@ -521,7 +519,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
          <p>Copyright &#169; 2021 All Rights Reserved </p>
       </div>
    </footer>
-   <?php require_once './adminJobs.php' ?>
+   <?php require_once './__adminJobs.php' ?>
    <script src="./scripts/src.js"></script>
 </body>
 

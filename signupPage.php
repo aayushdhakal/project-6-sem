@@ -1,13 +1,11 @@
 <?php
+session_start();
 require_once './loginAndSignupErrorMsg.php';
-require_once './connection.php';
-?>
-<?php
+require_once './__connection.php';
+require_once './__assignSession.php';
 if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
-   session_start();
-   $_SESSION['username'] = $_COOKIE['username'];
    header('location:index.php');
-};
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -236,15 +234,15 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
          ">
             <?php
             if (count($err_msgs) > 0) {
-               foreach ($err_msgs as $index=>$message) {
-                  displayError(true, $message,$index+1);
+               foreach ($err_msgs as $index => $message) {
+                  displayError(true, $message, $index + 1);
                }
             } else {
                displayError($err_signup);
             }
             ?>
          </div>
-         
+
       </div>
       <script src="./scripts/validation.js"></script>
 </body>
