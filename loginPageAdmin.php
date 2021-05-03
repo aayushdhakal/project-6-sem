@@ -2,7 +2,7 @@
 session_start();
 require_once './__assignSession.php';
 require_once './__connection.php';
-require_once './loginAndSignupErrorMsg.php';
+require_once './__loginAndSignupErrorMsg.php';
 if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
    header('location:index.php');
 }
@@ -167,7 +167,6 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
                   right:20px;
          ">
             <?php
-            require_once './loginAndSignupErrorMsg.php';
             if ($err_login) {
                displayError($err_login);
             } elseif ($loginAuthenticationFalied) {

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once './loginAndSignupErrorMsg.php';
+require_once './__loginAndSignupErrorMsg.php';
 require_once './__connection.php';
 require_once './__assignSession.php';
 if((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])){
@@ -159,6 +159,7 @@ if((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])){
             </form>
             <hr>
          </div>
+         
          <div style=" bottom:2rem;
                   display:flex;
                   flex-direction:column;
@@ -166,7 +167,6 @@ if((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])){
                   right:20px;
          ">
             <?php
-            require_once './loginAndSignupErrorMsg.php';
             if ($err_login) {
                displayError($err_login);
             } elseif ($loginAuthenticationFalied) {

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once './loginAndSignupErrorMsg.php';
+require_once './__loginAndSignupErrorMsg.php';
 require_once './__connection.php';
 require_once './__assignSession.php';
 if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {

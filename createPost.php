@@ -2,6 +2,7 @@
 session_start();
 require_once './__assignSession.php';
 require_once './__connection.php';
+require_once './__loginAndSignupErrorMsg.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +14,7 @@ require_once './__connection.php';
    <link rel="stylesheet" href="./style/style.css">
    <link rel="stylesheet" href="./style/header-navigationBar.css">
    <link rel="stylesheet" href="./style/createPost.css">
+   <link rel="stylesheet" href="./style/admin-jobs.css">
    <title>Passion Seekers | Create Post</title>
 </head>
 
@@ -28,84 +30,84 @@ require_once './__connection.php';
    </script>
 
    <?php
-   if (isset($_POST['upload'])) {
 
-      if (isset($_POST['title']) && !empty($_POST['title'])) {
-         $title = trim($_POST['title']);
-      } else {
-         $err['title'] = "Invalid title!";
-      }
+   //check if he is admin or not
+   $checkAdminQuery = mysqlisAdmin($_SESSION['id'], $_SESSION['username']);
+   $result = $connection->query($checkAdminQuery);
 
-      if (isset($_POST['description']) && !empty($_POST['description'])) {
-         $description = trim($_POST['description']);
-      } else {
-         $err['description'] = "Invalid description!";
-      }
+   if ($result->num_rows == 1) {
+      if (isset($_POST['upload'])) {
 
-      if (isset($_POST['lattitude']) && !empty($_POST['lattitude'])) {
-         $lattitude = trim($_POST['lattitude']);
-      } else {
-         $err['lattitude'] = 'Invalid lattitude!';
-      }
-
-      if (isset($_POST['longitude']) && !empty($_POST['longitude'])) {
-         $longitude = trim($_POST['longitude']);
-      } else {
-         $err['longitude'] = 'Invalid longitude!';
-      }
-
-      if (!isset($err['longitude']) && !isset($err['lattitude']) && !isset($err['title']) && !isset($err['description'])) {
-
-         // saving images in server
-         $imageNames = [];
-         $countFiles = count($_FILES['images']['name']);
-         if ($countFiles > 0) {
-            echo "step 1 <br>";
-            for ($i = 0; $i < $countFiles; $i++) {
-               $filename = $_FILES['images']['name'][$i];
-               // Upload file
-               // move_uploaded_file($_FILES['file']['tmp_name'][$i], 'upload/' . $filename);
-               // echo $filename . "<br>";
-               // echo $_FILES['images']['error'][$i];
-
-               //check for error on the each upload
-               if ($_FILES['images']['error'][$i] == 0) {
-                  echo "step 2 <br>";
-                  if ($_FILES['images']['size'][$i] <= 1024000) {
-                     echo "step 3 <br>";
-
-                     $file_types = ['image/png', 'image/jpeg', 'image/gif', 'image/jpg'];
-
-                     if (in_array($_FILES['images']['type'][$i], $file_types)) {
-                        echo "step 4 <br>";
-
-                        //move upload file to server
-                        $imageName = "imagePost" . uniqid().".png";
-                        array_push($imageNames,$imageName);
-
-                        if (move_uploaded_file($_FILES['images']['tmp_name'][$i], 'images/posts/' . $imageName)) {
-                           echo 'Image uploaded';
-                        } else {
-                           $err['images'] = 'error on image uploaded';
-                        }
-
-                     } else {
-                        $err['images'] = 'Select Valid format';
-                     }
-                  } else {
-                     $err['images'] = 'Select images upto 10 mb';
-                  }
-               }
-            }
+         if (isset($_POST['title']) && !empty($_POST['title'])) {
+            $title = trim($_POST['title']);
          } else {
-            $err['images'] = 'Please upload at least one file.';
+            $err['title'] = "Invalid title!";
          }
 
-         //check if he is admin or not
-         $checkAdminQuery = mysqlisAdmin($_SESSION['id'], $_SESSION['username']);
-         $result = $connection->query($checkAdminQuery);
+         if (isset($_POST['description']) && !empty($_POST['description'])) {
+            $description = trim($_POST['description']);
+         } else {
+            $err['description'] = "Invalid description!";
+         }
 
-         if ($result->num_rows == 1) {
+         if (isset($_POST['lattitude']) && !empty($_POST['lattitude'])) {
+            $lattitude = trim($_POST['lattitude']);
+         } else {
+            $err['lattitude'] = 'Invalid lattitude!';
+         }
+
+         if (isset($_POST['longitude']) && !empty($_POST['longitude'])) {
+            $longitude = trim($_POST['longitude']);
+         } else {
+            $err['longitude'] = 'Invalid longitude!';
+         }
+
+         if (!isset($err['longitude']) && !isset($err['lattitude']) && !isset($err['title']) && !isset($err['description'])) {
+
+            // saving images in server
+            $imageNames = [];
+            $countFiles = count($_FILES['images']['name']);
+            if ($countFiles > 0) {
+               echo "step 1 <br>";
+               for ($i = 0; $i < $countFiles; $i++) {
+                  $filename = $_FILES['images']['name'][$i];
+                  // Upload file
+                  // move_uploaded_file($_FILES['file']['tmp_name'][$i], 'upload/' . $filename);
+                  // echo $filename . "<br>";
+                  // echo $_FILES['images']['error'][$i];
+
+                  //check for error on the each upload
+                  if ($_FILES['images']['error'][$i] == 0) {
+                     echo "step 2 <br>";
+                     if ($_FILES['images']['size'][$i] <= 1024000) {
+                        echo "step 3 <br>";
+
+                        $file_types = ['image/png', 'image/jpeg', 'image/gif', 'image/jpg'];
+
+                        if (in_array($_FILES['images']['type'][$i], $file_types)) {
+                           echo "step 4 <br>";
+
+                           //move upload file to server
+                           $imageName = "imagePost" . uniqid() . ".png";
+                           array_push($imageNames, $imageName);
+
+                           if (move_uploaded_file($_FILES['images']['tmp_name'][$i], 'images/posts/' . $imageName)) {
+                              echo 'Image uploaded';
+                           } else {
+                              $err['images'] = 'error on image uploaded';
+                           }
+                        } else {
+                           $err['images'] = 'Select Valid format';
+                        }
+                     } else {
+                        $err['images'] = 'Select images upto 10 mb';
+                     }
+                  }
+               }
+            } else {
+               $err['images'] = 'Please upload at least one file.';
+            }
+
             if (count($err) == 0) {
                $queryToInsertData  = mysqlCreatePost($title, $description, $_SESSION['id'], $lattitude, $longitude);
                $output = $connection->query($queryToInsertData);
@@ -113,18 +115,16 @@ require_once './__connection.php';
                $lastInsertedLocationId = mysqli_insert_id($connection);
 
                foreach ($imageNames as $name) {
-                  $queryToInsertImage = mysqlAddImage($name,$lastInsertedLocationId);
+                  $queryToInsertImage = mysqlAddImage($name, $lastInsertedLocationId);
                   $connection->query($queryToInsertImage);
                };
             }
-         } else {
-            $err['users'] = 'Users not valid';
          }
       }
-
-      // print_r($err);
-      // print_r($_FILES['images']);
+   } else {
+      $err['users'] = 'Users not valid';
    }
+
    ?>
 
    <header>
@@ -167,6 +167,23 @@ require_once './__connection.php';
 
       </form>
    </section>
+
+   <?php require_once './__adminJobs.php' ?>
+
+   <div style=" bottom:2rem;
+                  display:flex;
+                  flex-direction:column;
+                  position:fixed;
+                  right:20px;
+         ">
+      <?php
+      if (count($err) > 0) {
+         foreach ($err as $index => $message) {
+            displayError(true, $message, $index + 1);
+         }
+      }
+      ?>
+   </div>
 
    <script src="./scripts/individualPage.js"></script>
 </body>
