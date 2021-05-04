@@ -31,7 +31,7 @@
 
 .location_information_upload_form_item textarea{
    resize: none;
-   height: 6rem;
+   height: 18rem;
    overflow: scroll;
 }
 

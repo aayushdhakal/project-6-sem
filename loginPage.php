@@ -3,7 +3,7 @@ session_start();
 require_once './__loginAndSignupErrorMsg.php';
 require_once './__connection.php';
 require_once './__assignSession.php';
-if((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])){
+if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
    header('location:index.php');
 }
 ?>
@@ -18,6 +18,7 @@ if((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])){
    <link rel="icon" href="./style/assests/travel.png">
    <link rel="stylesheet" href="./style/style.css">
    <link rel="stylesheet" href="./style/loginPage.css">
+   <link rel="icon" href="./style/assests/travel.png">
    <title>Passion Seekers | Login</title>
 </head>
 
@@ -159,7 +160,7 @@ if((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])){
             </form>
             <hr>
          </div>
-         
+
          <div style=" bottom:2rem;
                   display:flex;
                   flex-direction:column;

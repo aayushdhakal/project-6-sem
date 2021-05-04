@@ -26,7 +26,7 @@ function mysqlLoginQueryAdmin($username, $password)
   return $query;
 }
 
-function mysqlisAdmin($id,$username)
+function mysqlisAdmin($id, $username)
 {
   $query = "SELECT * FROM tbl_admins WHERE username='$username' AND status=1 AND id=$id";
   return $query;
@@ -74,15 +74,53 @@ function mysqlCheckAdminsEmail($email)
   return $query;
 }
 
-function mysqlCreatePost($title, $description, $adminId,$lattitude, $longitude)
+function mysqlCreatePost($title, $description, $adminId, $lattitude, $longitude)
 {
   $query = "INSERT INTO `tbl_location`(`title`, `description`, `admin_id`, `lattitude`, `longitude`) VALUES ('$title','$description','$adminId','$lattitude','$longitude')";
   return $query;
 }
 
-function mysqlAddImage($image,$locationId)
+function mysqlAddImage($image, $locationId)
 {
   $query = "INSERT INTO `tbl_images`(`image`, `location_id`) VALUES ('$image',$locationId)";
+  return $query;
+}
+
+function mysqlRemoveAllImagesByLocationId($id)
+{
+  $query = "DELETE FROM `tbl_images` WHERE location_id=$id";
+  return $query;
+}
+
+function mysqlGetPost($id, $admin = false)
+{
+  $query = "SELECT l.id,l.title, l.description, a.username, l.lattitude, l.longitude, l.created_at,l.status 
+            FROM   `tbl_location` AS l ,`tbl_admins` AS a
+            WHERE l.admin_id = a.id AND l.id=$id AND l.status=true";
+
+  $query1 = "SELECT `image` FROM `tbl_images` WHERE location_id=$id";
+
+  if ($admin) {
+    $query = "SELECT l.id,l.title, l.description, a.username, l.lattitude, l.longitude, l.created_at,l.status 
+            FROM   `tbl_location` AS l ,`tbl_admins` AS a
+            WHERE l.admin_id = a.id AND l.id=$id";
+  }
+  return [$query, $query1];
+}
+
+function mysqlUpdatePost($id, $title, $description, $lattitude, $longitude, $status)
+{
+  $query = "UPDATE
+    `tbl_location`
+SET
+    `title` = '$title',
+    `description` = '$description',
+    `lattitude` = $lattitude,
+    `longitude` = $longitude,
+    `status` = $status
+WHERE
+    id=$id";
+
   return $query;
 }
 

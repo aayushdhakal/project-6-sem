@@ -11,13 +11,35 @@
    max-width: 850px;
 }
 
+.post__title {
+   margin-bottom: 10px;
+   font-size: 2rem;
+}
+
+.post__created__by {
+   margin-top: 10px;
+   text-transform: lowercase;
+   opacity: 0.3;
+}
+
+.post__created__at {
+   opacity: 0.3;
+   text-transform: lowercase;
+}
+
 .post__image__slider {
    display: block;
    margin-bottom: 20px;
    overflow: hidden;
    position: relative;
    width: 800px;
+   /* max-height: 800px; */
 }
+
+.post__image__slider__container {
+   border: solid #999 1px;
+}
+
 
 .slideshow-post__image__slider__container {
    margin: auto;
@@ -38,18 +60,20 @@
 
 .prev,
 .next {
+   border-radius: 0 3px 3px 0;
    cursor: pointer;
-   position: absolute;
-   top: 50%;
-   width: auto;
-   padding: 16px;
-   margin-top: -22px;
    color: white;
+   position: absolute;
    font-weight: bold;
    font-size: 18px;
-   transition: 0.6s ease;
-   border-radius: 0 3px 3px 0;
+   margin-top: -22px;
+   padding: 16px;
+   top: 50%;
+   text-shadow: 0px 0px 4px #000;
    user-select: none;
+   transition: 0.6s ease;
+   /* transform: translateY(0%); */
+   width: auto;
 }
 
 .next {
@@ -157,11 +181,11 @@ aside {
    z-index: 1;
 }
 
-.aside__container{
+.aside__container {
    position: fixed;
 }
 
-.aside__recomendation{
+.aside__recomendation {
    background: var(--background-color-dark);
    padding: 20px;
    margin-top: 10px;
@@ -179,14 +203,14 @@ aside {
    width: 40%;
 }
 
-.aside__recomendation__content p{
+.aside__recomendation__content p {
    display: inline;
    padding-left: 10px;
 }
 
 @media only screen and (min-width: 1500px) {
-   
-   section{
+
+   section {
       margin-left: 10rem;
    }
 

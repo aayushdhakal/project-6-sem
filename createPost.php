@@ -15,6 +15,7 @@ require_once './__loginAndSignupErrorMsg.php';
    <link rel="stylesheet" href="./style/header-navigationBar.css">
    <link rel="stylesheet" href="./style/createPost.css">
    <link rel="stylesheet" href="./style/admin-jobs.css">
+   <link rel="icon" href="./style/assests/travel.png">
    <title>Passion Seekers | Create Post</title>
 </head>
 
@@ -50,13 +51,13 @@ require_once './__loginAndSignupErrorMsg.php';
             $err['description'] = "Invalid description!";
          }
 
-         if (isset($_POST['lattitude']) && !empty($_POST['lattitude'])) {
+         if (isset($_POST['lattitude']) && is_numeric($_POST['lattitude'])) {
             $lattitude = trim($_POST['lattitude']);
          } else {
             $err['lattitude'] = 'Invalid lattitude!';
          }
 
-         if (isset($_POST['longitude']) && !empty($_POST['longitude'])) {
+         if (isset($_POST['longitude']) && is_numeric($_POST['longitude'])) {
             $longitude = trim($_POST['longitude']);
          } else {
             $err['longitude'] = 'Invalid longitude!';
@@ -67,8 +68,9 @@ require_once './__loginAndSignupErrorMsg.php';
             // saving images in server
             $imageNames = [];
             $countFiles = count($_FILES['images']['name']);
-            if ($countFiles > 0) {
-               echo "step 1 <br>";
+
+            if ($countFiles > 0 && $_FILES['images']['error'][0] == 0) {
+               echo "<br> step 1 <br>";
                for ($i = 0; $i < $countFiles; $i++) {
                   $filename = $_FILES['images']['name'][$i];
                   // Upload file
@@ -79,7 +81,7 @@ require_once './__loginAndSignupErrorMsg.php';
                   //check for error on the each upload
                   if ($_FILES['images']['error'][$i] == 0) {
                      echo "step 2 <br>";
-                     if ($_FILES['images']['size'][$i] <= 1024000) {
+                     if ($_FILES['images']['size'][$i] <= 10485800) {
                         echo "step 3 <br>";
 
                         $file_types = ['image/png', 'image/jpeg', 'image/gif', 'image/jpg'];
@@ -88,7 +90,7 @@ require_once './__loginAndSignupErrorMsg.php';
                            echo "step 4 <br>";
 
                            //move upload file to server
-                           $imageName = "imagePost" . uniqid() . ".png";
+                           $imageName = "imagePost" . uniqid().rand().uniqid().rand() . ".png";
                            array_push($imageNames, $imageName);
 
                            if (move_uploaded_file($_FILES['images']['tmp_name'][$i], 'images/posts/' . $imageName)) {
@@ -100,7 +102,7 @@ require_once './__loginAndSignupErrorMsg.php';
                            $err['images'] = 'Select Valid format';
                         }
                      } else {
-                        $err['images'] = 'Select images upto 10 mb';
+                        $err['images'] = 'Select images upto 10 mb' . $index;
                      }
                   }
                }
@@ -118,6 +120,7 @@ require_once './__loginAndSignupErrorMsg.php';
                   $queryToInsertImage = mysqlAddImage($name, $lastInsertedLocationId);
                   $connection->query($queryToInsertImage);
                };
+               header('location:./individualPage.php?id='.$lastInsertedLocationId);
             }
          }
       }
