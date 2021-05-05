@@ -92,6 +92,13 @@ function mysqlRemoveAllImagesByLocationId($id)
   return $query;
 }
 
+function mysqlRemovePostAndImages($id){
+  $query = "DELETE FROM `tbl_location` WHERE id=$id";
+  $query1 = mysqlRemoveAllImagesByLocationId($id);
+
+  return [$query,$query1];
+}
+
 function mysqlGetPost($id, $admin = false)
 {
   $query = "SELECT l.id,l.title, l.description, a.username, l.lattitude, l.longitude, l.created_at,l.status 
