@@ -92,11 +92,12 @@ function mysqlRemoveAllImagesByLocationId($id)
   return $query;
 }
 
-function mysqlRemovePostAndImages($id){
+function mysqlRemovePostAndImages($id)
+{
   $query = "DELETE FROM `tbl_location` WHERE id=$id";
   $query1 = mysqlRemoveAllImagesByLocationId($id);
 
-  return [$query,$query1];
+  return [$query, $query1];
 }
 
 function mysqlGetPost($id, $admin = false)
@@ -117,6 +118,7 @@ function mysqlGetPost($id, $admin = false)
 
 function mysqlUpdatePost($id, $title, $description, $lattitude, $longitude, $status)
 {
+  $dateNow = date('Y:m:d') . " " . date('H:m:s');
   $query = "UPDATE
     `tbl_location`
 SET
@@ -124,9 +126,48 @@ SET
     `description` = '$description',
     `lattitude` = $lattitude,
     `longitude` = $longitude,
-    `status` = $status
+    `status` = $status,
+    `updated_at` = '$dateNow'
 WHERE
     id=$id";
+
+  return $query;
+}
+
+function mysqlLocationAndImagesInfo($pageNo, $pageOffset)
+{
+  $pageNo = $pageNo * $pageOffset;
+  $query =
+    "SELECT
+    id,
+    title,
+    description,
+    lattitude,
+    longitude,
+    `status`,
+    image_count,
+  	created_by,
+    created_by_id,
+    created_at,
+    updated_at
+FROM
+    `tbl_location` AS l,
+    (
+    SELECT
+        COUNT(location_id) AS image_count,
+        location_id
+    FROM
+        `tbl_images`
+    GROUP BY
+        location_id
+) AS i,
+(
+    SELECT username AS created_by,id AS created_by_id FROM `tbl_admins`
+) AS a
+WHERE
+    i.location_id = l.id AND
+    l.admin_id = a.created_by_id
+LIMIT $pageNo,$pageOffset";
 
   return $query;
 }
