@@ -172,5 +172,43 @@ LIMIT $pageNo,$pageOffset";
   return $query;
 }
 
+function mysqlLocationPostCount()
+{
+  $query = "SELECT COUNT(id) as `total` FROM `tbl_location`";
+  return $query;
+}
+
+function mysqlAdminRequestList($pageNo, $pageOffset)
+{
+  $pageNo = $pageNo * $pageOffset;
+  $query = "SELECT
+    id,
+    `name`,
+    username,
+    email,
+    `address`,
+    phone_number,
+    `status`,
+    created_at
+FROM
+    `tbl_admins`
+WHERE
+    `status` = 0
+LIMIT $pageNo,$pageOffset";
+
+  return $query;
+}
+
+function mysqladminRequests ($id,$accepted){
+
+  if($accepted == true){
+    $query = "UPDATE `tbl_admins` SET `status`=1 WHERE id=$id;";
+  } else {
+    $query = "DELETE FROM `tbl_admins` WHERE id=$id;";
+  }
+
+  return $query;
+}
+
 // $query1 = "SELECT * FROM tbl_users WHERE username='user' AND password='upassword' AND status=1";
 // print_r($connection->query($query1));

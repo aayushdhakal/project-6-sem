@@ -56,6 +56,8 @@ require_once './__loginAndSignupErrorMsg.php';
       $err['user'] = 'Not a valid User';
    }
 
+   $totalPost = ($connection->query(mysqlLocationPostCount()))->fetch_assoc();
+   $pageCount = ceil($totalPost['total'] / $pageOfset);
    ?>
 
    <header>
@@ -69,12 +71,12 @@ require_once './__loginAndSignupErrorMsg.php';
             <table border="1" class="all__posts__contents">
                <thead class="all__posts__contents__head">
                   <th>S.N</th>
-                  <th>Post Id</th>
                   <th>Title</th>
                   <th>Description</th>
                   <th>lattitude</th>
                   <th>longitude</th>
                   <th>Status</th>
+                  <th>Post Id</th>
                   <th>No of Images on Post</th>
                   <th>Created By</th>
                   <th>Created At</th>
@@ -84,13 +86,13 @@ require_once './__loginAndSignupErrorMsg.php';
                <tbody>
                   <?php foreach ($postList as $index => $post) { ?>
                      <tr class="all__posts__contents__content">
-                        <td><?php echo 2 * $pageNumber - 2 + $index + 1 ?></td>
-                        <td><?php echo $post['id'] ?></td>
+                        <td><?php echo $pageOfset * $pageNumber - $pageOfset + $index + 1 ?></td>
                         <td class="all__posts__contents__content__left"><?php echo $post['title'] ?></td>
                         <td class="all__posts__contents__content__left"><?php echo substr($post['description'], 0, 40) . ".... <a href='./individualPage.html?id=" . $post['id'] . "' class='all__posts__contents__content__more' >view more</a>" ?></td>
                         <td><?php echo $post['lattitude'] ?></td>
                         <td><?php echo $post['longitude'] ?></td>
                         <td><?php echo $post['status'] == 1 ? 'active' : 'hidden' ?></td>
+                        <td><?php echo $post['id'] ?></td>
                         <td><?php echo $post['image_count'] ?></td>
                         <td><?php echo $post['created_by'] ?></td>
                         <td><?php echo $post['created_at'] ?></td>
@@ -103,6 +105,18 @@ require_once './__loginAndSignupErrorMsg.php';
             </table>
          </div>
       </section>
+
+      <div class="page__numbers">
+         <?php for ($i = 1; $i <= $pageCount; $i++) {
+
+            if ($pageNumber == $i) { ?>
+               <p class="page__number page__number--active"><a><?php echo $i ?></a></p>
+            <?php } else { ?>
+               <p class="page__number page__number"><a href="<?php echo './allPosts.php?pageno=' . $i ?>"><?php echo $i ?></a></p>
+            <?php } ?>
+
+         <?php } ?>
+      </div>
 
    <?php } ?>
 

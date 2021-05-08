@@ -92,7 +92,7 @@ require_once './__loginAndSignupErrorMsg.php';
             <div class="search__by__post__item">
                <input type="number" name="id" class="search__by__post__item__input" placeholder="Enter post id here!" value=<?php echo isset($id) ? $id : ""; ?>>
 
-               <button href='./index.php' class="search__by__post__item__search" name="remove">Remove</button>"
+               <button href='./index.php' class="search__by__post__item__search" name="remove">Remove</button>
             </div>
          </form>
       </div>
