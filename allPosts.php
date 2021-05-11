@@ -7,16 +7,16 @@ require_once './__loginAndSignupErrorMsg.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="./style/style.css">
-<link rel="stylesheet" href="./style/header-navigationBar.css">
-<link rel="stylesheet" href="./style/all-posts.css">
-<link rel="stylesheet" href="./style/admin-jobs.css">
 
 <head>
+   <link rel="stylesheet" href="./style/style.css">
+   <link rel="stylesheet" href="./style/header-navigationBar.css">
+   <link rel="stylesheet" href="./style/all-posts.css">
+   <link rel="stylesheet" href="./style/admin-jobs.css">
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>All Posts</title>
+   <title>Passion Seekers | Login Admin</title>
 </head>
 
 <body>
@@ -50,6 +50,7 @@ require_once './__loginAndSignupErrorMsg.php';
 
       while ($row = $result->fetch_assoc()) {
          array_push($postList, $row);
+         // print_r($row);
       }
       // print_r($postList);
    } else {
@@ -73,8 +74,9 @@ require_once './__loginAndSignupErrorMsg.php';
                   <th>S.N</th>
                   <th>Title</th>
                   <th>Description</th>
-                  <th>lattitude</th>
-                  <th>longitude</th>
+                  <th>Lattitude</th>
+                  <th>Longitude</th>
+                  <th>Type of Activity</th>
                   <th>Status</th>
                   <th>Post Id</th>
                   <th>No of Images on Post</th>
@@ -91,6 +93,7 @@ require_once './__loginAndSignupErrorMsg.php';
                         <td class="all__posts__contents__content__left"><?php echo substr($post['description'], 0, 40) . ".... <a href='./individualPage.html?id=" . $post['id'] . "' class='all__posts__contents__content__more' >view more</a>" ?></td>
                         <td><?php echo $post['lattitude'] ?></td>
                         <td><?php echo $post['longitude'] ?></td>
+                        <td><?php echo $post['type_of_activity'] ?></td>
                         <td><?php echo $post['status'] == 1 ? 'active' : 'hidden' ?></td>
                         <td><?php echo $post['id'] ?></td>
                         <td><?php echo $post['image_count'] ?></td>

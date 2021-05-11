@@ -18,7 +18,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
    <link rel="stylesheet" href="./style/style.css">
    <link rel="stylesheet" href="./style/signupPage.css">
    <link rel="icon" href="./style/assests/travel.png">
-   <title>Passion Seekers | Signup</title>
+   <title>Passion Seekers | Signup Admin</title>
 </head>
 
 <body>

@@ -1,13 +1,23 @@
+<?php
+if (isset($_POST['search'])) {
+   if (isset($_POST['search_input']) && !empty($_POST['search_input'])) {
+      header("location:./list-of-posts.php?search=" . $_POST['search_input']);
+   } else {
+      header('location:./index.php');
+   }
+}
+?>
+
 <nav>
    <h1><a style="color: white;" href="./index.php">Passion Seekers</a></h1>
    <ul>
       <li>
          <div class="search__posts">
-            <form action="./loginPage.html" name="search__post">
-               <button type="button" class="search__form__btn">
+            <form method="POST">
+               <button type="button" class="search__form__btn" name="search">
                   <img src="./style/assests/search.png" alt="search">
                </button>
-               <input type="text" class="search__form__field">
+               <input type="text" class="search__form__field" name="search_input">
             </form>
          </div>
       </li>
@@ -17,7 +27,7 @@
       <?php
 
       if (isset($_SESSION['username'])) {
-         echo "<li><a href='#'>" . $_SESSION['username'] . "</a></li>";
+         echo "<li><a href='./profile.php?username=" . $_SESSION['username'] . "'>" . $_SESSION['username'] . "</a></li>";
 
          echo "<li class='logout__btn'>
                   <button 

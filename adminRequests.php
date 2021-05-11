@@ -18,7 +18,8 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
    <link rel="stylesheet" href="./style/header-navigationBar.css">
    <link rel="stylesheet" href="./style/admin-jobs.css">
    <link rel="stylesheet" href="./style/adminRequests.css">
-   <title>Passion Seekers</title>
+   <link rel="stylesheet" href="./style/all-posts.css">
+   <title>Passion Seekers | Admin Requests</title>
 </head>
 
 <body>
@@ -44,12 +45,16 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
       }
 
       $pageOfset = 10;
-      $result = $connection->query(mysqlAdminRequestList($pageNumber - 1, $pageOfset));
+      $queryToGetList = mysqlAdminRequestList($pageNumber - 1, $pageOfset);
+      $totalAdminCount = ($connection->query(mysqladminRequestsCount()))->fetch_assoc();
+      $result = $connection->query($queryToGetList);
       $adminList = [];
 
       while ($row = $result->fetch_assoc()) {
          array_push($adminList, $row);
       }
+      //count number of page required
+      $pageCount = ceil($totalAdminCount['total'] / $pageOfset);
 
       if (isset($_GET['confrimation']) && $_GET['confrimation'] == 'true') {
 
@@ -98,8 +103,6 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
             $err['server'] = 'Internal Server Error';
          }
       }
-
-      print_r($adminList);
    } else {
       $err['user'] = 'Not a valid user !';
    }
@@ -112,8 +115,9 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
    <?php if ($checkAdminResult->num_rows == 1) { ?>
 
       <section class="admin__request__list">
-         <table border="1" width="80%">
-            <thead class="admin__request__list__contents">
+         <h2>Admin Request List</h2>
+         <table border="1" width="80%" class="admin__request__list__table">
+            <thead class="admin__request__list__contents__head">
                <th>S.N</th>
                <th>Id</th>
                <th>Name</th>
@@ -125,7 +129,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
                <th>Created At</th>
                <th colspan="2">Actions</th>
             </thead>
-            <tbody>
+            <tbody class="admin__request__list__contents__body">
                <?php foreach ($adminList as $index => $admin) {
                ?>
                   <tr class="admin__request__list__contents">
@@ -138,14 +142,25 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
                      <td><?php echo $admin['phone_number'] ?></td>
                      <td><?php echo $admin['status'] == 0 ? "Not Active" : 'N/A' ?></td>
                      <td><?php echo $admin['created_at'] ?></td>
-                     <td><a href="<?php echo "./adminRequests.php?id=" . $admin['id'] . "&accept=true&pageno=" . $pageNumber ?>">Accept</a></td>
-                     <td><a href="<?php echo "./adminRequests.php?id=" . $admin['id'] . "&accept=false&pageno=" . $pageNumber ?>">Decline</a></td>
+                     <td><a href="<?php echo "./adminRequests.php?id=" . $admin['id'] . "&accept=true&pageno=" . $pageNumber ?>" class="admin__request__list__contents__button admin__request__list__contents__button--accept">Accept</a></td>
+                     <td><a href="<?php echo "./adminRequests.php?id=" . $admin['id'] . "&accept=false&pageno=" . $pageNumber ?>" class="admin__request__list__contents__button admin__request__list__contents__button--decline">Decline</a></td>
                   </tr>
                <?php }
                ?>
             </tbody>
          </table>
       </section>
+      <div class="page__numbers">
+         <?php for ($i = 1; $i <= $pageCount; $i++) {
+
+            if ($pageNumber == $i) { ?>
+               <p class="page__number page__number--active"><a><?php echo $i ?></a></p>
+            <?php } else { ?>
+               <p class="page__number page__number"><a href="<?php echo './allPosts.php?pageno=' . $i ?>"><?php echo $i ?></a></p>
+            <?php } ?>
+
+         <?php } ?>
+      </div>
    <?php } ?>
 
 

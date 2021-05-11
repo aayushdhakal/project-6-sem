@@ -58,12 +58,14 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
                setcookie('username', $username, time() + (60 * 60 * 24 * 7));
                setcookie('name', $data['name'], time() + (60 * 60 * 24 * 7));
                setcookie('id', $data['id'], time() + (60 * 60 * 24 * 7));
+               setcookie('is_user', $data['id'], time() + (60 * 60 * 24 * 7));
             };
 
             session_start();
             $_SESSION['username'] = $username;
             $_SESSION['name'] = $data['name'];
             $_SESSION['id'] = $data['id'];
+            $_SESSION['is_user'] = true;
 
             header("location:index.php");
             exit();

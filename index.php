@@ -521,6 +521,7 @@
    </footer>
    <?php require_once './__adminJobs.php' ?>
    <script src="./scripts/src.js"></script>
+   <script src="./scripts/individualPage.js"></script>
 </body>
 
 </html>

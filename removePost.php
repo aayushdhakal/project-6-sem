@@ -16,7 +16,7 @@ require_once './__loginAndSignupErrorMsg.php';
    <link rel="stylesheet" href="./style/edit-post.css">
    <link rel="stylesheet" href="./style/admin-jobs.css">
    <link rel="icon" href="./style/assests/travel.png">
-   <title>Passion Seekers | Create Post</title>
+   <title>Passion Seekers | Remove Post</title>
 </head>
 
 <body>
@@ -92,7 +92,7 @@ require_once './__loginAndSignupErrorMsg.php';
             <div class="search__by__post__item">
                <input type="number" name="id" class="search__by__post__item__input" placeholder="Enter post id here!" value=<?php echo isset($id) ? $id : ""; ?>>
 
-               <button href='./index.php' class="search__by__post__item__search" name="remove">Remove</button>
+               <button class="search__by__post__item__search" name="remove">Remove</button>
             </div>
          </form>
       </div>

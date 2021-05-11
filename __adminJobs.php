@@ -1,3 +1,4 @@
+   <?php require_once './__userJobs.php'; ?>
    <?php
    if ($_SESSION['admin'] == true) {
    ?>
@@ -9,7 +10,7 @@
             <a href="./allPosts.php"><button>View Posts <br>(Tabular Form)</button></a>
             <a href="./adminRequests.php"><button>Admin request list</button></a>
             <a href="#"><button>View Reviews</button></a>
-            <a href="#"><button>Block User</button></a>
+            <!-- <a href="#"><button>Block User</button></a> -->
          </div>
       </section>
    <?php } ?>

@@ -63,6 +63,12 @@ require_once './__loginAndSignupErrorMsg.php';
             $err['longitude'] = 'Invalid longitude!';
          }
 
+         if (isset($_POST['type-of-activity']) && $_POST['type-of-activity']) {
+            $typeOfActivities = trim($_POST['type-of-activity']);
+         } else {
+            $err['type-of-activity'] = 'Invalid Type of Activity!';
+         }
+
          if (!isset($err['longitude']) && !isset($err['lattitude']) && !isset($err['title']) && !isset($err['description'])) {
 
             // saving images in server
@@ -90,7 +96,7 @@ require_once './__loginAndSignupErrorMsg.php';
                            echo "step 4 <br>";
 
                            //move upload file to server
-                           $imageName = "imagePost" . uniqid().rand().uniqid().rand() . ".png";
+                           $imageName = "imagePost" . uniqid() . rand() . uniqid() . rand() . ".png";
                            array_push($imageNames, $imageName);
 
                            if (move_uploaded_file($_FILES['images']['tmp_name'][$i], 'images/posts/' . $imageName)) {
@@ -111,7 +117,7 @@ require_once './__loginAndSignupErrorMsg.php';
             }
 
             if (count($err) == 0) {
-               $queryToInsertData  = mysqlCreatePost($title, $description, $_SESSION['id'], $lattitude, $longitude);
+               $queryToInsertData  = mysqlCreatePost($title, $description, $_SESSION['id'], $lattitude, $longitude, $typeOfActivities);
                $output = $connection->query($queryToInsertData);
 
                $lastInsertedLocationId = mysqli_insert_id($connection);
@@ -120,7 +126,7 @@ require_once './__loginAndSignupErrorMsg.php';
                   $queryToInsertImage = mysqlAddImage($name, $lastInsertedLocationId);
                   $connection->query($queryToInsertImage);
                };
-               header('location:./individualPage.php?id='.$lastInsertedLocationId);
+               header('location:./individualPage.php?id=' . $lastInsertedLocationId);
             }
          }
       }
@@ -147,6 +153,10 @@ require_once './__loginAndSignupErrorMsg.php';
          <div class="location_information_upload_form_item">
             <Label for="description">Description</Label>
             <textarea type="text" name="description" id="description" placeholder="Enter description here"></textarea>
+         </div>
+         <div class="location_information_upload_form_item">
+            <Label for="type-of-activity">Type of Activity</Label>
+            <input type="text" name="type-of-activity" id="type-of-activity" placeholder="Enter type of activity here"></input>
          </div>
 
          <div class="location_information_upload_form_item">

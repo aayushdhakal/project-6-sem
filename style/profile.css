@@ -1,0 +1,48 @@
+.user__information {
+   background: rgb(207, 206, 206);
+   border-radius: 5px;
+   padding: 30px 20px;
+   margin: 80px auto 0 auto;
+   width: 450px;
+}
+
+.user__information__details {
+   text-align: center;
+}
+
+.users__information__detail {
+   display: block;
+   padding: 10px 0;
+}
+
+.users__information__detail label,
+.user__information__details__title {
+   display: block;
+   text-align: left;
+   margin-left: 0;
+}
+
+.users__information__detail label {
+   font-size: 1.4rem;
+}
+
+.users__information__detail input {
+   padding: 8px;
+   width: 100%;
+}
+
+.user__information__details__update__btn {
+   border: none;
+   background: rgb(53, 157, 204);
+   background: linear-gradient(100deg, rgba(53, 157, 204, 1) 22%, rgba(73, 169, 219, 0.8435749299719888) 48%, rgba(57, 140, 200, 0.8603816526610644) 72%, rgba(80, 147, 193, 0.835171568627451) 99%);
+   color: white;
+   font-size: 1.1rem;
+   outline: none;
+   padding: 10px;
+   transition: all ease 0.3s;
+   width: 100%;
+}
+
+.user__information__details__update__btn:hover {
+   transform: scale(1.04);
+}

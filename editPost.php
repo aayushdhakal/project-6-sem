@@ -16,7 +16,7 @@ require_once './__loginAndSignupErrorMsg.php';
    <link rel="stylesheet" href="./style/edit-post.css">
    <link rel="stylesheet" href="./style/admin-jobs.css">
    <link rel="icon" href="./style/assests/travel.png">
-   <title>Passion Seekers | Create Post</title>
+   <title>Passion Seekers | Edit Post</title>
 </head>
 
 <body>
@@ -62,6 +62,12 @@ require_once './__loginAndSignupErrorMsg.php';
          $err['longitude'] = 'Invalid longitude!';
       }
 
+      if (isset($_POST['type-of-activity']) && $_POST['type-of-activity']) {
+         $typeOfActivities = trim($_POST['type-of-activity']);
+      } else {
+         $err['type-of-activity'] = 'Invalid Type of Activity!';
+      }
+
       $statusForPost = $_POST['status'];
       $postIsActive = $statusForPost == "active" ? 1 : 0;
 
@@ -79,11 +85,11 @@ require_once './__loginAndSignupErrorMsg.php';
 
          // echo "<br>this is working 1<br>";
          //query to insert the information to database
-         $queryToInsertData  = mysqlUpdatePost($id, $title, $description, $lattitude, $longitude, $postIsActive);
+         $queryToInsertData  = mysqlUpdatePost($id, $title, $description, $lattitude, $longitude, $typeOfActivities,$postIsActive);
          $result = $connection->query($queryToInsertData);
 
          // echo "<br>".$queryToInsertData."<br>";
-         print_r($result);
+         // print_r($result);
          // echo "this is working 2";
 
          if ($countFiles > 0 && $_FILES['images']['error'][0] == 0) {
@@ -176,7 +182,7 @@ require_once './__loginAndSignupErrorMsg.php';
 
          if ($result->num_rows == 1) {
             $postInformations = $result->fetch_assoc();
-            // print_r($postInformations);
+            print_r($postInformations);
          } else {
             $err['id'] = 'Post Not found with id=' . $id . ' !';
             unset($id);
@@ -231,6 +237,11 @@ require_once './__loginAndSignupErrorMsg.php';
                <div class="location_information_upload_form_item">
                   <Label for="longitude">Longitude</Label>
                   <input type="number" name="longitude" id="longitude" placeholder="Enter longitude here" value=<?php echo isset($postInformations) ? "\"" . $postInformations['longitude'] . "\"" : ''; ?>>
+               </div>
+
+               <div class="location_information_upload_form_item">
+                  <Label for="type-of-activity">Type of Activity</Label>
+                  <input type="text" name="type-of-activity" id="type-of-activity" placeholder="Enter Type of Activity here" value=<?php echo isset($postInformations) ? "\"" . $postInformations['type_of_activity'] . "\"" : ''; ?>>
                </div>
 
                <div class="location_information_upload_form_item">

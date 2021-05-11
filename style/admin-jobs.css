@@ -1,23 +1,28 @@
-.admin__interaction {
-   position: fixed;
+.admin__interaction,
+.user__interaction {
    bottom: 0;
+   position: fixed;
    right: 2px;
    transform: translateX(88%);
    z-index: 2;
 }
 
-.admin__interaction__actions {
+.admin__interaction__actions,
+.user__interaction__actions {
    display: flex;
    flex-direction: column;
    margin-bottom: 20px;
 }
 
-.admin__interaction__actions a {
+.admin__interaction__actions a,
+.user__interaction__actions a {
    margin-bottom: 4px;
 }
 
-.admin__interaction__actions a button {
+.admin__interaction__actions a button,
+.user__interaction__actions a button{
    border: none;
+   box-shadow: 0px 0px 8px black;
    background-color: var(--blue);
    cursor: pointer;
    color: transparent;
@@ -30,7 +35,8 @@
    padding: 15px;*/
 }
 
-.admin__interaction__actions a button:hover {
+.admin__interaction__actions a button:hover ,
+.user__interaction__actions a button:hover {
    color: white;
    background-color: #173857c9;
    transform: translateX(-88%);

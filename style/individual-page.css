@@ -6,7 +6,7 @@
    background: var(--background-color-dark);
    border-radius: 4px;
    display: inline-block;
-   margin: 80px auto 30px 30px;
+   margin: 80px auto 0px 30px;
    padding: 30px;
    max-width: 850px;
 }
@@ -217,5 +217,67 @@ aside {
    /* .recommendation--small{
       margin-left: 10rem;
    } */
+}
 
+.individual__post__comments__section{
+   background: rgb(174, 187, 199);
+   border-radius: 5px;
+   display: flex;
+   flex-direction: column;
+   padding: 10px;
+}
+
+.post__comment__title{
+   font-size: 2rem;
+}
+
+.post__comment__view{
+   padding: 10px;
+}
+
+.post__comment__By{
+   font-style: italic;
+   opacity: 0.7;
+}
+
+.post__comment__At{
+   font-style: italic;
+   font-size: 0.8rem;
+   opacity: 0.5;
+}
+
+.post__comment__comment{
+   margin-left: 8px;
+   opacity: 0.9;
+}
+
+.post__comment__post{
+   width: 100%;
+}
+
+.post__comment__post{
+   padding: 10px;
+}
+
+.post__comment__post input{
+   border: none;
+   border-radius: 3px;
+   display: block;
+   padding: 8px;
+   margin-bottom: 5px;
+   width: 100%;
+}
+
+.post__comment__post button{
+   border: none;
+   background: var(--blue);
+   cursor: pointer;
+   color: white;
+   display: block;
+   padding: 12px;
+   transition: all ease 0.3s;
+}
+
+.post__comment__post button:hover{
+   background: var(--dark-blue);
 }

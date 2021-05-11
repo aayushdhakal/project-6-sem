@@ -74,9 +74,9 @@ function mysqlCheckAdminsEmail($email)
   return $query;
 }
 
-function mysqlCreatePost($title, $description, $adminId, $lattitude, $longitude)
+function mysqlCreatePost($title, $description, $adminId, $lattitude, $longitude, $typeOfActivities)
 {
-  $query = "INSERT INTO `tbl_location`(`title`, `description`, `admin_id`, `lattitude`, `longitude`) VALUES ('$title','$description','$adminId','$lattitude','$longitude')";
+  $query = "INSERT INTO `tbl_location`(`title`, `description`, `admin_id`, `lattitude`, `longitude`,`type_of_activities`) VALUES ('$title','$description','$adminId','$lattitude','$longitude','$typeOfActivities')";
   return $query;
 }
 
@@ -102,23 +102,34 @@ function mysqlRemovePostAndImages($id)
 
 function mysqlGetPost($id, $admin = false)
 {
-  $query = "SELECT l.id,l.title, l.description, a.username, l.lattitude, l.longitude, l.created_at,l.status 
-            FROM   `tbl_location` AS l ,`tbl_admins` AS a
-            WHERE l.admin_id = a.id AND l.id=$id AND l.status=true";
+  $query = "SELECT 
+              l.id,l.title, 
+              l.description, 
+              a.username, 
+              l.lattitude, 
+              l.longitude, 
+              l.type_of_activity,
+              l.created_at,
+              l.status,
+              l.type_of_activity
+            FROM   
+              `tbl_location` AS l ,`tbl_admins` AS a
+            WHERE 
+              l.admin_id = a.id AND l.id=$id AND l.status=true";
 
   $query1 = "SELECT `image` FROM `tbl_images` WHERE location_id=$id";
 
   if ($admin) {
-    $query = "SELECT l.id,l.title, l.description, a.username, l.lattitude, l.longitude, l.created_at,l.status 
+    $query = "SELECT l.id,l.title, l.description, a.username, l.lattitude, l.longitude,l.type_of_activity,l.created_at,l.status 
             FROM   `tbl_location` AS l ,`tbl_admins` AS a
             WHERE l.admin_id = a.id AND l.id=$id";
   }
   return [$query, $query1];
 }
 
-function mysqlUpdatePost($id, $title, $description, $lattitude, $longitude, $status)
+function mysqlUpdatePost($id, $title, $description, $lattitude, $longitude, $typeOfActivity, $status)
 {
-  $dateNow = date('Y:m:d') . " " . date('H:m:s');
+  $dateNow = date('Y:m:d') . " " . date('H:i:s');
   $query = "UPDATE
     `tbl_location`
 SET
@@ -127,7 +138,8 @@ SET
     `lattitude` = $lattitude,
     `longitude` = $longitude,
     `status` = $status,
-    `updated_at` = '$dateNow'
+    `updated_at` = '$dateNow',
+    `type_of_activity` = '$typeOfActivity'
 WHERE
     id=$id";
 
@@ -141,11 +153,12 @@ function mysqlLocationAndImagesInfo($pageNo, $pageOffset)
     "SELECT
     id,
     title,
-    description,
+    `description`,
     lattitude,
     longitude,
     `status`,
     image_count,
+    type_of_activity,
   	created_by,
     created_by_id,
     created_at,
@@ -199,14 +212,48 @@ LIMIT $pageNo,$pageOffset";
   return $query;
 }
 
-function mysqladminRequests ($id,$accepted){
+function mysqladminRequests($id, $accepted)
+{
 
-  if($accepted == true){
+  if ($accepted == true) {
     $query = "UPDATE `tbl_admins` SET `status`=1 WHERE id=$id;";
   } else {
     $query = "DELETE FROM `tbl_admins` WHERE id=$id;";
   }
 
+  return $query;
+}
+
+function mysqladminRequestsCount()
+{
+  return "SELECT COUNT(*) AS total  FROM `tbl_admins` WHERE `status`=0";
+}
+
+function mysqlInsertComment($userId, $location_id, $comment)
+{
+  $createdAt = date('Y-m-d') . " " . date('H:i:s');
+  $query = "INSERT INTO `tbl_comments`(`user_id`, `location_id`, `comment`,`created_at`) VALUES ($userId,$location_id,'$comment','$createdAt')";
+  return $query;
+}
+
+function mysqlgetComments($location_id, $pageNo, $pageOffset)
+{
+  $pageNo = $pageNo * $pageOffset;
+  $query = "SELECT
+    u.username,
+    c.comment,
+    c.created_at,
+    c.location_id,
+    c.id
+FROM
+    `tbl_comments` c
+LEFT JOIN `tbl_users` u ON
+    c.user_id = u.id
+WHERE
+	c.location_id=$location_id
+ORDER BY
+	c.created_at DESC
+LIMIT $pageNo,$pageOffset";
   return $query;
 }
 

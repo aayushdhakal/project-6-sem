@@ -11,6 +11,7 @@
 
 :root {
    --blue: #2f7cc4;
+   --dark-blue:#14436e;
    --background-color:rgb(238, 234, 234);
 }
 
@@ -54,4 +55,11 @@ p {
    background-color: var(--blue);
    height: 6px;
    width: 100%;
+}
+
+.end__of__page--absolute{
+   bottom: 0;
+   position: absolute;
+   left: 0;
+   right: 0;
 }
