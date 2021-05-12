@@ -46,6 +46,20 @@ require_once './__loginAndSignupErrorMsg.php';
                if ($result) {
 
                   $deleteQuery = mysqlRemovePostAndImages($id);
+
+                  //removing files from server
+                  $imageNameToRemoveFromServer = [];
+                  $imagesFromDb = $connection->query($checkIfPostExistsQuery[1]);
+                  while ($row = $imagesFromDb->fetch_assoc()) {
+                     array_push($imageNameToRemoveFromServer, $row['image']);
+                  }
+
+                  foreach ($imageNameToRemoveFromServer as $image) {
+                     if (!unlink("./images/posts/" . $image)) {
+                        $err['removingImageFromServer'] = "Error in removing files from the file Server.";
+                     }
+                  }
+
                   $result[1] = $connection->query($deleteQuery[1]);
                   $result[0] = $connection->query($deleteQuery[0]);
    ?>

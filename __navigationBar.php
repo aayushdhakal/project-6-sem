@@ -27,7 +27,7 @@ if (isset($_POST['search'])) {
       <?php
 
       if (isset($_SESSION['username'])) {
-         echo "<li><a href='./profile.php?username=" . $_SESSION['username'] . "'>" . $_SESSION['username'] . "</a></li>";
+         echo "<li><a href='./profile.php'>" . $_SESSION['username'] . "</a></li>";
 
          echo "<li class='logout__btn'>
                   <button 

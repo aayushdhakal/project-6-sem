@@ -75,7 +75,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
 
          if ($resultUsers->num_rows != 0 || $resultAdmin->num_rows != 0) {
             $err_username = true;
-            echo $username . "Error";
+            // echo $username . "Error";
             array_push($err_msgs, "Username is taken");
          }
       }
@@ -102,6 +102,8 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
       } else {
          $err_signup = false;
       }
+
+      
       //check if there is error if not then we procced to working with database
       if (!$err_signup) {
          if (isset($username) && isset($password) && isset($email)) {

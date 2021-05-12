@@ -20,6 +20,13 @@ function mysqlLoginQuery($username, $password)
   return $query;
 }
 
+function mysqlGetUserById($id, $admin = false)
+{
+  $isAdmin = $admin ? "`tbl_admins`" : "`tbl_users`";
+  $query = "SELECT * FROM " . $isAdmin . " WHERE id='$id';";
+  return $query;
+}
+
 function mysqlLoginQueryAdmin($username, $password)
 {
   $query = "SELECT * FROM tbl_admins WHERE username='$username' AND password='$password' AND status=1";
@@ -46,7 +53,7 @@ function mysqlSignUpAdmin($name = '', $username, $password, $email, $phoneNumber
   return $query;
 }
 
-//Query to check Username USERS
+//Query to check Username USERS[]
 function mysqlCheckUsersUsername($username)
 {
   $query = "SELECT * FROM tbl_users WHERE `username`='$username'";
@@ -254,6 +261,31 @@ WHERE
 ORDER BY
 	c.created_at DESC
 LIMIT $pageNo,$pageOffset";
+  return $query;
+}
+
+function mysqlUpdateProfile($id, $name, $username, $password, $email, $address, $phone, $avatar, $admin = false)
+{
+  $dateNow = date('Y:m:d') . " " . date('H:i:s');
+  $isAdmin = $admin ? "`tbl_admins`" : "`tbl_users`";
+  $isAvatar = isset($avatar) ? "`avatar` ='$avatar'," : "";
+  $isPassword = !is_null($password) ? " `password` ='" . $password . "'," : "";
+
+  $query = "
+    UPDATE
+    " . $isAdmin . "
+    SET
+    `name` ='$name',
+    `username` ='$username',
+    $isPassword
+    `email` ='$email',
+    `address` ='$address',
+    `phone_number` ='$phone',
+    $isAvatar
+    `Updated_at` ='$dateNow'
+    WHERE
+    id = '$id' ";
+
   return $query;
 }
 
