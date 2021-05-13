@@ -307,5 +307,29 @@ function mysqlRemoveFromFavorite($userId, $locationId)
   return $query;
 }
 
+function mysqlGetAllFavoritePosts($userId, $pageNo = 0, $pageOffset = 0)
+{
+  $pageNo = $pageNo * $pageOffset;
+  $query = "SELECT
+        l.id AS id,
+        f.id AS fid,
+    f.created_at,
+    l.title,
+    l.description,
+    l.type_of_activity,
+    l.lattitude,
+    l.longitude
+FROM
+    `tbl_favorites` AS f,
+    `tbl_location` AS l
+WHERE
+    `user_id`= $userId AND
+    f.location_id = l.id
+ORDER BY
+	  f.created_at DESC";
+
+  return $query;
+}
+
 // $query1 = "SELECT * FROM tbl_users WHERE username='user' AND password='upassword' AND status=1";
 // print_r($connection->query($query1));

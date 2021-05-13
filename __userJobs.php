@@ -19,7 +19,7 @@
                }
                ?>
             <?php } ?>
-            <a href="#"><button>Favorite List</button></a>
+            <a href="./favoriteList.php"><button>Favorite List</button></a>
             <a href="#"><button>Give Review</button></a>
             <!-- <a href="#"><button>Block User</button></a> -->
          </div>

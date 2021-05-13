@@ -11,4 +11,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
    $output = $connection->query($queryToRemoveFromFavorite);
 }
 
-header("location:./individualPage.php?id=$id");
+if (isset($_GET['redirect']) && !empty($_GET['redirect']) && $_GET['redirect'] == 'favorite') {
+   echo "redirect";
+   header("location:./favoriteList.php");
+} else {
+   header("location:./individualPage.php?id=$id");
+}
