@@ -117,9 +117,11 @@ require_once './__loginAndSignupErrorMsg.php';
             }
 
             if (count($err) == 0) {
+               echo "step 5";
                $queryToInsertData  = mysqlCreatePost($title, $description, $_SESSION['id'], $lattitude, $longitude, $typeOfActivities);
                $output = $connection->query($queryToInsertData);
 
+               echo "<br>".$queryToInsertData . "this is output";
                $lastInsertedLocationId = mysqli_insert_id($connection);
 
                foreach ($imageNames as $name) {

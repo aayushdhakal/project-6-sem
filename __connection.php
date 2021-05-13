@@ -81,9 +81,9 @@ function mysqlCheckAdminsEmail($email)
   return $query;
 }
 
-function mysqlCreatePost($title, $description, $adminId, $lattitude, $longitude, $typeOfActivities)
+function mysqlCreatePost($title, $description, $adminId, $lattitude, $longitude, $typeOfActivity)
 {
-  $query = "INSERT INTO `tbl_location`(`title`, `description`, `admin_id`, `lattitude`, `longitude`,`type_of_activities`) VALUES ('$title','$description','$adminId','$lattitude','$longitude','$typeOfActivities')";
+  $query = "INSERT INTO `tbl_location`(`title`, `description`, `admin_id`, `lattitude`, `longitude`,`type_of_activity`) VALUES ('$title','$description','$adminId','$lattitude','$longitude','$typeOfActivity')";
   return $query;
 }
 
@@ -286,6 +286,24 @@ function mysqlUpdateProfile($id, $name, $username, $password, $email, $address, 
     WHERE
     id = '$id' ";
 
+  return $query;
+}
+
+function mysqlCheckInFavorite($userId, $locationId)
+{
+  $query = "SELECT * FROM `tbl_favorites` WHERE `user_id`=$userId AND `location_id`='$locationId'";
+  return $query;
+}
+
+function mysqlSaveToFavorite($userId, $locationId)
+{
+  $query = "INSERT INTO `tbl_favorites`(`user_id`, `location_id`) VALUES ('$userId','$locationId')";
+  return $query;
+}
+
+function mysqlRemoveFromFavorite($userId, $locationId)
+{
+  $query = "DELETE FROM `tbl_favorites` WHERE `user_id`=$userId AND `location_id`=$locationId";
   return $query;
 }
 
