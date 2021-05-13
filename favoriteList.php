@@ -16,6 +16,7 @@ require_once './__loginAndSignupErrorMsg.php';
    <link rel="stylesheet" href="./style/header-navigationBar.css">
    <link rel="stylesheet" href="./style/admin-jobs.css">
    <link rel="icon" href="./style/assests/travel.png">
+   <link rel="stylesheet" href="./style/favorite-list.css">
    <title>Passion Seekers | Favorite Lists</title>
 </head>
 
@@ -54,8 +55,9 @@ require_once './__loginAndSignupErrorMsg.php';
 
    <section class="favorite__list">
       <div class="favorite__list__container">
-         <table border="1" style="margin-top: 70px;">
-            <thead>
+         <h2 class="favorite__list__title">Favorite Lists</h2>
+         <table border="1" class="favorite__list__table">
+            <thead class="favorite__list__table__head">
                <th>S.N</th>
                <th>Title</th>
                <th>Description</th>
@@ -63,19 +65,21 @@ require_once './__loginAndSignupErrorMsg.php';
                <th>Lattitude</th>
                <th>Longitude</th>
                <th>Saved at</th>
+               <th>Location Id</th>
                <th>Actions</th>
             </thead>
-            <tbody>
+            <tbody class="favorite__list__table__body">
                <?php foreach ($posts as $index => $post) { ?>
                   <tr>
                      <td><?php echo $index + 1 ?></td>
-                     <td><?php echo $post['title'] ?></td>
-                     <td><?php echo substr($post['description'], 0, 40) . ".... <a href='./individualPage.html?id=" . $post['id'] . "' class='favorite_list__description__more' >view more</a>" ?></td>
-                     <td><?php echo $post['type_of_activity'] ?></td>
+                     <td class="favorite__list__table__body__text"><?php echo $post['title'] ?></td>
+                     <td class="favorite__list__table__body__text"><?php echo substr($post['description'], 0, 40) . ".... <a href='./individualPage.php?id=" . $post['id'] . "' class='favorite_list__description__more' >view more</a>" ?></td>
+                     <td class="favorite__list__table__body__text"><?php echo $post['type_of_activity'] ?></td>
                      <td><?php echo $post['lattitude'] ?></td>
                      <td><?php echo $post['longitude'] ?></td>
                      <td><?php echo $post['created_at'] ?></td>
-                     <td><a <?php echo 'href="./removeFromFavorite.php?id='.$post['id']. '&redirect=favorite"' ?>>Delete</a></td>
+                     <td><?php echo $post['id'] ?></td>
+                     <td><a <?php echo 'href="./removeFromFavorite.php?id=' . $post['id'] . '&redirect=favorite"' ?> class="favorite_list__description__delete">Delete</a></td>
                   </tr>
                <?php } ?>
             </tbody>
