@@ -90,9 +90,9 @@ require_once './__loginAndSignupErrorMsg.php';
                      <tr class="all__posts__contents__content">
                         <td><?php echo $pageOfset * $pageNumber - $pageOfset + $index + 1 ?></td>
                         <td class="all__posts__contents__content__left"><?php echo $post['title'] ?></td>
-                        <td class="all__posts__contents__content__left"><?php echo substr($post['description'], 0, 40) . ".... <a href='./individualPage.html?id=" . $post['id'] . "' class='all__posts__contents__content__more' >view more</a>" ?></td>
-                        <td><?php echo $post['lattitude'] ?></td>
-                        <td><?php echo $post['longitude'] ?></td>
+                        <td class="all__posts__contents__content__left"><?php echo substr($post['description'], 0, 40) . ".... <a href='./individualPage.php?id=" . $post['id'] . "' class='all__posts__contents__content__more' >view more</a>" ?></td>
+                        <td><?php echo substr($post['lattitude'],0,5)."..." ?></td>
+                        <td><?php echo substr($post['longitude'],0,5)."..." ?></td>
                         <td><?php echo $post['type_of_activity'] ?></td>
                         <td><?php echo $post['status'] == 1 ? 'active' : 'hidden' ?></td>
                         <td><?php echo $post['id'] ?></td>

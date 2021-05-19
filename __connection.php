@@ -83,7 +83,7 @@ function mysqlCheckAdminsEmail($email)
 
 function mysqlCreatePost($title, $description, $adminId, $lattitude, $longitude, $typeOfActivity)
 {
-  $query = "INSERT INTO `tbl_location`(`title`, `description`, `admin_id`, `lattitude`, `longitude`,`type_of_activity`) VALUES ('$title','$description','$adminId','$lattitude','$longitude','$typeOfActivity')";
+  $query = "INSERT INTO `tbl_location`(`title`, `description`, `admin_id`, `lattitude`, `longitude`,`type_of_activity`) VALUES (\"$title\",\"".str_replace('"','\"',$description)."\",'$adminId','$lattitude','$longitude',\"$typeOfActivity\")";
   return $query;
 }
 
@@ -140,13 +140,13 @@ function mysqlUpdatePost($id, $title, $description, $lattitude, $longitude, $typ
   $query = "UPDATE
     `tbl_location`
 SET
-    `title` = '$title',
-    `description` = '$description',
+    `title` = \"$title\",
+    `description` = \"$description\",
     `lattitude` = $lattitude,
     `longitude` = $longitude,
     `status` = $status,
     `updated_at` = '$dateNow',
-    `type_of_activity` = '$typeOfActivity'
+    `type_of_activity` = \"$typeOfActivity\"
 WHERE
     id=$id";
 
@@ -327,6 +327,65 @@ WHERE
     f.location_id = l.id
 ORDER BY
 	  f.created_at DESC";
+
+  return $query;
+}
+
+function mysqlPostReview($title, $description, $userId)
+{
+  $query = "INSERT INTO `tbl_reviews`(`user_id`, `title`, `description`) VALUES ('$userId','$title','$description')";
+  return $query;
+}
+
+function mysqlGetReviewAll()
+{
+  $query = "SELECT * FROM `tbl_reviews` WHERE status=1";
+  return $query;
+}
+
+// Used after posts are added
+function mysqlSearchPost($searchText)
+{
+  $query =
+    "SELECT
+      *
+    FROM
+        `tbl_location`
+    WHERE
+        `title` LIKE '%$searchText%' OR `description` LIKE '%$searchText%' OR `type_of_activity` LIKE '%$searchText%' AND `status` = 1
+    GROUP BY
+        `id`";
+
+  return $query;
+}
+
+function mysqlPostRecommendation($count = 4)
+{
+  $query =
+    "SELECT
+        *
+    FROM
+        `tbl_location`
+    WHERE
+        `status` = 1
+    ORDER BY
+        RAND()
+    LIMIT $count";
+}
+
+function mysqlJustLikePost($typeOfActivity, $count)
+{
+  $query =
+    "SELECT
+        *
+    FROM
+        `tbl_location`
+    WHERE
+        `type_of_activity` LIKE '%$typeOfActivity%'
+    ORDER BY
+        RAND()
+    LIMIT $count
+    ";
 
   return $query;
 }

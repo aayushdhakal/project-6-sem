@@ -27,6 +27,12 @@
    text-transform: lowercase;
 }
 
+.post__image__slider__location__redirect{
+   color: rgb(5, 5, 179);
+   margin-left: 10px;
+   text-decoration: underline;
+}
+
 .post__image__slider {
    display: block;
    margin-bottom: 20px;
@@ -162,11 +168,14 @@
 }
 
 .post__image__slider__description {
-   line-height: 1.4;
+   font-family: 'Roboto Condensed',sans-serif;
+   font-size: 1rem;
+   font-weight: 550;
+   line-height: 1.8;
    margin: 10px 0;
+   width: 100%;
+   overflow: hidden;
 }
-
-
 
 /* Aside content */
 aside {
@@ -218,6 +227,10 @@ aside {
       margin-left: 10rem;
    } */
 }
+
+
+
+/* Comment Section */
 
 .individual__post__comments__section{
    background: rgb(174, 187, 199);

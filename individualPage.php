@@ -43,6 +43,7 @@ require_once './__loginAndSignupErrorMsg.php';
             array_push($images, $row);
          }
          $resultForlocationInfo = $resultForlocationInfo->fetch_assoc();
+         // print_r($resultForlocationInfo);
       } else {
          $err['post'] = "Post doesn't exists" . ($_SESSION['admin'] == true ? " for id=$id. Post might be hidden" : " ") . " !";
       }
@@ -85,7 +86,11 @@ require_once './__loginAndSignupErrorMsg.php';
                <h4 class="post__created__by"><?php echo $resultForlocationInfo['username'] ?></h4>
                <h4 class="post__created__at"><?php echo $resultForlocationInfo['created_at'] ?></h4>
                <p class="post__image__slider__typeOfActivity"><?php echo $resultForlocationInfo['type_of_activity'] ?></p>
+               <a href="<?php echo "https://maps.google.com/?q=" . $resultForlocationInfo['lattitude'] . "," . $resultForlocationInfo['longitude'] . "&ll=" . $resultForlocationInfo['lattitude'] . "," . $resultForlocationInfo['longitude'] . "&12z"; ?>" class="post__image__slider__location__redirect" target="_blank">View Location on Google maps</a>
+               <pre>
                <p class="post__image__slider__description"><?php echo $resultForlocationInfo['description'] ?></p>
+               </pre>
+
             <?php } ?>
 
             <?php if (!isset($err['post'])) { ?>

@@ -86,14 +86,14 @@ require_once './__loginAndSignupErrorMsg.php';
 
                   //check for error on the each upload
                   if ($_FILES['images']['error'][$i] == 0) {
-                     echo "step 2 <br>";
+                     // echo "step 2 <br>";
                      if ($_FILES['images']['size'][$i] <= 10485800) {
-                        echo "step 3 <br>";
+                        // echo "step 3 <br>";
 
                         $file_types = ['image/png', 'image/jpeg', 'image/gif', 'image/jpg'];
 
                         if (in_array($_FILES['images']['type'][$i], $file_types)) {
-                           echo "step 4 <br>";
+                           // echo "step 4 <br>";
 
                            //move upload file to server
                            $imageName = "imagePost" . uniqid() . rand() . uniqid() . rand() . ".png";
@@ -117,11 +117,13 @@ require_once './__loginAndSignupErrorMsg.php';
             }
 
             if (count($err) == 0) {
-               echo "step 5";
+               // echo "step 5";
                $queryToInsertData  = mysqlCreatePost($title, $description, $_SESSION['id'], $lattitude, $longitude, $typeOfActivities);
+
+               // echo "<pre>" . $queryToInsertData . "</pre>";
                $output = $connection->query($queryToInsertData);
 
-               echo "<br>".$queryToInsertData . "this is output";
+               echo "<br>" . $queryToInsertData . "this is output";
                $lastInsertedLocationId = mysqli_insert_id($connection);
 
                foreach ($imageNames as $name) {
@@ -163,12 +165,12 @@ require_once './__loginAndSignupErrorMsg.php';
 
          <div class="location_information_upload_form_item">
             <Label for="lattitude">Lattitude</Label>
-            <input type="number" name="lattitude" id="lattitude" placeholder="Enter lattitude here">
+            <input type="number" name="lattitude" id="lattitude" placeholder="Enter lattitude here" step="any">
          </div>
 
          <div class="location_information_upload_form_item">
             <Label for="longitude">Longitude</Label>
-            <input type="number" name="longitude" id="longitude" placeholder="Enter longitude here">
+            <input type="number" name="longitude" id="longitude" placeholder="Enter longitude here" step="any">
          </div>
 
          <div class="location_information_upload_form_item">

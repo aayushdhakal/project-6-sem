@@ -94,7 +94,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
             </a>
          </div>
          <div class="container__left__logo__info">
-            <a href="./index.html">
+            <a href="./index.php">
                <h3>Passion</h3>
                <h3>Seekers</h3>
             </a>

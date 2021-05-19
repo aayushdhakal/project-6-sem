@@ -85,15 +85,17 @@ require_once './__loginAndSignupErrorMsg.php';
 
          // echo "<br>this is working 1<br>";
          //query to insert the information to database
-         $queryToInsertData  = mysqlUpdatePost($id, $title, $description, $lattitude, $longitude, $typeOfActivities,$postIsActive);
+         $queryToInsertData  = mysqlUpdatePost($id, $title, $description, $lattitude, $longitude, $typeOfActivities, $postIsActive);
          $result = $connection->query($queryToInsertData);
+
+         // echo "<br>" . $queryToInsertData . "<br>";
 
          // echo "<br>".$queryToInsertData."<br>";
          // print_r($result);
          // echo "this is working 2";
 
          if ($countFiles > 0 && $_FILES['images']['error'][0] == 0) {
-            echo "<br> step 1 <br>";
+            // echo "<br> step 1 <br>";
             // echo $countFiles;
 
             for ($i = 0; $i < $countFiles; $i++) {
@@ -106,10 +108,10 @@ require_once './__loginAndSignupErrorMsg.php';
                //check for error on the each upload
 
                if ($_FILES['images']['error'][$i] == 0) {
-                  echo "step 2 <br>";
+                  // echo "step 2 <br>";
 
                   if ($_FILES['images']['size'][$i] <= 10485800) {
-                     echo "step 3 <br>";
+                     // echo "step 3 <br>";
 
                      $file_types = ['image/png', 'image/jpeg', 'image/gif', 'image/jpg'];
 
@@ -161,7 +163,7 @@ require_once './__loginAndSignupErrorMsg.php';
                $connection->query($queryToInsertImage);
             };
 
-            // header('location:./individualPage.php?id=' . $id);
+            header('location:./individualPage.php?id=' . $id);
          }
 
          if ($result == 1 && $postIsActive == 1) {
@@ -182,7 +184,7 @@ require_once './__loginAndSignupErrorMsg.php';
 
          if ($result->num_rows == 1) {
             $postInformations = $result->fetch_assoc();
-            print_r($postInformations);
+            // print_r($postInformations);
          } else {
             $err['id'] = 'Post Not found with id=' . $id . ' !';
             unset($id);
@@ -231,12 +233,12 @@ require_once './__loginAndSignupErrorMsg.php';
 
                <div class="location_information_upload_form_item">
                   <Label for="lattitude">Lattitude</Label>
-                  <input type="number" name="lattitude" id="lattitude" placeholder="Enter lattitude here" value=<?php echo isset($postInformations) ? "\"" . $postInformations['lattitude'] . "\"" : ''; ?>>
+                  <input type="number" name="lattitude" id="lattitude" placeholder="Enter lattitude here" value=<?php echo isset($postInformations) ? "\"" . $postInformations['lattitude'] . "\"" : ''; ?> step="any">
                </div>
 
                <div class="location_information_upload_form_item">
                   <Label for="longitude">Longitude</Label>
-                  <input type="number" name="longitude" id="longitude" placeholder="Enter longitude here" value=<?php echo isset($postInformations) ? "\"" . $postInformations['longitude'] . "\"" : ''; ?>>
+                  <input type="number" name="longitude" id="longitude" placeholder="Enter longitude here" value=<?php echo isset($postInformations) ? "\"" . $postInformations['longitude'] . "\"" : ''; ?> step="any">
                </div>
 
                <div class="location_information_upload_form_item">

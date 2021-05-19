@@ -9,7 +9,7 @@
             <a href=<?php echo isset($id) ? "./removePost.php?id=" . $id . "&redirect=true" : "./removePost.php" ?>><button>Remove Post <?php echo isset($id) ? " id=" . $id  : "" ?></button></a>
             <a href="./allPosts.php"><button>View Posts <br>(Tabular Form)</button></a>
             <a href="./adminRequests.php"><button>Admin request list</button></a>
-            <a href="#"><button>View Reviews</button></a>
+            <a href="./viewReviews.php"><button>View Reviews</button></a>
             <!-- <a href="#"><button>Block User</button></a> -->
          </div>
       </section>
