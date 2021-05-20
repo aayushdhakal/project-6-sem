@@ -57,6 +57,14 @@ require_once './__loginAndSignupErrorMsg.php';
       // echo $pageCount . "<br>";
       // echo $pageNumber;
    }
+
+   if (isset($_GET['type']) && !empty($_GET['type']) && $_GET['type'] == 'explore' && (!isset($_GET['search']) || !empty($_GET['search']))) {
+      //print list of exploring place like sightseeing,religious places
+   }
+
+   if (isset($_GET['type']) && !empty($_GET['type']) && $_GET['type'] == 'activities' && (!isset($_GET['search']) || !empty($_GET['search']))) {
+      //print list of activities place like hiking,treking,mounteneering so on
+   }
    ?>
    <header>
       <?php require_once './__navigationBar.php' ?>

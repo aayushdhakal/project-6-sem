@@ -511,5 +511,99 @@ ORDER BY
   return $query;
 }
 
+function mysqlGetPostsForExploreAndActivities($type = 'activity')
+{
+  switch ($type) {
+    case 'explore': {
+        $query =
+          "SELECT
+    l.id,
+    l.title,
+    l.description,
+    i.image
+FROM
+    (
+    SELECT
+        *
+    FROM
+        `tbl_location` AS l
+    WHERE
+        l.`type_of_activity` IN(
+            'religious Places',
+            'sightseeing',
+            'visiting',
+            'touring',
+            'sightsee'
+        ) AND l.`status` = 1
+) AS l,
+(
+    SELECT DISTINCTROW
+        location_id,
+        ANY_VALUE(image) AS image
+    FROM
+        `tbl_images`
+    WHERE
+        1
+    GROUP BY
+        location_id
+) AS i,
+`tbl_admins` AS a
+WHERE
+    l.id = i.location_id AND l.admin_id = a.id AND l.status = 1
+ORDER BY
+    l.id
+LIMIT 13";
+        break;
+      }
+
+    case 'activity':
+    case 'activities':
+    default: {
+        $query =
+          "SELECT
+    l.id,
+    l.title,
+    l.description,
+    i.image
+FROM
+    (
+    SELECT
+        *
+    FROM
+        `tbl_location` AS l
+    WHERE
+        l.`type_of_activity` IN(
+            'hiking',
+            'treking',
+            'mountaineering',
+            'mountain biking',
+            'cycling',
+            'cruising'
+        ) AND l.`status` = 1
+) AS l,
+(
+    SELECT DISTINCTROW
+        location_id,
+        ANY_VALUE(image) AS image
+    FROM
+        `tbl_images`
+    WHERE
+        1
+    GROUP BY
+        location_id
+) AS i,
+`tbl_admins` AS a
+WHERE
+    l.id = i.location_id AND l.admin_id = a.id AND l.status = 1
+ORDER BY
+    l.id
+LIMIT 13
+        ";
+      }
+  }
+
+  return $query;
+}
+
 // $query1 = "SELECT * FROM tbl_users WHERE username='user' AND password='upassword' AND status=1";
 // print_r($connection->query($query1));

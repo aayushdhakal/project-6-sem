@@ -49,7 +49,7 @@ require_once './__assignSession.php';
                <img src="<?php echo "./images/posts/" . $post['image']; ?>">
                <div class="img-info">
                   <h3><?php echo $post['title'] ?></h3>
-                  <p><?php echo substr($post['description'], 0, 220)."..." ?><a href="<?php echo "./individualPage.php?id=".$post['id']?>" style="color:var(--blue); text-decoration:underline;">more</a></p>
+                  <p><?php echo substr($post['description'], 0, 220) . "..." ?><a href="<?php echo "./individualPage.php?id=" . $post['id'] ?>" style="color:var(--blue); text-decoration:underline;">more</a></p>
                </div>
             </div>
          <?php } ?>
@@ -94,6 +94,7 @@ require_once './__assignSession.php';
 
    <hr>
    <div class="explore">
+      <?php echo mysqlGetPostsForExploreAndActivities('explore') ?>
       <h2>Explore</h2>
       <div class="explore_content">
          <div class="explore_content_blogs">
@@ -241,6 +242,7 @@ require_once './__assignSession.php';
 
    <hr>
    <div class="activity">
+      <?php echo mysqlGetPostsForExploreAndActivities('activity') ?>
       <h2>Activity</h2>
       <div class="activity_content">
          <div class="activity_content_blogs">

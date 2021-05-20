@@ -167,16 +167,14 @@ require_once './__loginAndSignupErrorMsg.php';
          <div class="aside__container">
 
             <?php
-            $queryToSimililarpost = mysqlJustLikePost($resultForlocationInfo['type_of_activity'], $id, 3);
+            $suggentionFallback = !isset($err['post'])? $resultForlocationInfo['type_of_activity']:"sightseeing";
+            $queryToSimililarpost = mysqlJustLikePost($suggentionFallback, $id, 3);
             $resultToSimilarPostFromDB = $connection->query($queryToSimililarpost);
             $postForSimilarPosts = [];
 
             while ($row = $resultToSimilarPostFromDB->fetch_assoc()) {
                array_push($postForSimilarPosts, $row);
             }
-
-            // print_r($postForSimilarPosts[0]);
-
             ?>
 
             <?php foreach ($postForSimilarPosts as $index => $post) { ?>
@@ -203,7 +201,7 @@ require_once './__loginAndSignupErrorMsg.php';
       <ul class="recommendation__list">
          <?php
          $countOfRecomendations = 3;
-         require_once './__recommendations.php';
+         include './__recommendations.php';
          ?>
          <?php foreach ($recomendationOfPosts as $recPost) { ?>
             <li class="recommendation__list__item">
