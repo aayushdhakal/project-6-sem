@@ -30,6 +30,7 @@ require_once './__loginAndSignupErrorMsg.php';
       }
    </script>
    <?php
+   $postsInformations = [];
    if (isset($_GET['search']) && !empty($_GET['search'])) {
       $pageOfset = 12;
       $pageNumber = 1;
@@ -46,12 +47,11 @@ require_once './__loginAndSignupErrorMsg.php';
       $totalNumberofPost = ($connection->query(mysqlSearchPostCount($_GET['search']))->fetch_assoc())['count'];
       $pageCount = ceil($totalNumberofPost / $pageOfset);
 
-      $searchedPosts = [];
       while ($row = $result->fetch_assoc()) {
-         array_push($searchedPosts, $row);
+         array_push($postsInformations, $row);
       }
       // print_r($result);
-      // print_r($searchedPosts[0]);
+      // print_r($postsInformations[0]);
       // echo $queryTosearch;
       // echo $totalNumberofPost . "<br>";
       // echo $pageCount . "<br>";
@@ -78,7 +78,7 @@ require_once './__loginAndSignupErrorMsg.php';
                </div>
             </li> -->
 
-            <?php foreach ($searchedPosts as $index => $post) { ?>
+            <?php foreach ($postsInformations as $index => $post) { ?>
                <li class="recommendation__list__item">
                   <a href="<?php echo "./individualPage.php?id=" . $post['id']; ?>">
                      <div class="recommendation__list__item_images">

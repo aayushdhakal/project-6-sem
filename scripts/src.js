@@ -37,7 +37,7 @@ setInterval(() => {
    }
    currentSlide(slideIndex);
    slideIndex++;
-}, 3000)
+}, 5000)
 
 // make the input field visible
 // const displayInputFieldBtn = document.querySelector('.search__form__btn');

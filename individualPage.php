@@ -161,40 +161,41 @@ require_once './__loginAndSignupErrorMsg.php';
             </div>
          <?php } ?>
       </section>
+
+
       <aside>
          <div class="aside__container">
-            <div class="aside__recomendation">
-               <a href="#">
-                  <h3>place 1</h3>
-                  <div class="aside__recomendation__content">
-                     <img src="./style/assests/img-slider/big.jpg" alt="#">
-                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo delectus enim quidem quia! Tenetur
-                        corrupti</p>
-                  </div>
-               </a>
-            </div>
-            <div class="aside__recomendation">
-               <a href="#">
-                  <h3>place 1</h3>
-                  <div class="aside__recomendation__content">
-                     <img src="./style/assests/img-slider/big.jpg" alt="#">
-                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo delectus enim quidem quia! Tenetur
-                        corrupti</p>
-                  </div>
-               </a>
-            </div>
-            <div class="aside__recomendation">
-               <a href="#">
-                  <h3>place 1</h3>
-                  <div class="aside__recomendation__content">
-                     <img src="./style/assests/img-slider/big.jpg" alt="#">
-                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo delectus enim quidem quia! Tenetur
-                        corrupti</p>
-                  </div>
-               </a>
-            </div>
+
+            <?php
+            $queryToSimililarpost = mysqlJustLikePost($resultForlocationInfo['type_of_activity'], $id, 3);
+            $resultToSimilarPostFromDB = $connection->query($queryToSimililarpost);
+            $postForSimilarPosts = [];
+
+            while ($row = $resultToSimilarPostFromDB->fetch_assoc()) {
+               array_push($postForSimilarPosts, $row);
+            }
+
+            // print_r($postForSimilarPosts[0]);
+
+            ?>
+
+            <?php foreach ($postForSimilarPosts as $index => $post) { ?>
+               <div class="aside__recomendation">
+                  <a href="<?php echo "./individualPage.php?id=".$post['id'] ?>">
+                     <h3><?php echo $post['title'] ?></h3>
+                     <div class="aside__recomendation__content">
+                        <img src=<?php echo "./images/posts/" . $post['image']; ?> alt="#">
+                        <p><?php echo substr($post['description'], 0, 100) . "...<u>more</u>" ?></p>
+                     </div>
+                  </a>
+
+               </div>
+            <?php } ?>
+
          </div>
       </aside>
+
+
    </div>
 
    <div class="recommendation recommendation--small">
@@ -204,10 +205,9 @@ require_once './__loginAndSignupErrorMsg.php';
          $countOfRecomendations = 3;
          require_once './__recommendations.php';
          ?>
-
          <?php foreach ($recomendationOfPosts as $recPost) { ?>
             <li class="recommendation__list__item">
-               <a href="<?php echo "./individualPage.php?id=" . $recpost['id']; ?>">
+               <a href="<?php echo "./individualPage.php?id=" . $recPost['id']; ?>">
                   <div class="recommendation__list__item_images">
                      <img src="<?php echo './images/posts/' . $recPost['image'] ?>" alt="#">
                   </div>
@@ -221,8 +221,8 @@ require_once './__loginAndSignupErrorMsg.php';
          <?php } ?>
       </ul>
    </div>
-   <?php require_once './__adminJobs.php' ?>
 
+   <?php require_once './__adminJobs.php' ?>
    <div style=" bottom:2rem;
                   display:flex;
                   flex-direction:column;

@@ -202,14 +202,16 @@ aside {
 
 .aside__recomendation__content {
    display: flex;
+   flex-direction: row;
    padding: 10px;
 }
 
 .aside__recomendation__content img {
-   display: inline-block;
-   height: 40%;
-   object-fit: fill;
-   width: 40%;
+   display: block;
+   object-fit:cover;
+   resize: none;
+   height: 100px;
+   width: 140px;
 }
 
 .aside__recomendation__content p {

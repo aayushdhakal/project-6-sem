@@ -39,37 +39,20 @@ require_once './__assignSession.php';
 
       <div class="slideshow-container">
          <div class="shade-slides"></div>
-         <div class="slides fade">
-            <img src="./style/assests/img-slider/91475-Kopan-Monastery.jpg">
-            <div class="img-info">
-               <h3>Monasteries</h3>
-               <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio eum odit inventore rerum. Illum
-                  corporis molestias necessitatibus nam maiores voluptatem voluptatum totam natus ut minus. Amet
-                  nesciunt aliquid quod exercitationem!</p>
-            </div>
-         </div>
 
-         <div class="slides fade">
-            <img src="./style/assests/img-slider/bhaktapur-tour.jpg">
-            <div class="img-info">
-               <h3>Bhaktapur</h3>
-               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui omnis accusamus commodi. Excepturi
-                  quisquam placeat
-                  provident laboriosam vero repellendus consectetur officia, necessitatibus quo, magnam voluptatibus id
-                  iusto, sunt
-                  pariatur eius.</p>
-            </div>
-         </div>
+         <?php
+         $countOfRecomendations = 3;
+         include './__recommendations.php' ?>
 
-         <div class="slides fade">
-            <img src="./style/assests/img-slider/safari chitwan.jpg">
-            <div class="img-info">
-               <h3>Chitwan</h3>
-               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui omnis accusamus commodi. Excepturi
-                  quisquam placeat provident laboriosam vero repellendus consectetur officia, necessitatibus quo, magnam
-                  voluptatibus id iusto, sunt pariatur eius.</p>
+         <?php foreach ($recomendationOfPosts as $index => $post) { ?>
+            <div class="slides fade">
+               <img src="<?php echo "./images/posts/" . $post['image']; ?>">
+               <div class="img-info">
+                  <h3><?php echo $post['title'] ?></h3>
+                  <p><?php echo substr($post['description'], 0, 220)."..." ?><a href="<?php echo "./individualPage.php?id=".$post['id']?>" style="color:var(--blue); text-decoration:underline;">more</a></p>
+               </div>
             </div>
-         </div>
+         <?php } ?>
 
          <!-- <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
          <a class="next" onclick="plusSlides(1)">&#10095;</a> -->
@@ -87,11 +70,14 @@ require_once './__assignSession.php';
    <div class="recommendation">
       <h2>Recommendations</h2>
       <ul class="recommendation__list">
-         <?php require_once './__recommendations.php'; ?>
+         <?php
+         $countOfRecomendations = 4;
+         include './__recommendations.php';
+         ?>
 
          <?php foreach ($recomendationOfPosts as $recPost) { ?>
             <li class="recommendation__list__item">
-               <a href="<?php echo "./individualPage.php?id=" . $recpost['id']; ?>">
+               <a href="<?php echo "./individualPage.php?id=" . $recPost['id']; ?>">
                   <div class="recommendation__list__item_images">
                      <img src="<?php echo './images/posts/' . $recPost['image'] ?>" alt="#">
                   </div>
