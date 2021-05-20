@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['search'])) {
    if (isset($_POST['search_input']) && !empty($_POST['search_input'])) {
-      header("location:./list-of-posts.php?search=" . $_POST['search_input']);
+      header("location:./listOfPosts.php?search=" . $_POST['search_input']);
    } else {
       header('location:./index.php');
    }

@@ -344,19 +344,112 @@ function mysqlGetReviewAll()
 }
 
 // Used after posts are added
-function mysqlSearchPost($searchText)
+function mysqlSearchPostCount($searchText)
 {
   $query =
     "SELECT
-      *
+    COUNT(*) as count
+FROM
+    (
+    SELECT
+        *
     FROM
-        `tbl_location`
+        `tbl_location` AS l
     WHERE
-        `title` LIKE '%$searchText%' OR `description` LIKE '%$searchText%' OR `type_of_activity` LIKE '%$searchText%' AND `status` = 1
+        l.`title` LIKE '%$searchText%' OR l.`description` LIKE '%$searchText%' OR l.`type_of_activity` LIKE '%$searchText%' AND l.`status` = 1
+) AS l,
+(
+    SELECT DISTINCTROW
+        location_id,
+        ANY_VALUE(image) AS image
+    FROM
+        `tbl_images`
+    WHERE
+        1
     GROUP BY
-        `id`";
+        location_id
+) AS i,
+`tbl_admins` as a	
+WHERE
+    l.id = i.location_id AND
+    l.admin_id = a.id AND
+    l.status = 1
+ORDER BY
+    l.id";
 
   return $query;
+}
+
+function mysqlSearchPost($searchText,$pageNo=0,$pageOffset=10){
+  $pageNo = $pageNo * $pageOffset;
+  $query1 =
+  "SELECT
+    l.id,
+    l.title,
+    l.description,
+    l.type_of_activity,
+    l.status,
+    i.image,
+    a.username,
+    l.created_at
+FROM
+    (
+    SELECT
+        *
+    FROM
+        `tbl_location` AS l
+    WHERE
+        l.`title` LIKE '%$searchText%' OR l.`description` LIKE '%$searchText%' OR l.`type_of_activity` LIKE '%$searchText%' AND l.`status` = 1
+) AS l,
+(
+    SELECT DISTINCTROW
+        location_id,
+        ANY_VALUE(image) AS image
+    FROM
+        `tbl_images`
+    WHERE
+        1
+    GROUP BY
+        location_id
+) AS i,
+`tbl_admins` as a	
+WHERE
+    l.id = i.location_id AND
+    l.admin_id = a.id AND
+    l.status = 1
+ORDER BY
+    l.id
+    LIMIT $pageNo,$pageOffset";
+//   $query = 
+//   "SELECT
+//     *
+// FROM
+//     (
+//     SELECT
+//         *
+//     FROM
+//         `tbl_location` AS l
+//     WHERE
+//         l.`title` LIKE '%$searchText%' OR l.`description` LIKE '%$searchText%' OR l.`type_of_activity` LIKE '%$searchText%' AND l.`status` = 1
+// ) AS l,
+// (
+//     SELECT DISTINCTROW
+//         location_id,
+//         ANY_VALUE(image) AS image
+//     FROM
+//         `tbl_images`
+//     WHERE
+//         1
+//     GROUP BY
+//         location_id
+// ) AS i
+// WHERE
+//     l.id = i.location_id
+// ORDER BY
+//     l.id
+//     LIMIT $pageNo,$pageOffset
+//   ";
+  return $query1;
 }
 
 function mysqlPostRecommendation($count = 4)

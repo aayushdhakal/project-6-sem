@@ -1,6 +1,6 @@
 <?php
-   session_start();
-   require_once './__assignSession.php';
+session_start();
+require_once './__assignSession.php';
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +33,7 @@
          }
       }
    </script>
-   
+
    <header>
       <?php require_once './__navigationBar.php'; ?>
 
@@ -152,8 +152,7 @@
 
                <div class="explore_content_blog_info">
                   <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae, officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
+                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis! Vitae, officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
                </div>
             </div>
 
@@ -164,9 +163,7 @@
 
                <div class="explore_content_blog_info">
                   <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
+                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis! Vitae, officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
                </div>
             </div>
 
@@ -177,9 +174,7 @@
 
                <div class="explore_content_blog_info">
                   <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
+                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis! Vitae, officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
                </div>
             </div>
 
@@ -505,17 +500,17 @@
          <div class="footer__list__feature">
             <h3>Social Media</h3>
             <ul>
-               <li><a href="https:www.twitter.com" target="_blank">Twitter</a></li>
-               <li><a href="https:www.instagram.com" target="_blank">Instagram</a></li>
-               <li><a href="https:www.youtube.com" target="_blank">Youtube</a></li>
-               <li><a href="https:www.facebook.com" target="_blank">Facebook</a></li>
-               <li><a href="https:www.pinterest.com" target="_blank">Pinterest</a></li>
+               <li><a href="https://www.twitter.com" target="_blank">Twitter</a></li>
+               <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
+               <li><a href="https://www.youtube.com" target="_blank">Youtube</a></li>
+               <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
+               <li><a href="https://www.pinterest.com" target="_blank">Pinterest</a></li>
             </ul>
          </div>
       </div>
       <div class="footer__website__legal__info">
          <h1>Passion Seekers</h1>
-         <p>Privacy Policy</p>
+         <p>Privacy Policy</p> -->
          <p>Copyright &#169; 2021 All Rights Reserved </p>
       </div>
    </footer>

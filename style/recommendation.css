@@ -43,12 +43,12 @@
 
 .recommendation__list__item_more {
    text-decoration: underline;
-   color: rgba(105, 99, 99, 0.425);
+   color: var(--blue);
 }
 
 .recommendation__list__item_images {
    display: block;
-   height: 50%;
+   height: 170px;
    max-width: 100%;
    position: relative;
 }
