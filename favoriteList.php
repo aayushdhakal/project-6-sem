@@ -45,7 +45,7 @@ require_once './__loginAndSignupErrorMsg.php';
    while ($row = $result->fetch_assoc()) {
       array_push($posts, $row);
    }
-   print_r($posts);
+   // print_r($posts);
    ?>
 
 
@@ -75,8 +75,8 @@ require_once './__loginAndSignupErrorMsg.php';
                      <td class="favorite__list__table__body__text"><?php echo $post['title'] ?></td>
                      <td class="favorite__list__table__body__text"><?php echo substr($post['description'], 0, 40) . ".... <a href='./individualPage.php?id=" . $post['id'] . "' class='favorite_list__description__more' >view more</a>" ?></td>
                      <td class="favorite__list__table__body__text"><?php echo $post['type_of_activity'] ?></td>
-                     <td><?php echo $post['lattitude'] ?></td>
-                     <td><?php echo $post['longitude'] ?></td>
+                     <td><?php echo substr($post['lattitude'],0,5)."..." ?></td>
+                     <td><?php echo substr($post['longitude'],0,5)."..." ?></td>
                      <td><?php echo $post['created_at'] ?></td>
                      <td><?php echo $post['id'] ?></td>
                      <td><a <?php echo 'href="./removeFromFavorite.php?id=' . $post['id'] . '&redirect=favorite"' ?> class="favorite_list__description__delete">Delete</a></td>

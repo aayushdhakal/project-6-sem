@@ -87,55 +87,22 @@ require_once './__assignSession.php';
    <div class="recommendation">
       <h2>Recommendations</h2>
       <ul class="recommendation__list">
+         <?php require_once './__recommendations.php'; ?>
 
-         <li class="recommendation__list__item">
-            <div class="recommendation__list__item_images">
-               <img src="./style/assests/img-slider/bhaktapur-tour.jpg" alt="#">
-            </div>
-            <div class="recommendation__list__item_info">
-               <span class="tag">Created By</span>
-               <h4>Lorem, ipsum</h4>
-               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio veniam optio nemo alias saepe
-                  sequi hic! Dignissimos autem error temporibus, eaque delectus est, sunt...<a class="recommendation__list__item_more">more</a></p>
-            </div>
-         </li>
-
-         <li class="recommendation__list__item">
-            <div class="recommendation__list__item_images">
-               <img src="./style/assests/picture.jpg" alt="#">
-            </div>
-            <div class="recommendation__list__item_info">
-               <span class="tag">Created By</span>
-               <h4>Lorem, ipsum</h4>
-               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio veniam optio nemo alias saepe
-                  sequi hic! Dignissimos autem error temporibus, eaque delectus est, sunt...<a class="recommendation__list__item_more">more</a></p>
-            </div>
-         </li>
-
-         <li class="recommendation__list__item">
-            <div class="recommendation__list__item_images">
-               <img src="./style/assests/img-slider/raimond-klavins-59Al83Zjtf8-unsplash.jpg" alt="#">
-            </div>
-            <div class="recommendation__list__item_info">
-               <span class="tag">Created By</span>
-               <h4>Lorem, ipsum</h4>
-               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio veniam optio nemo alias saepe
-                  sequi hic! Dignissimos autem error temporibus, eaque delectus est, sunt...<a class="recommendation__list__item_more">more</a></p>
-            </div>
-         </li>
-
-         <li class="recommendation__list__item">
-            <div class="recommendation__list__item_images">
-               <img src="./style/assests/img-slider/big.jpg" alt="#">
-            </div>
-            <div class="recommendation__list__item_info">
-               <span class="tag">Created By</span>
-               <h4>Lorem, ipsum</h4>
-               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio veniam optio nemo alias saepe
-                  sequi hic! Dignissimos autem error temporibus, eaque delectus est, sunt...<a class="recommendation__list__item_more">more</a></p>
-            </div>
-         </li>
-
+         <?php foreach ($recomendationOfPosts as $recPost) { ?>
+            <li class="recommendation__list__item">
+               <a href="<?php echo "./individualPage.php?id=" . $recpost['id']; ?>">
+                  <div class="recommendation__list__item_images">
+                     <img src="<?php echo './images/posts/' . $recPost['image'] ?>" alt="#">
+                  </div>
+               </a>
+               <div class="recommendation__list__item_info">
+                  <span class="tag"><?php echo $recPost['username']; ?></span>
+                  <h4><?php echo $recPost['title']; ?></h4>
+                  <p><?php echo substr($recPost['description'], 0, 150) ?>...<a href="<?php echo "./individualPage.php?id=" . $recPost['id']; ?>" class="recommendation__list__item_more">more</a></p>
+               </div>
+            </li>
+         <?php } ?>
       </ul>
    </div>
 
