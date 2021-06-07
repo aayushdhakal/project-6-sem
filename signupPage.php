@@ -103,7 +103,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
          $err_signup = false;
       }
 
-      
+
       //check if there is error if not then we procced to working with database
       if (!$err_signup) {
          if (isset($username) && isset($password) && isset($email)) {
@@ -166,60 +166,54 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
 
                <div class="container__right__form__element">
                   <Label for="name">Name</Label>
-                  <input type="text" placeholder="Enter name here" id="name" name="name" <?php echo 'value="' . $name . '"' ?>>
+                  <input type="text" placeholder="Enter name here" id="name" name="name" <?php echo 'value="' . $name . '"' ?> autocomplete="off">
                </div>
 
                <div class="container__right__form__element">
                   <Label for="email">Email</Label>
                   <?php if (isset($err_email)) { ?>
-                     <input type="text" placeholder="Enter email here" id="email" name="email" class="validation__input validation__input--empty">
+                     <input type="text" placeholder="Enter email here" id="email" name="email" class="validation__input validation__input--empty" autocomplete="off">
                   <?php } else { ?>
-                     <input type="text" placeholder="Enter email here" id="email" name="email" class="validation__input" <?php echo 'value="' . $email . '"' ?>>
+                     <input type="text" placeholder="Enter email here" id="email" name="email" class="validation__input" <?php echo 'value="' . $email . '"' ?> autocomplete="off">
                   <?php  } ?>
-                  <!-- <input type="text" placeholder="Enter email here" id="email" name="email"> -->
                </div>
 
                <div class="container__right__form__element">
                   <Label for="phone">Phone Number</Label>
-                  <input type="text" placeholder="Enter phone here" id="phone" name="phone" <?php echo 'value="' . $phone . '"' ?>>
+                  <input type="text" placeholder="Enter phone here" id="phone" name="phone" <?php echo 'value="' . $phone . '"' ?> autocomplete="off">
                </div>
 
                <div class="container__right__form__element">
                   <Label for="address">Address</Label>
-                  <input type="text" placeholder="Enter address here" id="address" name="address" <?php echo 'value="' . $address . '"' ?>>
+                  <input type="text" placeholder="Enter address here" id="address" name="address" <?php echo 'value="' . $address . '"' ?> autocomplete="off">
                </div>
 
                <div class="container__right__form__element">
                   <Label for="username">Username</Label>
                   <?php if (isset($err_username)) { ?>
-                     <input type="text" placeholder="Enter username here" id="username" name="username" class="validation__input validation__input--empty">
+                     <input type="text" placeholder="Enter username here" id="username" name="username" class="validation__input validation__input--empty" autocomplete="off">
                   <?php } else { ?>
-                     <input type="text" placeholder="Enter username here" id="username" name="username" class="validation__input" <?php echo 'value="' . $username . '"' ?>>
+                     <input type="text" placeholder="Enter username here" id="username" name="username" class="validation__input" <?php echo 'value="' . $username . '"' ?> autocomplete="off">
                   <?php } ?>
                </div>
 
                <div class="container__right__form__element">
                   <Label for="password">Password</Label>
                   <?php if (isset($err_password)) { ?>
-                     <input type="text" placeholder="Enter password here" id="password" name="password" class="validation__input validation__input--empty">
+                     <input type="password" placeholder="Enter password here" id="password" name="password" class="validation__input validation__input--empty" autocomplete="off">
                   <?php } else { ?>
-                     <input type="text" placeholder="Enter password here" id="password" name="password" class="validation__input">
+                     <input type="password" placeholder="Enter password here" id="password" name="password" class="validation__input" autocomplete="off">
                   <?php } ?>
                </div>
 
                <div class="container__right__form__element">
                   <Label for="repassword">Re-enter password</Label>
                   <?php if (isset($err_re_password)) { ?>
-                     <input type="text" placeholder="Enter Password here Again" id="repassword" name="repassword" class="validation__input validation__input--empty">
+                     <input type="password" placeholder="Enter Password here Again" id="repassword" name="repassword" class="validation__input validation__input--empty" autocomplete="off">
                   <?php } else { ?>
-                     <input type="text" placeholder="Enter Password here Again" id="repassword" name="repassword" class="validation__input">
+                     <input type="password" placeholder="Enter Password here Again" id="repassword" name="repassword" class="validation__input" autocomplete="off">
                   <?php } ?>
                </div>
-
-               <!-- <div class="container__right__form__element container__right__form__element--checkbox">
-                  <Label for="remember">Remember Me</Label>
-                  <input type="checkbox" id="remember">
-               </div> -->
 
                <div class="container__right__form__element container__right__form__element--signup__btn">
                   <input type="submit" value="Signup" name="signup">

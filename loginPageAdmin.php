@@ -139,9 +139,9 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
                   <Label for="password">Password</Label>
                   <?php if (isset($err_password)) { ?>
 
-                     <input type="text" placeholder="Enter password here" id="password" name="password" class="validation__input validation__input--empty">
+                     <input type="password" placeholder="Enter password here" id="password" name="password" class="validation__input validation__input--empty">
                   <?php } else { ?>
-                     <input type="text" placeholder="Enter password here" id="password" name="password" class="validation__input">
+                     <input type="password" placeholder="Enter password here" id="password" name="password" class="validation__input">
                   <?php } ?>
                </div>
 
