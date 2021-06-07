@@ -21,9 +21,9 @@ if (isset($_POST['search'])) {
             </form>
          </div>
       </li>
-      <li><a href="#">Explore</a></li>
-      <li><a href="#">Activities</a></li>
-      <li><a href="#">Trending places</a></li>
+      <li><a href="./listOfPosts.php?type=explore">Explore</a></li>
+      <li><a href="./listOfPosts.php?type=activities">Activities</a></li>
+      <!-- <li><a href="#">Trending places</a></li> -->
       <?php
 
       if (isset($_SESSION['username'])) {

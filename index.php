@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once './__assignSession.php';
+require_once './__connection.php';
 ?>
 
 <!DOCTYPE html>
@@ -94,299 +95,110 @@ require_once './__assignSession.php';
 
    <hr>
    <div class="explore">
-      <?php echo mysqlGetPostsForExploreAndActivities('explore') ?>
+      <?php //echo mysqlGetPostsForExploreAndActivities('explore'); 
+      ?>
       <h2>Explore</h2>
       <div class="explore_content">
          <div class="explore_content_blogs">
 
-            <div class="explore_content_blog">
-               <div class="explore_content_blog_image">
-                  <img src="./style/assests/img-slider/safari chitwan.jpg" alt="blog">
-               </div>
+            <?php
+            $queryToGetExplore = mysqlGetPostsForExploreAndActivities('explore');
+            $activitiesForExplore = $connection->query($queryToGetExplore);
+            $arrayOfLocationExplore = [];
 
-               <div class="explore_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis! Vitae, officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
-               </div>
-            </div>
+            while ($row = $activitiesForExplore->fetch_assoc()) {
+               array_push($arrayOfLocationExplore, $row);
+            }
+            ?>
 
-            <div class="explore_content_blog">
-               <div class="explore_content_blog_image">
-                  <img src="./style/assests/img-slider/44a0dde69ff2ed39e29b572131d5cc66.jpg" alt="blog">
-               </div>
+            <?php
+            if (count($arrayOfLocationExplore) >= 11) {
+               foreach ($arrayOfLocationExplore as $index => $location) {
+                  if ($index == 2 || $index == 3 || $index == 6) {
+            ?>
+                     <div class="explore_content_blog explore_content_blog--big">
+                        <div class="explore_content_blog_image">
+                           <img src="<?php echo './images/posts/' . $location['image'] ?>" alt="image">
+                        </div>
 
-               <div class="explore_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis! Vitae, officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
-               </div>
-            </div>
+                        <div class="explore_content_blog_info">
+                           <h2><?php echo $location['title']; ?></h2>
+                           <p><?php echo substr($location['description'], 0, 180) . "..." ?><a href="<?php echo "./individualPage.php?id=" . $location['id'] ?>" style="color:var(--blue); text-decoration:underline;">more</a></p>
+                        </div>
+                     </div>
+                  <?php
+                  } else {
+                  ?>
+                     <div class="explore_content_blog">
+                        <div class="explore_content_blog_image">
+                           <img src="<?php echo './images/posts/' . $location['image'] ?>" alt="image">
+                        </div>
 
-            <div class="explore_content_blog explore_content_blog--big">
-               <div class="explore_content_blog_image">
-                  <img src="./style/assests/img-slider/5ea0e5798a68e_pas.png" alt="blog">
-               </div>
-
-               <div class="explore_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis! Vitae, officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
-               </div>
-            </div>
-
-            <div class="explore_content_blog explore_content_blog--big">
-               <div class="explore_content_blog_image">
-                  <img src="./style/assests/img-slider/91475-Kopan-Monastery.jpg" alt="blog">
-               </div>
-
-               <div class="explore_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
-               </div>
-            </div>
-
-            <div class="explore_content_blog">
-               <div class="explore_content_blog_image">
-                  <img src="./style/assests/img-slider/bhaktapur-tour.jpg" alt="blog">
-               </div>
-
-               <div class="explore_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
-               </div>
-            </div>
-
-            <div class="explore_content_blog">
-               <div class="explore_content_blog_image">
-                  <img src="./style/assests/img-slider/big.jpg" alt="blog">
-               </div>
-
-               <div class="explore_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
-               </div>
-            </div>
-
-            <div class="explore_content_blog explore_content_blog--big">
-               <div class="explore_content_blog_image">
-                  <img src="./style/assests/img-slider/diya-pokharel-QhlJ7XDjEvg-unsplash.jpg" alt="blog">
-               </div>
-
-               <div class="explore_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
-               </div>
-            </div>
-
-            <div class="explore_content_blog">
-               <div class="explore_content_blog_image">
-                  <img src="./style/assests/img-slider/Elephant polo.jpg" alt="blog">
-               </div>
-
-               <div class="explore_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
-               </div>
-            </div>
-
-            <div class="explore_content_blog">
-               <div class="explore_content_blog_image">
-                  <img src="./style/assests/img-slider/Kapan-Monastries.jpg" alt="blog">
-               </div>
-
-               <div class="explore_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
-               </div>
-            </div>
-
-            <div class="explore_content_blog">
-               <div class="explore_content_blog_image">
-                  <img src="./style/assests/img-slider/lumbini2.jpg" alt="blog">
-               </div>
-
-               <div class="explore_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
-               </div>
-            </div>
-
-            <div class="explore_content_blog">
-               <div class="explore_content_blog_image">
-                  <img src="./style/assests/img-slider/raimond-klavins-59Al83Zjtf8-unsplash.jpg" alt="blog">
-               </div>
-
-               <div class="explore_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="explore_blog_more">more</a></p>
-               </div>
-            </div>
-
+                        <div class="explore_content_blog_info">
+                           <h2><?php echo $location['title']; ?></h2>
+                           <p><?php echo substr($location['description'], 0, 180) . "..." ?><a href="<?php echo "./individualPage.php?id=" . $location['id'] ?>" style="color:var(--blue); text-decoration:underline;">more</a></p>
+                        </div>
+                     </div>
+            <?php
+                  }
+               }
+            }
+            ?>
          </div>
       </div>
    </div>
 
    <hr>
    <div class="activity">
-      <?php echo mysqlGetPostsForExploreAndActivities('activity') ?>
+      <?php //echo mysqlGetPostsForExploreAndActivities('activity') 
+      ?>
       <h2>Activity</h2>
       <div class="activity_content">
          <div class="activity_content_blogs">
 
-            <div class="activity_content_blog">
-               <div class="activity_content_blog_image">
-                  <img src="./style/assests/img-slider/safari chitwan.jpg" alt="blog">
-               </div>
+            <?php
+            $queryToGetActivities = mysqlGetPostsForExploreAndActivities('activity');
+            $activitiesForActivities = $connection->query($queryToGetActivities);
+            $arrayOfLocationForActivities = [];
 
-               <div class="activity_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae, officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="activity_blog_more" class="activity_blog_more">more</a></p>
-               </div>
-            </div>
+            while ($row = $activitiesForActivities->fetch_assoc()) {
+               array_push($arrayOfLocationForActivities, $row);
+            }
+            ?>
 
-            <div class="activity_content_blog">
-               <div class="activity_content_blog_image">
-                  <img src="./style/assests/img-slider/44a0dde69ff2ed39e29b572131d5cc66.jpg" alt="blog">
-               </div>
+            <?php
+            if (count($arrayOfLocationForActivities) >= 11) {
+               foreach ($arrayOfLocationForActivities as $index => $location) {
+                  if ($index == 2 || $index == 3 || $index == 6) {
+            ?>
+                     <div class="activity_content_blog activity_content_blog--big">
+                        <div class="activity_content_blog_image">
+                           <img src="<?php echo './images/posts/' . $location['image'] ?>" alt="image">
+                        </div>
 
-               <div class="activity_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="activity_blog_more">more</a></p>
-               </div>
-            </div>
+                        <div class="activity_content_blog_info">
+                           <h2><?php echo $location['title']; ?></h2>
+                           <p><?php echo substr($location['description'], 0, 180) . "..." ?><a href="<?php echo "./individualPage.php?id=" . $location['id'] ?>" style="color:var(--blue); text-decoration:underline;">more</a></p>
+                        </div>
+                     </div>
+                  <?php
+                  } else {
+                  ?>
+                     <div class="activity_content_blog">
+                        <div class="activity_content_blog_image">
+                           <img src="<?php echo './images/posts/' . $location['image'] ?>" alt="image">
+                        </div>
 
-            <div class="activity_content_blog activity_content_blog--big">
-               <div class="activity_content_blog_image">
-                  <img src="./style/assests/img-slider/5ea0e5798a68e_pas.png" alt="blog">
-               </div>
-
-               <div class="activity_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="activity_blog_more">more</a></p>
-               </div>
-            </div>
-
-            <div class="activity_content_blog activity_content_blog--big">
-               <div class="activity_content_blog_image">
-                  <img src="./style/assests/img-slider/91475-Kopan-Monastery.jpg" alt="blog">
-               </div>
-
-               <div class="activity_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="activity_blog_more">more</a></p>
-               </div>
-            </div>
-
-            <div class="activity_content_blog">
-               <div class="activity_content_blog_image">
-                  <img src="./style/assests/img-slider/bhaktapur-tour.jpg" alt="blog">
-               </div>
-
-               <div class="activity_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="activity_blog_more">more</a></p>
-               </div>
-            </div>
-            <div class="activity_content_blog">
-               <div class="activity_content_blog_image">
-                  <img src="./style/assests/img-slider/big.jpg" alt="blog">
-               </div>
-
-               <div class="activity_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="activity_blog_more">more</a></p>
-               </div>
-            </div>
-
-            <div class="activity_content_blog activity_content_blog--big">
-               <div class="activity_content_blog_image">
-                  <img src="./style/assests/img-slider/diya-pokharel-QhlJ7XDjEvg-unsplash.jpg" alt="blog">
-               </div>
-
-               <div class="activity_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="activity_blog_more">more</a></p>
-               </div>
-            </div>
-
-            <div class="activity_content_blog">
-               <div class="activity_content_blog_image">
-                  <img src="./style/assests/img-slider/Elephant polo.jpg" alt="blog">
-               </div>
-
-               <div class="activity_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="activity_blog_more">more</a></p>
-               </div>
-            </div>
-
-            <div class="activity_content_blog">
-               <div class="activity_content_blog_image">
-                  <img src="./style/assests/img-slider/Kapan-Monastries.jpg" alt="blog">
-               </div>
-
-               <div class="activity_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="activity_blog_more">more</a></p>
-               </div>
-            </div>
-
-            <div class="activity_content_blog">
-               <div class="activity_content_blog_image">
-                  <img src="./style/assests/img-slider/lumbini2.jpg" alt="blog">
-               </div>
-
-               <div class="activity_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="activity_blog_more">more</a></p>
-               </div>
-            </div>
-
-            <div class="activity_content_blog">
-               <div class="activity_content_blog_image">
-                  <img src="./style/assests/img-slider/raimond-klavins-59Al83Zjtf8-unsplash.jpg" alt="blog">
-               </div>
-
-               <div class="activity_content_blog_info">
-                  <h2>Title</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt temporibus voluptas qui debitis!
-                     Vitae,
-                     officiis. Architecto, eos. Quod, id possimus! ..<a href="#" class="activity_blog_more">more</a></p>
-               </div>
-            </div>
+                        <div class="activity_content_blog_info">
+                           <h2><?php echo $location['title']; ?></h2>
+                           <p><?php echo substr($location['description'], 0, 180) . "..." ?><a href="<?php echo "./individualPage.php?id=" . $location['id'] ?>" style="color:var(--blue); text-decoration:underline;">more</a></p>
+                        </div>
+                     </div>
+            <?php
+                  }
+               }
+            }
+            ?>
 
          </div>
       </div>
@@ -394,43 +206,30 @@ require_once './__assignSession.php';
    <hr>
 
    <footer>
-      <div class="subscribe__feature">
-         <div class="subscribe__btn">
-            <div class="subscribe__icon">
-               <img src="./style/assests/mail-icon.png" alt="icon subscribe">
-            </div>
-            <h2>Get Newsletter</h2>
-         </div>
-         <form action="#" name="subscribeEmail" class="subscribe_newsletter">
-            <input type="text" placeholder="Enter mail here!">
-            <button>Subscribe</button>
-         </form>
+      <div class="footer__border__top">
       </div>
+
       <div class="footer__content">
          <div class="footer__list__feature">
             <h3>Top Cities</h3>
             <ul>
-               <li><a href="#">Pokhara</a></li>
-               <li><a href="#">Kathmandu</a></li>
-               <li><a href="#">Biratnagar</a></li>
-               <li><a href="#">Birjung</a></li>
-               <li><a href="#">Nagarkot</a></li>
+               <li><a href="./listOfPosts.php?search=pokhara">Pokhara</a></li>
+               <li><a href="./listOfPosts.php?search=kathmandu">Kathmandu</a></li>
+               <li><a href="./listOfPosts.php?search=biratnagar">Biratnagar</a></li>
+               <li><a href="./listOfPosts.php?search=birjung">Birjung</a></li>
+               <li><a href="./listOfPosts.php?search=nagarkot">Nagarkot</a></li>
             </ul>
          </div>
          <div class="footer__list__feature">
             <h3>Top Choices</h3>
             <ul>
-               <li><a href="#">Art & culture</a></li>
-               <li><a href="#">Entertainment</a></li>
-               <li><a href="#">Nature & wildlife</a></li>
-               <li><a href="#">Outdoor activities</a></li>
-               <li><a href="#">Leisure activities</a></li>
-               <li><a href="#">Tours</a></li>
-               <li><a href="#">Road trips</a></li>
-               <li><a href="#">Virtual attraction</a></li>
-               <li><a href="#">Top attraction</a></li>
-               <li><a href="#">Hiking</a></li>
-               <li><a href="#">Treking</a></li>
+               <li><a href="./listOfPosts.php?search=religious%20places">Religious Places</a></li>
+               <li><a href="./listOfPosts.php?search=sightseeing">Sightseeing</a></li>
+               <li><a href="./listOfPosts.php?search=trekking">Trekking</a></li>
+               <li><a href="./listOfPosts.php?search=hiking">Hiking</a></li>
+               <li><a href="./listOfPosts.php?search=leisure%20activities">Leisure activities</a></li>
+               <li><a href="./listOfPosts.php?search=tours">Tours</a></li>
+               <li><a href="./listOfPosts.php?search=road%20trips">Road trips</a></li>
             </ul>
          </div>
          <div class="footer__list__feature footer__list__feature--contact">
@@ -465,8 +264,8 @@ require_once './__assignSession.php';
       </div>
       <div class="footer__website__legal__info">
          <h1>Passion Seekers</h1>
-         <p>Privacy Policy</p> -->
-         <p>Copyright &#169; 2021 All Rights Reserved </p>
+         <!-- <p>Privacy Policy</p>
+         <p>Copyright &#169; 2021 All Rights Reserved </p> -->
       </div>
    </footer>
    <?php require_once './__adminJobs.php' ?>

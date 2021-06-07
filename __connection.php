@@ -551,8 +551,8 @@ FROM
 WHERE
     l.id = i.location_id AND l.admin_id = a.id AND l.status = 1
 ORDER BY
-    l.id
-LIMIT 13";
+    RAND()
+LIMIT 11";
         break;
       }
 
@@ -574,7 +574,7 @@ FROM
     WHERE
         l.`type_of_activity` IN(
             'hiking',
-            'treking',
+            'trekking',
             'mountaineering',
             'mountain biking',
             'cycling',
@@ -596,8 +596,8 @@ FROM
 WHERE
     l.id = i.location_id AND l.admin_id = a.id AND l.status = 1
 ORDER BY
-    l.id
-LIMIT 13
+    RAND()
+LIMIT 11
         ";
       }
   }

@@ -59,11 +59,22 @@ require_once './__loginAndSignupErrorMsg.php';
    }
 
    if (isset($_GET['type']) && !empty($_GET['type']) && $_GET['type'] == 'explore' && (!isset($_GET['search']) || !empty($_GET['search']))) {
-      //print list of exploring place like sightseeing,religious places
+      $queryToGetExplore = mysqlGetPostsForExploreAndActivities('explore');
+      $exploreDatafromDatabase = $connection->query($queryToGetExplore);
+
+      while ($row = $exploreDatafromDatabase->fetch_assoc()) {
+         array_push($postsInformations, $row);
+      }
    }
 
    if (isset($_GET['type']) && !empty($_GET['type']) && $_GET['type'] == 'activities' && (!isset($_GET['search']) || !empty($_GET['search']))) {
-      //print list of activities place like hiking,treking,mounteneering so on
+      $queryToGetActivity = mysqlGetPostsForExploreAndActivities();
+      // echo $queryToGetActivity;
+      $activityDatafromDatabase = $connection->query($queryToGetActivity);
+
+      while ($row = $activityDatafromDatabase->fetch_assoc()) {
+         array_push($postsInformations, $row);
+      }
    }
    ?>
    <header>
@@ -71,20 +82,15 @@ require_once './__loginAndSignupErrorMsg.php';
    </header>
    <section>
       <div class="recommendation recommendation--lists">
-         <h2>Search results for "<?php echo $_GET['search']; ?>"</h2>
-         <ul class="recommendation__list recommendation__list--search__posts">
+         <?php if (isset($_GET['search']) && !empty($_GET['search'])) { ?>
+            <h2>Search results for "<?php echo $_GET["search"]; ?>"</h2>
+         <?php } ?>
 
-            <!-- <li class="recommendation__list__item">
-               <div class="recommendation__list__item_images">
-                  <img src="./style/assests/img-slider/bhaktapur-tour.jpg" alt="#">
-               </div>
-               <div class="recommendation__list__item_info">
-                  <span class="tag">Created By</span>
-                  <h4>Lorem, ipsum</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio veniam optio nemo alias saepe
-                     sequi hic! Dignissimos autem error temporibus, eaque delectus est, sunt...<a class="recommendation__list__item_more">more</a></p>
-               </div>
-            </li> -->
+         <?php if (isset($_GET['type']) && !empty($_GET['type'])) { ?>
+            <h2>Suggestion for places to <?php echo $_GET["type"]; ?> </h2>
+         <?php }?>
+
+         <ul class="recommendation__list recommendation__list--search__posts">
 
             <?php foreach ($postsInformations as $index => $post) { ?>
                <li class="recommendation__list__item">
