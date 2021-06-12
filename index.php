@@ -11,7 +11,6 @@ require_once './__connection.php';
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
    <link rel="stylesheet" href="./style/style.css">
    <link rel="stylesheet" href="./style/header-navigationBar.css">
    <link rel="stylesheet" href="./style/header-slider.css">

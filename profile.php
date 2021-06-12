@@ -21,6 +21,7 @@ require_once './__loginAndSignupErrorMsg.php';
    <link rel="stylesheet" href="./style/header-navigationBar.css">
    <link rel="stylesheet" href="./style/admin-jobs.css">
    <link rel="stylesheet" href="./style/profile.css">
+   <link rel="icon" href="./style/assests/travel.png">
    <title>Passion Seekers | Profile</title>
 </head>
 

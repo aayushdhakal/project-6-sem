@@ -14,7 +14,7 @@
                   <?php if ($isInFavorite->num_rows == 1) { ?>
                      <a href=<?php echo isset($id) ? "./removeFromFavorite.php?id=" . $id : "" ?>><button>Saved. Remove from favorite?</button></a>
                   <?php } else { ?>
-                     <a href=<?php echo isset($id) ? "./saveToFavorite.php?id=" . $id  : "" ?>><button>Save to favorite<?php echo isset($id) ? " id=" . $id  : "" ?>?</button></a>
+                     <a href=<?php echo isset($id) ? "./saveToFavorite.php?id=" . $id  : "" ?>><button>Save to favorite?<?php echo isset($id) ? " id=" . $id  : "" ?></button></a>
                <?php }
                }
                ?>

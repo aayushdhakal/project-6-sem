@@ -17,6 +17,7 @@ require_once './__loginAndSignupErrorMsg.php';
    <link rel="stylesheet" href="./style/footer.css">
    <link rel="stylesheet" href="./style/admin-jobs.css">
    <link rel="stylesheet" href="./style/list-of-posts.css">
+   <link rel="icon" href="./style/assests/travel.png">
    <title>List of Posts</title>
 </head>
 
@@ -81,44 +82,56 @@ require_once './__loginAndSignupErrorMsg.php';
       <?php require_once './__navigationBar.php' ?>
    </header>
    <section>
+
       <div class="recommendation recommendation--lists">
+
          <?php if (isset($_GET['search']) && !empty($_GET['search'])) { ?>
             <h2>Search results for "<?php echo $_GET["search"]; ?>"</h2>
          <?php } ?>
 
          <?php if (isset($_GET['type']) && !empty($_GET['type'])) { ?>
             <h2>Suggestion for places to <?php echo $_GET["type"]; ?> </h2>
-         <?php }?>
+         <?php } ?>
 
-         <ul class="recommendation__list recommendation__list--search__posts">
+         <?php if (count($postsInformations) > 0) { ?>
 
-            <?php foreach ($postsInformations as $index => $post) { ?>
-               <li class="recommendation__list__item">
-                  <a href="<?php echo "./individualPage.php?id=" . $post['id']; ?>">
-                     <div class="recommendation__list__item_images">
-                        <img src="<?php echo './images/posts/' . $post['image'] ?>" alt="#">
+            <ul class="recommendation__list recommendation__list--search__posts">
+
+               <?php foreach ($postsInformations as $index => $post) { ?>
+                  <li class="recommendation__list__item">
+                     <a href="<?php echo "./individualPage.php?id=" . $post['id']; ?>">
+                        <div class="recommendation__list__item_images">
+                           <img src="<?php echo './images/posts/' . $post['image'] ?>" alt="#">
+                        </div>
+                     </a>
+                     <div class="recommendation__list__item_info">
+                        <span class="tag"><?php echo $post['username']; ?></span>
+                        <h4><?php echo $post['title']; ?></h4>
+                        <p><?php echo substr($post['description'], 0, 150) ?>...<a href="<?php echo "./individualPage.php?id=" . $post['id']; ?>" class="recommendation__list__item_more">more</a></p>
                      </div>
-                  </a>
-                  <div class="recommendation__list__item_info">
-                     <span class="tag"><?php echo $post['username']; ?></span>
-                     <h4><?php echo $post['title']; ?></h4>
-                     <p><?php echo substr($post['description'], 0, 150) ?>...<a href="<?php echo "./individualPage.php?id=" . $post['id']; ?>" class="recommendation__list__item_more">more</a></p>
-                  </div>
-               </li>
-            <?php } ?>
-         </ul>
-         <div class="page__numbers">
-            <?php for ($i = 1; $i <= $pageCount; $i++) {
-
-               if ($pageNumber == $i) { ?>
-                  <p class="page__number page__number--active"><a><?php echo $i ?></a></p>
-               <?php } else { ?>
-                  <p class="page__number page__number"><a href="<?php echo './listOfPosts.php?search=' . $_GET['search'] . '&pageno=' . $i  ?>"><?php echo $i ?></a></p>
+                  </li>
                <?php } ?>
+            </ul>
 
-            <?php } ?>
-         </div>
+            <div class="page__numbers">
+               <?php for ($i = 1; $i <= $pageCount; $i++) {
+
+                  if ($pageNumber == $i) { ?>
+                     <p class="page__number page__number--active"><a><?php echo $i ?></a></p>
+                  <?php } else { ?>
+                     <p class="page__number page__number"><a href="<?php echo './listOfPosts.php?search=' . $_GET['search'] . '&pageno=' . $i  ?>"><?php echo $i ?></a></p>
+                  <?php } ?>
+
+               <?php } ?>
+            </div>
+
+         <?php } else { ?>
+            <h2 style="color: #b01107;">" No Results Found "</h2>
+         <?php } ?>
+
       </div>
+
+
    </section>
    <hr>
    <section>
@@ -143,6 +156,7 @@ require_once './__loginAndSignupErrorMsg.php';
             <?php } ?>
          </ul>
       </div>
+
    </section>
    <!-- <div class="end__of__page"></div> -->
    <footer>

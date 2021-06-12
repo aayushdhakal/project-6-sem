@@ -13,6 +13,7 @@ require_once './__loginAndSignupErrorMsg.php';
    <link rel="stylesheet" href="./style/header-navigationBar.css">
    <link rel="stylesheet" href="./style/all-posts.css">
    <link rel="stylesheet" href="./style/admin-jobs.css">
+   <link rel="icon" href="./style/assests/travel.png">
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,8 +92,8 @@ require_once './__loginAndSignupErrorMsg.php';
                         <td><?php echo $pageOfset * $pageNumber - $pageOfset + $index + 1 ?></td>
                         <td class="all__posts__contents__content__left"><?php echo $post['title'] ?></td>
                         <td class="all__posts__contents__content__left"><?php echo substr($post['description'], 0, 40) . ".... <a href='./individualPage.php?id=" . $post['id'] . "' class='all__posts__contents__content__more' >view more</a>" ?></td>
-                        <td><?php echo substr($post['lattitude'],0,5)."..." ?></td>
-                        <td><?php echo substr($post['longitude'],0,5)."..." ?></td>
+                        <td><?php echo substr($post['lattitude'], 0, 5) . "..." ?></td>
+                        <td><?php echo substr($post['longitude'], 0, 5) . "..." ?></td>
                         <td><?php echo $post['type_of_activity'] ?></td>
                         <td><?php echo $post['status'] == 1 ? 'active' : 'hidden' ?></td>
                         <td><?php echo $post['id'] ?></td>
