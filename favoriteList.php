@@ -38,14 +38,18 @@ require_once './__loginAndSignupErrorMsg.php';
       $pageNumber = $_GET['pageno'];
    }
 
-   $queryToGetAllFavorite = mysqlGetAllFavoritePosts($_SESSION['id'], $pageNumber - 1, 10);
-   $result = $connection->query($queryToGetAllFavorite);
-   $posts = [];
+   if (isset($_SESSION['id']) && !empty($_SESSION['id']) && $_SESSION['is_user'] == true) {
+      $queryToGetAllFavorite = mysqlGetAllFavoritePosts($_SESSION['id'], $pageNumber - 1, 10);
+      $result = $connection->query($queryToGetAllFavorite);
+      $posts = [];
 
-   while ($row = $result->fetch_assoc()) {
-      array_push($posts, $row);
+      while ($row = $result->fetch_assoc()) {
+         array_push($posts, $row);
+      }
+      // print_r($_SESSION);
+   } else {
+      $err['user'] = 'Please Login as a user!';
    }
-   // print_r($posts);
    ?>
 
 
@@ -53,6 +57,7 @@ require_once './__loginAndSignupErrorMsg.php';
       <?php require_once './__navigationBar.php'; ?>
    </header>
 
+   <?php if(!$err['user']){?>
    <section class="favorite__list">
       <div class="favorite__list__container">
          <h2 class="favorite__list__title">Favorite Lists</h2>
@@ -75,8 +80,8 @@ require_once './__loginAndSignupErrorMsg.php';
                      <td class="favorite__list__table__body__text"><?php echo $post['title'] ?></td>
                      <td class="favorite__list__table__body__text"><?php echo substr($post['description'], 0, 40) . ".... <a href='./individualPage.php?id=" . $post['id'] . "' class='favorite_list__description__more' >view more</a>" ?></td>
                      <td class="favorite__list__table__body__text"><?php echo $post['type_of_activity'] ?></td>
-                     <td><?php echo substr($post['lattitude'],0,5)."..." ?></td>
-                     <td><?php echo substr($post['longitude'],0,5)."..." ?></td>
+                     <td><?php echo substr($post['lattitude'], 0, 5) . "..." ?></td>
+                     <td><?php echo substr($post['longitude'], 0, 5) . "..." ?></td>
                      <td><?php echo $post['created_at'] ?></td>
                      <td><?php echo $post['id'] ?></td>
                      <td><a <?php echo 'href="./removeFromFavorite.php?id=' . $post['id'] . '&redirect=favorite"' ?> class="favorite_list__description__delete">Delete</a></td>
@@ -86,6 +91,7 @@ require_once './__loginAndSignupErrorMsg.php';
          </table>
       </div>
    </section>
+   <?php } ?>
 
    <?php require_once './__adminJobs.php' ?>
 

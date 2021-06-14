@@ -17,7 +17,7 @@ require_once './__loginAndSignupErrorMsg.php';
    <link rel="stylesheet" href="./style/recommendation.css">
    <link rel="stylesheet" href="./style/admin-jobs.css">
    <link rel="icon" href="./style/assests/travel.png">
-   <title>Passion Seekers | Post</title>
+   <title>Passion Seekers</title>
 </head>
 
 <body class="overflow__body">
@@ -167,7 +167,7 @@ require_once './__loginAndSignupErrorMsg.php';
          <div class="aside__container">
 
             <?php
-            $suggentionFallback = !isset($err['post'])? $resultForlocationInfo['type_of_activity']:"sightseeing";
+            $suggentionFallback = !isset($err['post']) ? $resultForlocationInfo['type_of_activity'] : "sightseeing";
             $queryToSimililarpost = mysqlJustLikePost($suggentionFallback, $id, 3);
             $resultToSimilarPostFromDB = $connection->query($queryToSimililarpost);
             $postForSimilarPosts = [];
@@ -179,7 +179,7 @@ require_once './__loginAndSignupErrorMsg.php';
 
             <?php foreach ($postForSimilarPosts as $index => $post) { ?>
                <div class="aside__recomendation">
-                  <a href="<?php echo "./individualPage.php?id=".$post['id'] ?>">
+                  <a href="<?php echo "./individualPage.php?id=" . $post['id'] ?>">
                      <h3><?php echo $post['title'] ?></h3>
                      <div class="aside__recomendation__content">
                         <img src=<?php echo "./images/posts/" . $post['image']; ?> alt="#">
@@ -275,6 +275,22 @@ require_once './__loginAndSignupErrorMsg.php';
 
          slides[slideIndex - 1].style.display = "block";
       }
+   </script>
+   <script>
+      const postTitle = document.querySelector('.post__title');
+      let stateOfTitle = false;
+      let changingTitle = setInterval(() => {
+         if (stateOfTitle) {
+            document.title = "Passion Seekers";
+         } else {
+            document.title = postTitle.textContent;
+         }
+         stateOfTitle = !stateOfTitle;
+      }, 3000);
+
+      setTimeout(()=>{
+         clearInterval(changingTitle);
+      },15000)
    </script>
 </body>
 

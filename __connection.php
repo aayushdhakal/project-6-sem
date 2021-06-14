@@ -333,13 +333,13 @@ ORDER BY
 
 function mysqlPostReview($title, $description, $userId)
 {
-  $query = "INSERT INTO `tbl_reviews`(`user_id`, `title`, `description`) VALUES ('$userId','$title','$description')";
+  $query = "INSERT INTO `tbl_feedbacks`(`user_id`, `title`, `description`) VALUES ('$userId','$title','$description')";
   return $query;
 }
 
 function mysqlGetReviewAll()
 {
-  $query = "SELECT * FROM `tbl_reviews` WHERE status=1";
+  $query = "SELECT * FROM `tbl_feedbacks` WHERE status=1";
   return $query;
 }
 

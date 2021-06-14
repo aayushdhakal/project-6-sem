@@ -135,7 +135,7 @@ require_once './__loginAndSignupErrorMsg.php';
          }
       }
    } else {
-      $err['users'] = 'Users not valid';
+      $err['users'] = 'Not a valid User!';
    }
 
    ?>
@@ -144,46 +144,49 @@ require_once './__loginAndSignupErrorMsg.php';
       <?php require_once './__navigationBar.php'; ?>
    </header>
    <hr>
-   <section class="location__information">
-      <h2 class="location__information__title">Create Post</h2>
 
-      <form method="post" class="location__information_upload_form" enctype="multipart/form-data">
+   <?php if ($result->num_rows == 1) { ?>
+      <section class="location__information">
+         <h2 class="location__information__title">Create Post</h2>
 
-         <div class="location_information_upload_form_item">
-            <Label for="title">Title</Label>
-            <input type="text" name="title" id="title" placeholder="Enter title here">
-         </div>
+         <form method="post" class="location__information_upload_form" enctype="multipart/form-data">
 
-         <div class="location_information_upload_form_item">
-            <Label for="description">Description</Label>
-            <textarea type="text" name="description" id="description" placeholder="Enter description here"></textarea>
-         </div>
-         <div class="location_information_upload_form_item">
-            <Label for="type-of-activity">Type of Activity</Label>
-            <input type="text" name="type-of-activity" id="type-of-activity" placeholder="Enter type of activity here"></input>
-         </div>
+            <div class="location_information_upload_form_item">
+               <Label for="title">Title</Label>
+               <input type="text" name="title" id="title" placeholder="Enter title here">
+            </div>
 
-         <div class="location_information_upload_form_item">
-            <Label for="lattitude">Lattitude</Label>
-            <input type="number" name="lattitude" id="lattitude" placeholder="Enter lattitude here" step="any">
-         </div>
+            <div class="location_information_upload_form_item">
+               <Label for="description">Description</Label>
+               <textarea type="text" name="description" id="description" placeholder="Enter description here"></textarea>
+            </div>
+            <div class="location_information_upload_form_item">
+               <Label for="type-of-activity">Type of Activity</Label>
+               <input type="text" name="type-of-activity" id="type-of-activity" placeholder="Enter type of activity here"></input>
+            </div>
 
-         <div class="location_information_upload_form_item">
-            <Label for="longitude">Longitude</Label>
-            <input type="number" name="longitude" id="longitude" placeholder="Enter longitude here" step="any">
-         </div>
+            <div class="location_information_upload_form_item">
+               <Label for="lattitude">Lattitude</Label>
+               <input type="number" name="lattitude" id="lattitude" placeholder="Enter lattitude here" step="any">
+            </div>
 
-         <div class="location_information_upload_form_item">
-            <Label for="images">Upload Images</Label>
-            <input type="file" name="images[]" id="images" title="&nbsp;" multiple>
-         </div>
+            <div class="location_information_upload_form_item">
+               <Label for="longitude">Longitude</Label>
+               <input type="number" name="longitude" id="longitude" placeholder="Enter longitude here" step="any">
+            </div>
 
-         <div class="location_information_upload_form_item">
-            <button type="submit" name="upload" class="location_information_upload_form_item__submit">Submit</button>
-         </div>
+            <div class="location_information_upload_form_item">
+               <Label for="images">Upload Images</Label>
+               <input type="file" name="images[]" id="images" title="&nbsp;" multiple>
+            </div>
 
-      </form>
-   </section>
+            <div class="location_information_upload_form_item">
+               <button type="submit" name="upload" class="location_information_upload_form_item__submit">Submit</button>
+            </div>
+
+         </form>
+      </section>
+   <?php } ?>
 
    <?php require_once './__adminJobs.php' ?>
 

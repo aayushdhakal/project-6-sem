@@ -32,33 +32,38 @@ require_once './__loginAndSignupErrorMsg.php';
    <?php
    $queryToCheckUser = mysqlCheckUsersUsername($_SESSION['username']);
    $isValidUser = ($connection->query($queryToCheckUser))->num_rows == 1 ? true : false;
+   $isValidUser = $isValidUser && $_SESSION['is_user'] == true;
 
-   if (isset($_POST['submit_review'])) {
+   if ($isValidUser) {
+      if (isset($_POST['submit_review'])) {
 
-      if (isset($_POST['title']) && !empty($_POST['title'])) {
-         $title = trim($_POST['title']);
-      } else {
-         $err['title'] = "Invalid title!";
-      }
-
-      if (isset($_POST['description']) && !empty($_POST['description'])) {
-         $description = trim($_POST['description']);
-      } else {
-         $err['description'] = "Invalid description!";
-      }
-
-      if (!(count($err) > 0) && $isValidUser == true) {
-         $queryToInsertReview = mysqlPostReview($title, $description, $_SESSION['id']);
-         $output = $connection->query($queryToInsertReview);
-
-         echo $queryToInsertReview.";";
-         echo $output."this is output";
-         if ($output) {
-            echo "<script>alert('Review has been posted')</script>";
+         if (isset($_POST['title']) && !empty($_POST['title'])) {
+            $title = trim($_POST['title']);
          } else {
-            $err['post_review'] = "Error on posting review";
+            $err['title'] = "Invalid title!";
+         }
+
+         if (isset($_POST['description']) && !empty($_POST['description'])) {
+            $description = trim($_POST['description']);
+         } else {
+            $err['description'] = "Invalid description!";
+         }
+
+         if (!(count($err) > 0) && $isValidUser == true) {
+            $queryToInsertReview = mysqlPostReview($title, $description, $_SESSION['id']);
+            $output = $connection->query($queryToInsertReview);
+
+            echo $queryToInsertReview . ";";
+            echo $output . "this is output";
+            if ($output) {
+               echo "<script>alert('Review has been posted')</script>";
+            } else {
+               $err['post_review'] = "Error on posting review";
+            }
          }
       }
+   } else {
+      $err['user'] = 'Please login as user';
    }
    ?>
 
@@ -66,24 +71,27 @@ require_once './__loginAndSignupErrorMsg.php';
       <?php require_once './__navigationBar.php'; ?>
    </header>
 
-   <section class="review__section">
-      <div class="review__section__container">
-         <h2 class="review__section__container">Review</h2>
-         <hr>
-         <form method="post" class="review_section__form">
-            <div class="review__form__group">
-               <Label for="title">Title</Label>
-               <input type="text" placeholder="Enter title here." id="title" name="title" autocomplete="off">
-            </div>
-            <div class="review__form__group">
-               <Label for="description">Description</Label>
-               <textarea name="description" id="description" cols="30" rows="10" placeholder="Enter description here" name="description" autocomplete="off"></textarea>
-            </div>
-            <button name="submit_review" type="submit" class="review__section__submit">Submit</button>
-         </form>
-      </div>
-   </section>
+   <?php if ($isValidUser) { ?>
 
+      <section class="review__section">
+         <div class="review__section__container">
+            <h2 class="review__section__container">Review</h2>
+            <hr>
+            <form method="post" class="review_section__form">
+               <div class="review__form__group">
+                  <Label for="title">Title</Label>
+                  <input type="text" placeholder="Enter title here." id="title" name="title" autocomplete="off">
+               </div>
+               <div class="review__form__group">
+                  <Label for="description">Description</Label>
+                  <textarea name="description" id="description" cols="30" rows="10" placeholder="Enter description here" name="description" autocomplete="off"></textarea>
+               </div>
+               <button name="submit_review" type="submit" class="review__section__submit">Submit</button>
+            </form>
+         </div>
+      </section>
+
+   <?php } ?>
    <?php require_once './__adminJobs.php' ?>
    <div style=" bottom:2rem;
                   display:flex;

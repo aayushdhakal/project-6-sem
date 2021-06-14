@@ -69,7 +69,9 @@ require_once './__loginAndSignupErrorMsg.php';
             </table>
          </div>
       </section>
-   <?php } ?>
+   <?php } else {
+      $err['user'] = 'Not a valid User!';
+   } ?>
    <div class="end__of__page end__of__page--absolute"></div>
    <?php require_once './__adminJobs.php' ?>
    <div style=" bottom:2rem;
