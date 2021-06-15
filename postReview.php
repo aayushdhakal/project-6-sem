@@ -75,8 +75,8 @@ require_once './__loginAndSignupErrorMsg.php';
 
       <section class="review__section">
          <div class="review__section__container">
-            <h2 class="review__section__container">Review</h2>
-            <hr>
+            <h2 class="review__section__container" style="margin:10px;font-size:2rem;">Review</h2>
+            <hr style="margin: 8px;">
             <form method="post" class="review_section__form">
                <div class="review__form__group">
                   <Label for="title">Title</Label>

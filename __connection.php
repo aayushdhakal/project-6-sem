@@ -187,6 +187,8 @@ FROM
 WHERE
     i.location_id = l.id AND
     l.admin_id = a.created_by_id
+ORDER BY
+	`created_at` DESC
 LIMIT $pageNo,$pageOffset";
 
   return $query;
@@ -466,8 +468,9 @@ LIMIT $count";
   return $query;
 }
 
-function mysqlRecentPosts($count = 3)
+function mysqlRecentPosts($id,$count = 3)
 {
+  $id = isset($id)?$id:true;
   $query =
   "SELECT
     l.id,
@@ -485,7 +488,7 @@ FROM
     FROM
         `tbl_location` AS l
     WHERE
-        l.`status` = 1
+        l.`status` = 1 AND l.`id` != $id
 ) AS l,
 (
     SELECT DISTINCTROW

@@ -64,6 +64,13 @@ p {
    right: 0;
 }
 
+.end__of__page--fixed{
+   bottom: 0;
+   position: fixed;
+   left: 0;
+   right: 0;
+}
+
 pre {
    overflow-x: auto;
    white-space: pre-wrap;

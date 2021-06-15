@@ -91,75 +91,74 @@ require_once './__loginAndSignupErrorMsg.php';
                <p class="post__image__slider__description"><?php echo $resultForlocationInfo['description'] ?></p>
                </pre>
 
-            <?php } ?>
+               <?php if (!isset($err['post'])) { ?>
+                  <div class="individual__post__comments__section">
+                     <h4 class="post__comment__title">Comments</h4>
 
-            <?php if (!isset($err['post'])) { ?>
-               <div class="individual__post__comments__section">
-                  <h4 class="post__comment__title">Comments</h4>
+                     <div class="post__comment__view">
+                        <?php
 
-                  <div class="post__comment__view">
-                     <?php
+                        //check if user is logged in
+                        $queryToCheckUser = mysqlCheckUsersUsername($_SESSION['username']);
+                        $isValidUser = ($connection->query($queryToCheckUser))->num_rows == 1 ? true : false;
+                        //check if user is admin
+                        $checkAdminQuery = mysqlisAdmin($_SESSION['id'], $_SESSION['username']);
+                        $result = $connection->query($checkAdminQuery);
 
-                     //check if user is logged in
-                     $queryToCheckUser = mysqlCheckUsersUsername($_SESSION['username']);
-                     $isValidUser = ($connection->query($queryToCheckUser))->num_rows == 1 ? true : false;
-                     //check if user is admin
-                     $checkAdminQuery = mysqlisAdmin($_SESSION['id'], $_SESSION['username']);
-                     $result = $connection->query($checkAdminQuery);
+                        if (isset($_POST['post_comment'])) {
+                           if (!empty($_POST['comment'])) {
+                              if ($isValidUser || $result->num_rows != 1) {
 
-                     if (isset($_POST['post_comment'])) {
-                        if (!empty($_POST['comment'])) {
-                           if ($isValidUser || $result->num_rows != 1) {
+                                 $queryToInsertComment = mysqlInsertComment($_SESSION['id'], $id, $_POST['comment']);
 
-                              $queryToInsertComment = mysqlInsertComment($_SESSION['id'], $id, $_POST['comment']);
-
-                              $output = $connection->query($queryToInsertComment);
-                              if ($output != 1) {
-                                 $err['comment']  = "Failed to comment!";
+                                 $output = $connection->query($queryToInsertComment);
+                                 if ($output != 1) {
+                                    $err['comment']  = "Failed to comment!";
+                                 }
+                              } else {
+                                 $err['comment'] = 'Please login as Users to Comment.';
                               }
                            } else {
-                              $err['comment'] = 'Please login as Users to Comment.';
+                              $err['comment'] = 'Enter valid comment.';
                            }
-                        } else {
-                           $err['comment'] = 'Enter valid comment.';
                         }
-                     }
 
-                     //fetching comments
-                     $pageOffset = 10;
-                     $pageNumberForComment =  (isset($_GET['comment']) && is_numeric($_GET['comment'])) ? $_GET['comment'] : 1;
+                        //fetching comments
+                        $pageOffset = 10;
+                        $pageNumberForComment =  (isset($_GET['comment']) && is_numeric($_GET['comment'])) ? $_GET['comment'] : 1;
 
-                     $queryToGetComments = mysqlgetComments($id, $pageNumberForComment - 1, $pageOffset);
-                     $comments = [];
-                     $getComments = $connection->query($queryToGetComments);
+                        $queryToGetComments = mysqlgetComments($id, $pageNumberForComment - 1, $pageOffset);
+                        $comments = [];
+                        $getComments = $connection->query($queryToGetComments);
 
-                     while ($row = $getComments->fetch_assoc()) {
-                        array_push($comments, $row);
-                     }
+                        while ($row = $getComments->fetch_assoc()) {
+                           array_push($comments, $row);
+                        }
 
-                     if (count($comments) > 0) {
-                        foreach ($comments as $comment) {
-                     ?>
-                           <div class="post_comment__comments">
-                              <h3 class="post__comment__By" style="display: inline;"><?php echo $comment['username']; ?></h3>
-                              <p class="post__comment__At" style="display: inline-block;"><?php echo $comment['created_at']; ?></p>
-                              <p class=" post__comment__comment"><?php echo $comment['comment']; ?></p>
-                              <hr>
-                           </div>
-                     <?php }
-                     }
+                        if (count($comments) > 0) {
+                           foreach ($comments as $comment) {
+                        ?>
+                              <div class="post_comment__comments">
+                                 <h3 class="post__comment__By" style="display: inline;"><?php echo $comment['username']; ?></h3>
+                                 <p class="post__comment__At" style="display: inline-block;"><?php echo $comment['created_at']; ?></p>
+                                 <p class=" post__comment__comment"><?php echo $comment['comment']; ?></p>
+                                 <hr>
+                              </div>
+                        <?php }
+                        }
 
-                     ?>
+                        ?>
+                     </div>
+                     <div class=" post__comment__post">
+                        <form method="POST">
+                           <input type="text" name="comment" placeholder="Comment here">
+                           <button type="submit" name="post_comment">Comment</button>
+                        </form>
+                     </div>
                   </div>
-                  <div class=" post__comment__post">
-                     <form method="POST">
-                        <input type="text" name="comment" placeholder="Comment here">
-                        <button type="submit" name="post_comment">Comment</button>
-                     </form>
-                  </div>
-               </div>
             </div>
          <?php } ?>
+      <?php } ?>
       </section>
 
 
@@ -168,7 +167,7 @@ require_once './__loginAndSignupErrorMsg.php';
 
             <?php
             $suggentionFallback = !isset($err['post']) ? $resultForlocationInfo['type_of_activity'] : "sightseeing";
-            $queryForRecentPost = mysqlRecentPosts();
+            $queryForRecentPost = mysqlRecentPosts($id, 3);
             $resultForRecentPost = $connection->query($queryForRecentPost);
             $postForRecentPosts = [];
 
@@ -225,7 +224,6 @@ require_once './__loginAndSignupErrorMsg.php';
                   flex-direction:column;
                   position:fixed;
                   right:20px;
-                  z-index:2;
          ">
       <?php
       if (count($err) > 0) {
@@ -236,7 +234,7 @@ require_once './__loginAndSignupErrorMsg.php';
       ?>
    </div>
 
-   <div class="end__of__page <?php echo isset($err['post']) ? "end__of__page--absolute" : ''; ?>"></div>
+   <div class="end__of__page <?php echo count($err) !=0 ? "end__of__page--fixed" : ''; ?>"></div>
 
    <?php if (isset($err['post'])) { ?>
       <style>

@@ -3,6 +3,11 @@
    width: 70%;
 }
 
+.favorite__list__title{
+   margin-top:70px;
+   margin-bottom: 10px;
+}
+
 .favorite__list__container {
    width: auto;
 }
