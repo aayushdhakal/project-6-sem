@@ -113,7 +113,7 @@ require_once './__loginAndSignupErrorMsg.php';
                   }
                }
             } else {
-               $err['images'] = 'Please upload at least one file.';
+               $err['images'] = 'Please upload at least one Image.';
             }
 
             if (count($err) == 0) {
@@ -153,26 +153,26 @@ require_once './__loginAndSignupErrorMsg.php';
 
             <div class="location_information_upload_form_item">
                <Label for="title">Title</Label>
-               <input type="text" name="title" id="title" placeholder="Enter title here">
+               <input type="text" name="title" id="title" placeholder="Enter title here" <?php echo isset($title) ? "value='" . $title . "'" : ""; ?>>
             </div>
 
             <div class="location_information_upload_form_item">
                <Label for="description">Description</Label>
-               <textarea type="text" name="description" id="description" placeholder="Enter description here"></textarea>
+               <textarea type="text" name="description" id="description" placeholder="Enter description here"><?php echo isset($description) ? $description : ""; ?></textarea>
             </div>
             <div class="location_information_upload_form_item">
                <Label for="type-of-activity">Type of Activity</Label>
-               <input type="text" name="type-of-activity" id="type-of-activity" placeholder="Enter type of activity here"></input>
+               <input type="text" name="type-of-activity" id="type-of-activity" placeholder="Enter type of activity here" <?php echo isset($typeOfActivities) ? "value='" . $typeOfActivities . "'" : ""; ?>>
             </div>
 
             <div class="location_information_upload_form_item">
                <Label for="lattitude">Lattitude</Label>
-               <input type="number" name="lattitude" id="lattitude" placeholder="Enter lattitude here" step="any">
+               <input type="number" name="lattitude" id="lattitude" placeholder="Enter lattitude here" step="any" <?php echo isset($lattitude) ? "value='" . $lattitude . "'" : ""; ?>>
             </div>
 
             <div class="location_information_upload_form_item">
                <Label for="longitude">Longitude</Label>
-               <input type="number" name="longitude" id="longitude" placeholder="Enter longitude here" step="any">
+               <input type="number" name="longitude" id="longitude" placeholder="Enter longitude here" step="any" <?php echo isset($longitude) ? "value='" . $longitude . "'" : ""; ?>>
             </div>
 
             <div class="location_information_upload_form_item">

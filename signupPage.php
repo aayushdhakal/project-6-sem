@@ -36,7 +36,7 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
          $name = trim($_POST['name']);
       }
 
-      if (isset($_POST['email']) && !empty($_POST['email'])) {
+      if (isset($_POST['email']) && !empty($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
          $email = trim($_POST['email']);
       } else {
          $err_email = true;
