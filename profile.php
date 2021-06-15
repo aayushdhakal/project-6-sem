@@ -223,7 +223,7 @@ require_once './__loginAndSignupErrorMsg.php';
       <section class="user__information">
          <div class="user__information__details">
             <h2 class="user__information__details__title">User Informations</h2>
-            <hr>
+            <hr style="margin: 0; border:black 1px solid;">
             <form method="POST" class="user__information__details_form" enctype="multipart/form-data">
 
                <div class="users__information__detail">

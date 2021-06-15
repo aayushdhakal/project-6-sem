@@ -234,7 +234,7 @@ require_once './__loginAndSignupErrorMsg.php';
       ?>
    </div>
 
-   <div class="end__of__page <?php echo count($err) !=0 ? "end__of__page--fixed" : ''; ?>"></div>
+   <div class="end__of__page <?php echo count($err) != 0 ? "end__of__page--fixed" : ''; ?>"></div>
 
    <?php if (isset($err['post'])) { ?>
       <style>
@@ -283,11 +283,12 @@ require_once './__loginAndSignupErrorMsg.php';
             document.title = postTitle.textContent;
          }
          stateOfTitle = !stateOfTitle;
-      }, 3000);
+      }, 1000);
 
       setTimeout(() => {
          clearInterval(changingTitle);
-      }, 15000)
+         document.title = "Passion Seekers | " + postTitle.textContent;
+      }, 9000)
    </script>
 </body>
 
