@@ -3,8 +3,8 @@ session_start();
 require_once './__assignSession.php';
 require_once './__connection.php';
 require_once './__loginAndSignupErrorMsg.php';
-if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
-   header('location:index.php');
+if ((isset($_SESSION['username'])) && !empty($_SESSION['username'])) {
+   header('location:./index.php');
 }
 ?>
 <!DOCTYPE html>

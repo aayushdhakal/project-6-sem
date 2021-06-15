@@ -6,6 +6,5 @@ if ((isset($_COOKIE['username'])) && !empty($_COOKIE['username'])) {
    $_SESSION['id'] = $_COOKIE['id'];
    $_SESSION['admin'] = $_COOKIE['admin'];
    $_SESSION['is_user'] = $_COOKIE['is_user'];
-   // header('location:index.php');
-};
+}
 ?>
