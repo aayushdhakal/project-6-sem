@@ -23,3 +23,15 @@ function changeVisiblility(e) {
    }
 }
 
+const asideContainer = document.querySelectorAll('.aside__recomendation');
+
+asideContainer.forEach((e)=>{
+   e.addEventListener('mouseover',()=>{
+      e.classList.add('aside__recomendation--recent__post');
+      console.log('over');
+   })
+   e.addEventListener('mouseout',()=>{
+      e.classList.remove('aside__recomendation--recent__post');
+      console.log('out');
+   })
+})

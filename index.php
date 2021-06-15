@@ -68,7 +68,7 @@ require_once './__connection.php';
 
    <hr>
    <div class="recommendation">
-      <h2>Recommendations</h2>
+      <h2>Featured by Passion Seekers</h2>
       <ul class="recommendation__list">
          <?php
          $countOfRecomendations = 4;

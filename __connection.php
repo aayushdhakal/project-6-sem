@@ -466,10 +466,10 @@ LIMIT $count";
   return $query;
 }
 
-function mysqlJustLikePost($typeOfActivity, $id, $count)
+function mysqlRecentPosts($count = 3)
 {
   $query =
-    "SELECT
+  "SELECT
     l.id,
     l.title,
     l.description,
@@ -485,7 +485,7 @@ FROM
     FROM
         `tbl_location` AS l
     WHERE
-        l.`type_of_activity` LIKE '%$typeOfActivity%' AND l.`status` = 1
+        l.`status` = 1
 ) AS l,
 (
     SELECT DISTINCTROW
@@ -493,20 +493,15 @@ FROM
         ANY_VALUE(image) AS image
     FROM
         `tbl_images`
-    WHERE
-        1
     GROUP BY
         location_id
 ) AS i,
-`tbl_admins` as a	
+`tbl_admins` AS a
 WHERE
-    l.id = i.location_id AND
-    l.admin_id = a.id AND
-    l.status = 1 AND
-    l.id !=$id
+    l.id = i.location_id AND l.admin_id = a.id AND l.status = 1
 ORDER BY
-    RAND()
-    LIMIT $count";
+    l.created_at DESC
+LIMIT $count";
 
   return $query;
 }

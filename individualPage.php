@@ -168,16 +168,16 @@ require_once './__loginAndSignupErrorMsg.php';
 
             <?php
             $suggentionFallback = !isset($err['post']) ? $resultForlocationInfo['type_of_activity'] : "sightseeing";
-            $queryToSimililarpost = mysqlJustLikePost($suggentionFallback, $id, 3);
-            $resultToSimilarPostFromDB = $connection->query($queryToSimililarpost);
-            $postForSimilarPosts = [];
+            $queryForRecentPost = mysqlRecentPosts();
+            $resultForRecentPost = $connection->query($queryForRecentPost);
+            $postForRecentPosts = [];
 
-            while ($row = $resultToSimilarPostFromDB->fetch_assoc()) {
-               array_push($postForSimilarPosts, $row);
+            while ($row = $resultForRecentPost->fetch_assoc()) {
+               array_push($postForRecentPosts, $row);
             }
             ?>
 
-            <?php foreach ($postForSimilarPosts as $index => $post) { ?>
+            <?php foreach ($postForRecentPosts as $index => $post) { ?>
                <div class="aside__recomendation">
                   <a href="<?php echo "./individualPage.php?id=" . $post['id'] ?>">
                      <h3><?php echo $post['title'] ?></h3>
@@ -186,7 +186,6 @@ require_once './__loginAndSignupErrorMsg.php';
                         <p><?php echo substr($post['description'], 0, 100) . "...<u>more</u>" ?></p>
                      </div>
                   </a>
-
                </div>
             <?php } ?>
 
@@ -288,9 +287,9 @@ require_once './__loginAndSignupErrorMsg.php';
          stateOfTitle = !stateOfTitle;
       }, 3000);
 
-      setTimeout(()=>{
+      setTimeout(() => {
          clearInterval(changingTitle);
-      },15000)
+      }, 15000)
    </script>
 </body>
 
