@@ -9,7 +9,7 @@ if (isset($_POST['search'])) {
 ?>
 
 <nav>
-   <h1><a style="color: white;" href="./index.php">Passion Seekers</a></h1>
+   <h1 class="website__name"><a href="./index.php">Passion Seekers</a></h1>
    <ul>
       <li>
          <div class="search__posts">

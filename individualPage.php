@@ -43,16 +43,13 @@ require_once './__loginAndSignupErrorMsg.php';
             array_push($images, $row);
          }
          $resultForlocationInfo = $resultForlocationInfo->fetch_assoc();
-         // print_r($resultForlocationInfo);
       } else {
          $err['post'] = "Post doesn't exists" . ($_SESSION['admin'] == true ? " for id=$id. Post might be hidden" : " ") . " !";
       }
-
-      // print_r($images);
-      // print_r($resultForlocationInfo);
    } else {
       $err['id'] = "Invalid id value!";
    }
+
    ?>
    <header>
       <?php require_once './__navigationBar.php' ?>
@@ -92,12 +89,12 @@ require_once './__loginAndSignupErrorMsg.php';
                </pre>
 
                <?php if (!isset($err['post'])) { ?>
+                  <hr class="separator__comment">
                   <div class="individual__post__comments__section">
                      <h4 class="post__comment__title">Comments</h4>
-
                      <div class="post__comment__view">
-                        <?php
 
+                        <?php
                         //check if user is logged in
                         $queryToCheckUser = mysqlCheckUsersUsername($_SESSION['username']);
                         $isValidUser = ($connection->query($queryToCheckUser))->num_rows == 1 ? true : false;
@@ -123,6 +120,16 @@ require_once './__loginAndSignupErrorMsg.php';
                            }
                         }
 
+                        //removing comment
+                        //removing the comment as user/admin
+                        if (!$err['post'] && !$err['id'] && isset($_GET['removeCommentId']) && !empty($_GET['removeCommentId']) && is_numeric($_GET['removeCommentId'])) {
+                           $queryToRemoveComment = mysqlRemoveComment($_GET['removeCommentId']);
+                           $isCommentDeleted = $connection->query($queryToRemoveComment)->num_rows == 1 ? true : false;
+                           if ($isCommentDeleted == false) {
+                              $err['comment'] = 'Error on deleting comment';
+                           }
+                        }
+
                         //fetching comments
                         $pageOffset = 10;
                         $pageNumberForComment =  (isset($_GET['comment']) && is_numeric($_GET['comment'])) ? $_GET['comment'] : 1;
@@ -135,14 +142,27 @@ require_once './__loginAndSignupErrorMsg.php';
                            array_push($comments, $row);
                         }
 
+                        // echo "<pre>";
+                        // print_r($comments);
+                        // print_r($_SESSION);
+                        // echo "</pre>";
+
                         if (count($comments) > 0) {
                            foreach ($comments as $comment) {
                         ?>
-                              <div class="post_comment__comments">
-                                 <h3 class="post__comment__By" style="display: inline;"><?php echo $comment['username']; ?></h3>
-                                 <p class="post__comment__At" style="display: inline-block;"><?php echo $comment['created_at']; ?></p>
-                                 <p class=" post__comment__comment"><?php echo $comment['comment']; ?></p>
-                                 <hr>
+                              <div class="post__comment__comments">
+                                 <div class="post__comment__avatar__image"><img src="./images/avatar/<?php echo $comment['avatar'] ? $comment['avatar'] : 'default.png'; ?>" alt="profile image"></div>
+
+                                 <div class="post__comment__details">
+                                    <h3 class="post__comment__By" style="display: inline;"><?php echo $comment['username']; ?></h3>
+                                    <p class="post__comment__At"><?php echo $comment['created_at']; ?></p>
+                                    <p class=" post__comment__comment"><?php echo $comment['comment']; ?></p>
+                                 </div>
+                                 <?php if ($_SESSION['admin'] == true || $_SESSION['username'] == $comment['username']) { ?>
+                                    <div class="post__comment__remove__comment">
+                                       <a href="./individualPage.php?<?php echo "id=" . $id . "&removeCommentId=" . $comment['id']; ?>">&#9747;</a>
+                                    </div>
+                                 <?php } ?>
                               </div>
                         <?php }
                         }
@@ -160,7 +180,6 @@ require_once './__loginAndSignupErrorMsg.php';
          <?php } ?>
       <?php } ?>
       </section>
-
 
       <aside>
          <div class="aside__container">

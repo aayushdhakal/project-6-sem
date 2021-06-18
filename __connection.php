@@ -250,6 +250,7 @@ function mysqlgetComments($location_id, $pageNo, $pageOffset)
   $pageNo = $pageNo * $pageOffset;
   $query = "SELECT
     u.username,
+    u.avatar,
     c.comment,
     c.created_at,
     c.location_id,
@@ -553,12 +554,11 @@ ORDER BY
 LIMIT 11";
         break;
       }
-
     case 'activity':
     case 'activities':
     default: {
         $query =
-          "SELECT
+        "SELECT
     l.id,
     l.title,
     l.description,
@@ -599,7 +599,11 @@ LIMIT 11
         ";
       }
   }
+  return $query;
+}
 
+function mysqlRemoveComment($id){
+  $query = "DELETE FROM `tbl_comments` WHERE id=$id";
   return $query;
 }
 

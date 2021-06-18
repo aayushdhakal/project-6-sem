@@ -208,8 +208,8 @@ aside {
    animation: recentPost 0.32s ease-in-out;
    animation-fill-mode: forwards;
    background-color: var(--blue);
-   border-radius: 20px 0px 0px 20px;
-   box-shadow: 0px 0px 7px 1px black ;
+   border-radius: 30px 0px 0px 30px;
+   box-shadow: 0px 0px 7px 1px black;
    content: "Recent Post";
    color: white;
    display: inline-block;
@@ -267,12 +267,72 @@ aside {
 
 /* Comment Section */
 
+.separator__comment {
+   border: var(--blue) solid 2px;
+   border-radius: 2px;
+   margin-bottom: 25px;
+}
+
 .individual__post__comments__section {
-   background: rgb(174, 187, 199);
+   /* background: rgb(201, 214, 226); */
    border-radius: 5px;
    display: flex;
    flex-direction: column;
    padding: 10px;
+}
+
+.post__comment__comments {
+   /* border: 1px solid black; */
+   align-items: center;
+   background: rgba(47, 124, 196, 0.342);
+   border-radius: 10px;
+   display: flex;
+   padding: 10px;
+   position: relative;
+   margin-top: 5px;
+}
+
+.post__comment__remove__comment{
+   font-size: 1.1rem;
+   font-weight: 800;
+   position: absolute;
+   top: 10px;
+   transition: transform ease 0.3s;
+   transform: scale(0);
+   right: 20px;
+}
+
+.post__comment__remove__comment--visible{
+   transform: scale(1);
+}
+
+.post__comment__remove__comment a{
+   color: rgb(160, 0, 0);
+}
+
+.post__comment__remove__comment:hover{
+   transform: scale(1.5);
+}
+.post__comment__remove__comment:hover a{
+   transform: scale(1.5);
+   color: rgb(255, 0, 0);
+}
+
+.post__comment__details{
+   padding-left: 10px;
+}
+
+.post__comment__avatar__image {
+   border-radius: 50%;
+   display: inline-block;
+   height: 60px;
+   overflow: hidden;
+   width: 60px;
+}
+
+.post__comment__avatar__image img {
+   height: 100%;
+   width: 100%;
 }
 
 .post__comment__title {
@@ -284,17 +344,20 @@ aside {
 }
 
 .post__comment__By {
+   display: inline;
    font-style: italic;
    opacity: 0.7;
 }
 
 .post__comment__At {
+   display: inline;
    font-style: italic;
-   font-size: 0.8rem;
-   opacity: 0.5;
+   font-size: 0.7rem;
+   opacity: 0.7;
 }
 
 .post__comment__comment {
+   font-size: 1.4rem;
    margin-left: 8px;
    opacity: 0.9;
 }

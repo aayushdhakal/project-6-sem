@@ -25,13 +25,25 @@ function changeVisiblility(e) {
 
 const asideContainer = document.querySelectorAll('.aside__recomendation');
 
-asideContainer.forEach((e)=>{
-   e.addEventListener('mouseover',()=>{
+asideContainer.forEach((e) => {
+   e.addEventListener('mouseover', () => {
       e.classList.add('aside__recomendation--recent__post');
       console.log('over');
    })
-   e.addEventListener('mouseout',()=>{
+   e.addEventListener('mouseout', () => {
       e.classList.remove('aside__recomendation--recent__post');
       console.log('out');
    })
+})
+
+const commentCollection = document.querySelectorAll('.post__comment__remove__comment');
+
+commentCollection.forEach((e) => {
+   e.parentElement.addEventListener('mouseover', () => {
+      e.classList.add('post__comment__remove__comment--visible');
+   })
+   e.parentElement.addEventListener('mouseout', () => {
+      e.classList.remove('post__comment__remove__comment--visible');
+   })
+
 })

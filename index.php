@@ -157,10 +157,10 @@ require_once './__connection.php';
 
             <?php
             $queryToGetActivities = mysqlGetPostsForExploreAndActivities('activity');
-            $activitiesForActivities = $connection->query($queryToGetActivities);
+            $activitiesFormDatabaseAsPost = $connection->query($queryToGetActivities);
             $arrayOfLocationForActivities = [];
 
-            while ($row = $activitiesForActivities->fetch_assoc()) {
+            while ($row = $activitiesFormDatabaseAsPost->fetch_assoc()) {
                array_push($arrayOfLocationForActivities, $row);
             }
             ?>

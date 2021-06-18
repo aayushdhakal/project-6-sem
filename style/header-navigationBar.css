@@ -18,6 +18,11 @@ header nav {
    z-index: 10;
 }
 
+.website__name a{
+   color: white;
+   text-shadow: 0px 0px 5px black;
+}
+
 .search__posts form {
    align-items: center;
    display: flex;
