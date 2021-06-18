@@ -171,7 +171,7 @@ require_once './__loginAndSignupErrorMsg.php';
                      </div>
                      <div class=" post__comment__post">
                         <form method="POST">
-                           <input type="text" name="comment" placeholder="Comment here">
+                           <input type="text" name="comment" placeholder="Comment here" autocomplete="off">
                            <button type="submit" name="post_comment">Comment</button>
                         </form>
                      </div>

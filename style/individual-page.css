@@ -357,7 +357,7 @@ aside {
 }
 
 .post__comment__comment {
-   font-size: 1.4rem;
+   font-size: 1.1rem;
    margin-left: 8px;
    opacity: 0.9;
 }
@@ -372,20 +372,24 @@ aside {
 
 .post__comment__post input {
    border: none;
-   border-radius: 3px;
+   border-radius: 5px;
    display: block;
-   padding: 8px;
+   font-size: 1rem;
+   padding: 10px;
    margin-bottom: 5px;
    width: 100%;
 }
 
 .post__comment__post button {
    border: none;
+   border-radius: 5px;
    background: var(--blue);
    cursor: pointer;
    color: white;
    display: block;
-   padding: 12px;
+   font-size: 1rem;
+   font-size: 800;
+   padding: 12px 30px;
    transition: all ease 0.3s;
 }
 
