@@ -9,7 +9,9 @@ if (isset($_POST['search'])) {
 ?>
 
 <nav>
-   <h1 class="website__name"><a href="./index.php">Passion Seekers</a></h1>
+   <h1 class="website__name">
+      <a href="./index.php">Passion Seekers</a><?php echo $_SESSION['admin'] ? '<span class="website__user__type">admin</span>' : ''; ?>
+   </h1>
    <ul>
       <li>
          <div class="search__posts">

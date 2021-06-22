@@ -18,9 +18,21 @@ header nav {
    z-index: 10;
 }
 
+.website__name{
+   position: relative;
+}
+
 .website__name a{
    color: white;
    text-shadow: 0px 0px 5px black;
+}
+
+.website__user__type{
+   color: #E1ECF8;
+   font-size: 1rem;
+   font-style: italic;
+   position: absolute;
+   pointer-events:none;
 }
 
 .search__posts form {

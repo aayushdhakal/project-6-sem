@@ -263,13 +263,12 @@ require_once './__connection.php';
       </div>
       <div class="footer__website__legal__info">
          <h1>Passion Seekers</h1>
-         <!-- <p>Privacy Policy</p>
-         <p>Copyright &#169; 2021 All Rights Reserved </p> -->
+         <p>Privacy Policy</p>
+         <p>Copyright &#169; 2021 All Rights Reserved </p>
       </div>
    </footer>
    <?php require_once './__adminJobs.php' ?>
    <script src="./scripts/src.js"></script>
    <script src="./scripts/individualPage.js"></script>
 </body>
-
 </html>
